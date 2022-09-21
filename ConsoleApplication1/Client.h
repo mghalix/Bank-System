@@ -1,11 +1,12 @@
 #pragma once
 #include <iostream>
 #include "Person.h"
-using namespace std;
 class Client : public Person
 {
 private:
+  //Attributes
   double balance;
+
 public:
   //Constructors
   /*
@@ -13,23 +14,27 @@ public:
     balance = 0;
   }
   */
-  Client(int id, string name, string password, double balance) : Person(id, name, password) {
+
+  Client(int id, std::string name, std::string password, double balance) : Person(id, name, password) {
     Validation::checkBalanceOfClient(balance);
     this->balance = balance;
   }
+
   Client(double balance) : Person() {
     Validation::checkBalanceOfClient(balance);
     this->balance = balance;
   }
-  //setters 
+
+  //Setters 
   void setBalance(double balance) {
     Validation::checkBalanceOfClient(balance);
     this->balance = balance;
   }
-  //getters
+
+  //Getters
   double getBalance() { return balance; }
 
-  // methods
+  //Methods
   void deposit(double amount) {
     balance += amount;
   }
@@ -47,15 +52,14 @@ public:
   }
 
   void checkBalance() {
-    cout << "Your balance: " << balance;
+    std::cout << "Your balance: " << balance;
   }
 
   void display() {
-    cout
-      << "Client ACCOUNT: \n"
-      << "ID: " << id << endl
-      << "Name: " << name << endl
-      << "Balance" << balance << endl;
+    std::cout << "Client Account info.\n";
+    std::cout << "Name: " << getName() << std::endl
+      << "ID: #" << getID() << std::endl
+      // << "Password: " << getPassword() << std::endl
+      << "Balance: $" << getBalance() << std::endl;
   }
 };
-
