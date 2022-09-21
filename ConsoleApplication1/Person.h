@@ -6,13 +6,14 @@ using namespace std;
 
 class Person
 {
-private:
+public:
 	int id;
 	string name;
 	string password;
 
 public:
 	//constructor
+	Person() {};
 	Person(int id , string name , string password) {
 		
 		this->id = id;

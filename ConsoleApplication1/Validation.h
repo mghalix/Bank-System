@@ -1,9 +1,5 @@
 #pragma once
 #include <iostream>
-
-
-
-
 using namespace std;
 class Validation
 {
@@ -21,6 +17,11 @@ public:
 			throw("password is too long!");
 	}
 
+	static void checkBalanceOfClient(double balance) {
+		if (balance < 1500)
+			throw "your balance must be greater than 1500 ";
+
+	}
 
 };
 

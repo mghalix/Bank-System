@@ -1,5 +1,18 @@
-﻿  ConsoleApplication1.cpp
-  Person.cpp
-  Validation.cpp
-  Generating Code...
-  ConsoleApplication1.vcxproj -> D:\Bank-System\ConsoleApplication1\Debug\ConsoleApplication1.exe
+﻿  Client.cpp
+D:\Bank-System\ConsoleApplication1\Client.h(31,9): error C2365: 'Client::balance': redefinition; previous definition was 'data member'
+D:\Bank-System\ConsoleApplication1\Client.h(8): message : see declaration of 'Client::balance'
+D:\Bank-System\ConsoleApplication1\Client.h(31,21): error C2059: syntax error: 'return'
+D:\Bank-System\ConsoleApplication1\Client.h(31,35): error C2238: unexpected token(s) preceding ';'
+D:\Bank-System\ConsoleApplication1\Client.h(35,2): error C2628: 'Client' followed by 'void' is illegal (did you forget a ';'?)
+D:\Bank-System\ConsoleApplication1\Client.h(36,3): error C2065: 'balance': undeclared identifier
+D:\Bank-System\ConsoleApplication1\Client.h(40,3): error C2065: 'balance': undeclared identifier
+D:\Bank-System\ConsoleApplication1\Client.h(44,3): error C2065: 'balance': undeclared identifier
+D:\Bank-System\ConsoleApplication1\Client.h(45,11): error C2248: 'Client::balance': cannot access private member declared in class 'Client'
+D:\Bank-System\ConsoleApplication1\Client.h(8): message : see declaration of 'Client::balance'
+D:\Bank-System\ConsoleApplication1\Client.h(5): message : see declaration of 'Client'
+D:\Bank-System\ConsoleApplication1\Client.h(49,31): error C2065: 'balance': undeclared identifier
+D:\Bank-System\ConsoleApplication1\Client.h(55,16): error C2065: 'id': undeclared identifier
+D:\Bank-System\ConsoleApplication1\Client.h(56,19): error C2065: 'name': undeclared identifier
+D:\Bank-System\ConsoleApplication1\Client.h(57,20): error C2065: 'balance': undeclared identifier
+D:\Bank-System\ConsoleApplication1\Client.h(59,1): error C2059: syntax error: '}'
+D:\Bank-System\ConsoleApplication1\Client.h(59,1): error C2143: syntax error: missing ';' before '}'
