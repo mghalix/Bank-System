@@ -1,12 +1,12 @@
 #pragma once
 #include <iostream>
-#include "person.h"
 #include "validation.h"
+#include "employee.h"
 using namespace std;
-class admin {
+class Admin : Employee {
 public:
 
-    admin(int id, string name, string password, float balance)
+    Admin(int id, string name, string password, float balance)
     {
 
     }
