@@ -6,7 +6,6 @@ private:
 	int id;
 	std::string name, password;
 	virtual void display() = 0;
-
 public:
 	//Constructors
 	Person() {

@@ -9,7 +9,6 @@ int main() {
         c1.setID(123);
         c1.setName("Ahmed");
         c1.setPassword("15678");
-
     }
     catch (const char *msg) {
         cout << msg << endl;
@@ -20,6 +19,5 @@ int main() {
     cout << "-----\n";
     c1.setPassword("12345678");
     c1.display();
-
     return 0;
 }
