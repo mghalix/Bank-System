@@ -3,19 +3,18 @@
 #include "validation.h"
 #include "employee.h"
 using namespace std;
-class Admin : Employee {
+class Admin : public Employee {
 public:
 
-    Admin(int id, string name, string password, float balance)
-    {
+    Admin(int id, string name, string password, float balance) : Employee(id, name, password, balance) {
+
 
     }
 
-    void display() override
-    {
-        cout << "admin name    : " << Person::getName() << endl;
-        cout << "admin id      : " << Person::getID() << endl;
-        cout << "admin balance : " << Person::
+    void display() override {
+        cout << "admin name    : " << getName() << endl;
+        cout << "admin id      : " << getID() << endl;
+        cout << "admin balance : " << getPassword()<<endl;
     }
 
 };
