@@ -130,6 +130,7 @@
     <ClCompile Include="bank-system.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="admin.h" />
     <ClInclude Include="client.h" />
     <ClInclude Include="data_source_interface.h" />
     <ClInclude Include="file_manager.h" />

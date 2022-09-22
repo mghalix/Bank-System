@@ -6,7 +6,6 @@ class Client : public Person
 private:
     //Attributes
     double balance;
-
 public:
     //Constructors
     /*
