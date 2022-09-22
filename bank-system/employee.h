@@ -38,9 +38,9 @@ public:
 
     //Methods
     void display() override {
-        std::cout << "name: " << Person::getName() << std::endl
-            << "password: " << Person::getPassword() << std::endl
-            << "ID: " << Person::getID() << std::endl
-            << "salary: " << salary << std::endl;
+        std::cout << "Name: " << getName() << std::endl
+            //<< "password: " << getPassword() << std::endl
+            << "ID: #" << getID() << std::endl
+            << "Salary: $" << salary << std::endl;
     }
 };

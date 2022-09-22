@@ -1,7 +1,7 @@
 ﻿#include <iostream>
-#include "client.h"
 #include "validation.h"
 #include "file_manager.h"
+#include "employee.h"
 using namespace std;
 int main() {
     Client c1(1500);
@@ -19,5 +19,8 @@ int main() {
     cout << "-----\n";
     c1.setPassword("12345678");
     c1.display();
+    Employee emp(1234, "Mohanad", "13213123", 4440.5, 56000);
+
+    emp.display();
     return 0;
 }
