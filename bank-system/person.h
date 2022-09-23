@@ -41,5 +41,4 @@ public:
 		Validation::checkPassword(password);
 		this->password = password;
 	}
-
 };
