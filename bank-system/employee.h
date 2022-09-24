@@ -6,17 +6,13 @@ class Employee : public Person {
 private:
   //Attributes
   float salary;
-  double balance;
-
 public:
   //Constructors 
   Employee() : Person() {
     salary = 0.0;
-    balance = 0.0;
   }
 
-  Employee(int id, std::string name, std::string password, double balance, float salary) : Person(id, name, password) {
-    this->balance = balance;
+  Employee(int id, std::string name, std::string password, float salary) : Person(id, name, password) {
     Validation::checkSalary(salary);
     this->salary = salary;
   }
@@ -27,14 +23,8 @@ public:
     this->salary = salary;
   }
 
-  void setBalance(double balance) {
-    this->balance = balance;
-  }
-
   //Getters
   float getSalary() const { return salary; }
-
-  double getBalance() const { return balance; }
 
   //Methods
   void display() override {

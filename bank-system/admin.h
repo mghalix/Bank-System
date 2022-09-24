@@ -6,5 +6,5 @@ using namespace std;
 class Admin : public Employee {
 public:
 
-    Admin(int id, string name, string password, float balance) : Employee(id, name, password, balance) {}
+    Admin(int id, string name, string password, float salary) : Employee(id, name, password, salary) {}
 };

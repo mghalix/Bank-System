@@ -10,7 +10,7 @@ int main() {
         c1.setName("Ahmed");
         c1.setPassword("15678");
     }
-    catch (const char* msg) {
+    catch (const char *msg) {
         cout << msg << endl;
     }
     //Outputs no_password here because the program didn't accept the password setter above in the try block above, thus used the default password value initialized inside the Client's class constructor
@@ -19,7 +19,7 @@ int main() {
     cout << "-----\n";
     c1.setPassword("12345678");
     c1.display();
-    Employee emp(1234, "Mohanad", "13213123", 4440.5, 56000);
+    Employee emp(1234, "Mohanad", "13213123", 56000);
 
     emp.display();
     return 0;
