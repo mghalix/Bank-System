@@ -30,7 +30,6 @@ int main() {
   cout << "Testing Admin Output: " << endl;
   adms[1].display();
 
-
   cin.get();
   return 0;
 }

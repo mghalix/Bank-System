@@ -13,7 +13,7 @@ public:
   }
 
   Employee(int id, std::string name, std::string password, float salary) : Person(id, name, password) {
-    Validation::checkSalary(salary);
+    Validation::checkSalary(salary); // min 5000
     this->salary = salary;
   }
 

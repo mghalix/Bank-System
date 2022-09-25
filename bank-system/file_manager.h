@@ -1,44 +1,43 @@
 #pragma once
 #include "data_source_interface.h"
 #include <fstream>
-#include <string>
 class FileManager : DataSourceInterface {
 public:
   // Metwally's Task
   void addClient(Client cli) override {
-    ofstream clientInfo;
-    clientInfo.open("Clients.txt", ios::app); // short for append
-    string line; // id|name|password|balance
-    line = to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + to_string(cli.getBalance());
-    clientInfo << line << endl;
+    std::ofstream clientInfo;
+    clientInfo.open("Clients.txt", std::ios::app); // short for append
+    std::string line; // id|name|password|balance
+    line = std::to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + std::to_string(cli.getBalance());
+    clientInfo << line << std::endl;
     clientInfo.close();
   }
 
   void addEmployee(Employee emp) override {
-    ofstream employeeInfo;
-    employeeInfo.open("Employee.txt", ios::app);
-    string line;
-    line = to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + to_string(emp.getSalary());
-    employeeInfo << line << endl;
+    std::ofstream employeeInfo;
+    employeeInfo.open("Employee.txt", std::ios::app);
+    std::string line;
+    line = std::to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + std::to_string(emp.getSalary());
+    employeeInfo << line << std::endl;
     employeeInfo.close();
   }
 
   void addAdmin(Admin adm) override {
-    ofstream adminInfo;
-    adminInfo.open("Admin.txt", ios::app);
-    string line;
-    line = to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + to_string(adm.getSalary());
-    adminInfo << line << endl;
+    std::ofstream adminInfo;
+    adminInfo.open("Admin.txt", std::ios::app);
+    std::string line;
+    line = std::to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + std::to_string(adm.getSalary());
+    adminInfo << line << std::endl;
     adminInfo.close();
   }
 
   // Ghali's Task
-  vector<Client> getAllClients() override {
-    vector<Client> clients;
-    ifstream fin("Clients.txt");
-    fin.seekg(0, ios::beg);
+  std::vector<Client> getAllClients() override {
+    std::vector<Client> clients;
+    std::ifstream fin("Clients.txt");
+    fin.seekg(0, std::ios::beg);
     while (fin.peek() != EOF) {
-      string arr[4];
+      std::string arr[4];
       getline(fin, arr[0], '|');
       getline(fin, arr[1], '|');
       getline(fin, arr[2], '|');
@@ -49,12 +48,12 @@ public:
     return clients;
   }
 
-  vector<Employee> getAllEmployees() override {
-    vector<Employee> employees;
-    ifstream fin("Employee.txt");
-    fin.seekg(0, ios::beg);
+  std::vector<Employee> getAllEmployees() override {
+    std::vector<Employee> employees;
+    std::ifstream fin("Employee.txt");
+    fin.seekg(0, std::ios::beg);
     while (fin.peek() != EOF) {
-      string arr[4];
+      std::string arr[4];
       getline(fin, arr[0], '|');
       getline(fin, arr[1], '|');
       getline(fin, arr[2], '|');
@@ -65,12 +64,12 @@ public:
     return employees;
   }
 
-  vector<Admin> getAllAdmins() override {
-    vector<Admin> admins;
-    ifstream fin("Admin.txt");
-    fin.seekg(0, ios::beg);
+  std::vector<Admin> getAllAdmins() override {
+    std::vector<Admin> admins;
+    std::ifstream fin("Admin.txt");
+    fin.seekg(0, std::ios::beg);
     while (fin.peek() != EOF) {
-      string arr[4];
+      std::string arr[4];
       getline(fin, arr[0], '|');
       getline(fin, arr[1], '|');
       getline(fin, arr[2], '|');
@@ -82,17 +81,17 @@ public:
   }
 
   void removeAllClients() override {
-    ofstream ofs("Clients.txt", ios::trunc);
+    std::ofstream ofs("Clients.txt", std::ios::trunc);
     ofs.close();
   }
 
   void removeAllEmployees() override {
-    ofstream ofs("Employee.txt", ios::trunc);
+    std::ofstream ofs("Employee.txt", std::ios::trunc);
     ofs.close();
   }
 
   void removeAllAdmins() override {
-    ofstream ofs("Admin.txt", ios::trunc);
+    std::ofstream ofs("Admin.txt", std::ios::trunc);
     ofs.close();
   }
 };
