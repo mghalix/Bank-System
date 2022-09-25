@@ -1,5 +1,6 @@
 #pragma once
 #include "data_source_interface.h"
+#include <string>
 #include <fstream>
 class FileManager : DataSourceInterface {
 public:
