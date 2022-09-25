@@ -4,34 +4,33 @@
 #include "employee.h"
 using namespace std;
 int main() {
-  Client c1(1500);
-  try {
-    c1.setID(123);
-    c1.setName("Ahmed");
-    c1.setPassword("15678");
-  }
-  catch (const char *msg) {
-    cout << msg << endl;
-  }
-  //Outputs no_password here because the program didn't accept the password setter above in the try block above, thus used the default password value initialized inside the Client's class constructor
-  cout << c1.getPassword() << endl;
-  //Updating to an acceptable password(length 8-20)
-  cout << "-----\n";
-  c1.setPassword("12345678");
-  // c1.display();
-  Employee emp(1234, "Mohanad", "13213123", 56000);
-
-  // emp.display();
+  Employee emp1(1234, "Mohanad", "121312351", 56000);
+  Employee emp2(123, "Ahmed", "131512312", 7000.54);
+  Client cli1(4451, "client1", "9786412495", 12314);
+  Client cli2(7402, "client 2", "923812344", 123123);
+  Admin adm1(101, "admin1", "11281123412", 9000.90);
+  Admin adm2(1011, "admin2", "12342412412", 11000.970);
   FileManager fm;
-  fm.addEmployee(emp);
-  try {
+  fm.addEmployee(emp1);
+  fm.addEmployee(emp2);
+  fm.addClient(cli1);
+  fm.addClient(cli2);
+  fm.addAdmin(adm1);
+  fm.addAdmin(adm2);
 
-    fm.addEmployee(Employee(123, "ahmed", "12312312", 7000.54));
-  }
-  catch (const char *msg) {
-    cerr << msg << endl;
-  }
   vector<Employee> emps = fm.getAllEmployees();
-  cout << emps[1].getSalary() << endl;
+  vector<Client> clis = fm.getAllClients();
+  vector<Admin> adms = fm.getAllAdmins();
+  cout << "Testing Employee Output: " << endl;
+  emps[1].display();
+  cout << "-----\n";
+  cout << "Testing Client Output: " << endl;
+  clis[0].display();
+  cout << "-----\n";
+  cout << "Testing Admin Output: " << endl;
+  adms[1].display();
+
+
+  cin.get();
   return 0;
 }

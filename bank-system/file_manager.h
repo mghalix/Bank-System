@@ -59,7 +59,7 @@ public:
       getline(fin, arr[1], '|');
       getline(fin, arr[2], '|');
       getline(fin, arr[3], '\n');
-      employees.push_back(Employee(stoi(arr[0]), arr[1], arr[2], stod(arr[3])));
+      employees.push_back(Employee(stoi(arr[0]), arr[1], arr[2], stof(arr[3])));
     }
     fin.close();
     return employees;

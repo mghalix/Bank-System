@@ -1,2 +1,5 @@
 ﻿  bank-system.cpp
-  bank-system.vcxproj -> C:\Users\mghali\Desktop\Bank-System\bank-system\x64\Debug\bank-system.exe
+C:\Users\mghali\Desktop\route-project\bank-system\bank-system.cpp(8,51): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\mghali\Desktop\route-project\bank-system\bank-system.cpp(11,51): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\mghali\Desktop\route-project\bank-system\bank-system.cpp(12,54): warning C4305: 'argument': truncation from 'double' to 'float'
+  bank-system.vcxproj -> C:\Users\mghali\Desktop\route-project\bank-system\x64\Debug\bank-system.exe
