@@ -2,7 +2,7 @@
 #include "data_source_interface.h"
 #include <fstream>
 #include <string>
-class FileManager : Data {
+class FileManager : DataSourceInterface {
 public:
   // Metwally's Task
   void addClient(Client cli) override {

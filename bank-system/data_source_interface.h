@@ -3,7 +3,7 @@
 #include <vector>
 #include "admin.h"
 #include "employee.h"
-class Data {
+class DataSourceInterface {
 	virtual void addClient(Client) = 0;
 	virtual void addEmployee(Employee) = 0;
 	virtual void addAdmin(Admin) = 0;
