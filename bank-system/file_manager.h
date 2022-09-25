@@ -6,30 +6,30 @@ class FileManager : DataSourceInterface {
 public:
   // Metwally's Task
   void addClient(Client cli) override {
-    fstream ClientInfo;
-    ClientInfo.open("Clients.txt", ios::app);
-    string line;
+    ofstream clientInfo;
+    clientInfo.open("Clients.txt", ios::app); // short for append
+    string line; // id|name|password|balance
     line = to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + to_string(cli.getBalance());
-    ClientInfo << line << endl;
-    ClientInfo.close();
+    clientInfo << line << endl;
+    clientInfo.close();
   }
 
   void addEmployee(Employee emp) override {
-    fstream ClientInfo;
-    ClientInfo.open("Employee.txt", ios::app);
+    ofstream employeeInfo;
+    employeeInfo.open("Employee.txt", ios::app);
     string line;
     line = to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + to_string(emp.getSalary());
-    ClientInfo << line << endl;
-    ClientInfo.close();
+    employeeInfo << line << endl;
+    employeeInfo.close();
   }
 
   void addAdmin(Admin adm) override {
-    fstream ClientInfo;
-    ClientInfo.open("Admin.txt", ios::app);
+    ofstream adminInfo;
+    adminInfo.open("Admin.txt", ios::app);
     string line;
     line = to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + to_string(adm.getSalary());
-    ClientInfo << line << endl;
-    ClientInfo.close();
+    adminInfo << line << endl;
+    adminInfo.close();
   }
 
   // Ghali's Task
