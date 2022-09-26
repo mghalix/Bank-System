@@ -7,7 +7,7 @@ int main() {
   Employee emp1(1234, "Mohanad", "121312351", 56000);
   Employee emp2(123, "Ahmed", "131512312", 7000.54);
   Client cli1(4451, "client1", "9786412495", 12314);
-  Client cli2(7402, "client 2", "923812344", 123123);
+  Client cli2(7402, "client2", "923812344", 123123);
   Admin adm1(101, "admin1", "11281123412", 9000.90);
   Admin adm2(1011, "admin2", "12342412412", 11000.970);
   FileManager fm;
@@ -22,14 +22,23 @@ int main() {
   vector<Client> clis = fm.getAllClients();
   vector<Admin> adms = fm.getAllAdmins();
   cout << "Testing Employee Output: " << endl;
-  emps[1].display();
-  cout << "-----\n";
+  for (int i = 0; i < emps.size(); i++) {
+    emps[i].display();
+    cout << "-----\n";
+  }
+  cout << "-----------------------------------------------------------------\n";
   cout << "Testing Client Output: " << endl;
-  clis[0].display();
-  cout << "-----\n";
+  for (int i = 0; i < clis.size(); i++) {
+    clis[i].display();
+    cout << "-----\n";
+  }
+  cout << "-----------------------------------------------------------------\n";
   cout << "Testing Admin Output: " << endl;
-  adms[1].display();
+  for (int i = 0; i < adms.size(); i++) {
+    adms[i].display();
+    cout << "-----\n";
+  }
+  cout << "-----------------------------------------------------------------\n";
 
-  cin.get();
   return 0;
 }

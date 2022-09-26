@@ -6,8 +6,7 @@ class FileManager : DataSourceInterface {
 public:
   // Metwally's Task
   void addClient(Client cli) override {
-    std::ofstream clientInfo;
-    clientInfo.open("Clients.txt", std::ios::app); // short for append
+    std::ofstream clientInfo("Clients.txt", std::ios::app); // short for append
     std::string line; // id|name|password|balance
     line = std::to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + std::to_string(cli.getBalance());
     clientInfo << line << std::endl;
@@ -15,8 +14,7 @@ public:
   }
 
   void addEmployee(Employee emp) override {
-    std::ofstream employeeInfo;
-    employeeInfo.open("Employee.txt", std::ios::app);
+    std::ofstream employeeInfo("Employee.txt", std::ios::app);
     std::string line;
     line = std::to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + std::to_string(emp.getSalary());
     employeeInfo << line << std::endl;
@@ -24,8 +22,7 @@ public:
   }
 
   void addAdmin(Admin adm) override {
-    std::ofstream adminInfo;
-    adminInfo.open("Admin.txt", std::ios::app);
+    std::ofstream adminInfo("Admin.txt", std::ios::app);
     std::string line;
     line = std::to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + std::to_string(adm.getSalary());
     adminInfo << line << std::endl;
@@ -36,14 +33,14 @@ public:
   std::vector<Client> getAllClients() override {
     std::vector<Client> clients;
     std::ifstream fin("Clients.txt");
-    fin.seekg(0, std::ios::beg);
+    fin.seekg(0, std::ios::beg); // beginning  
     while (fin.peek() != EOF) {
       std::string arr[4];
       getline(fin, arr[0], '|');
       getline(fin, arr[1], '|');
       getline(fin, arr[2], '|');
       getline(fin, arr[3], '\n');
-      clients.push_back(Client(stoi(arr[0]), arr[1], arr[2], stod(arr[3])));
+      clients.push_back(Client(stoi(arr[0]), arr[1], arr[2], stof(arr[3])));
     }
     fin.close();
     return clients;
@@ -82,7 +79,7 @@ public:
   }
 
   void removeAllClients() override {
-    std::ofstream ofs("Clients.txt", std::ios::trunc);
+    std::ofstream ofs("Clients.txt", std::ios::trunc); // truncate
     ofs.close();
   }
 

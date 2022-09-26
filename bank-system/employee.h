@@ -29,7 +29,7 @@ public:
   //Methods
   void display() override {
     std::cout << "Name: " << getName() << std::endl
-      //<< "password: " << getPassword() << std::endl
+      // << "password: " << getPassword() << std::endl
       << "ID: #" << getID() << std::endl
       << "Salary: $" << salary << std::endl;
   }

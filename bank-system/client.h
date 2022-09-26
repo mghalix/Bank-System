@@ -55,7 +55,6 @@ public:
   }
 
   void display() {
-    std::cout << "Client Account info.\n";
     std::cout << "Name: " << getName() << std::endl
       << "ID: #" << getID() << std::endl
       // << "Password: " << getPassword() << std::endl
