@@ -20,7 +20,7 @@ public:
 			throw "Your balance must be greater than 1500 ";
 	}
 
-	static void checkSalary(float salary) {
+	static void checkSalary(double salary) {
 		if (salary < 5000)
 			throw("Low salary");
 	}

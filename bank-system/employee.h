@@ -2,17 +2,14 @@
 #include <iostream>
 #include "person.h"
 #include "validation.h"
+#include <fstream>
 class Employee : public Person {
 private:
   //Attributes
-  float salary;
+  double salary;
 public:
-  //Constructors 
-  Employee() : Person() {
-    salary = 0.0;
-  }
-
-  Employee(int id, std::string name, std::string password, float salary) : Person(id, name, password) {
+  //Constructors
+  Employee(int id, std::string name, std::string password, double salary) : Person(id, name, password) {
     Validation::checkSalary(salary); // min 5000
     this->salary = salary;
   }
@@ -24,7 +21,7 @@ public:
   }
 
   //Getters
-  float getSalary() const { return salary; }
+  double getSalary() const { return salary; }
 
   //Methods
   void display() override {
@@ -33,4 +30,6 @@ public:
       << "ID: #" << getID() << std::endl
       << "Salary: $" << salary << std::endl;
   }
+
+  void editClient(int id, std::string name, std::string password, double balance);
 };
