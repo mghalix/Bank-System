@@ -1,2 +1,2 @@
 # Bank-System
-C++ App to ruin a bank system
+C++ App to run a bank system
