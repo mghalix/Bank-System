@@ -2,22 +2,15 @@
 #include <iostream>
 #include "person.h"
 #include "validation.h"
+#include <fstream>
 class Employee : public Person {
 private:
   //Attributes
-  float salary;
-  double balance;
-
+  double salary;
 public:
-  //Constructors 
-  Employee() : Person() {
-    salary = 0.0;
-    balance = 0.0;
-  }
-
-  Employee(int id, std::string name, std::string password, double balance, float salary) : Person(id, name, password) {
-    this->balance = balance;
-    Validation::checkSalary(salary);
+  //Constructors
+  Employee(int id, std::string name, std::string password, double salary) : Person(id, name, password) {
+    Validation::checkSalary(salary); // min 5000
     this->salary = salary;
   }
 
@@ -27,20 +20,16 @@ public:
     this->salary = salary;
   }
 
-  void setBalance(double balance) {
-    this->balance = balance;
-  }
-
   //Getters
-  float getSalary() const { return salary; }
-
-  double getBalance() const { return balance; }
+  double getSalary() const { return salary; }
 
   //Methods
   void display() override {
-    std::cout << "name: " << Person::getName() << std::endl
-      << "password: " << Person::getPassword() << std::endl
-      << "ID: " << Person::getID() << std::endl
-      << "salary: " << salary << std::endl;
+    std::cout << "Name: " << getName() << std::endl
+      // << "password: " << getPassword() << std::endl
+      << "ID: #" << getID() << std::endl
+      << "Salary: $" << salary << std::endl;
   }
+
+  void editClient(int id, std::string name, std::string password, double balance);
 };
