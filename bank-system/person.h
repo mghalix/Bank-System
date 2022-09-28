@@ -9,9 +9,9 @@ private:
 public:
 	//Constructors
 	Person() {
-		id = 123;
-		name = "no_name";
-		password = "no_password";
+		id = ;
+		name = "";
+		password = "";
 	}
 
 	Person(int id, std::string name, std::string password) {
