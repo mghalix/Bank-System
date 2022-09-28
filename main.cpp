@@ -1,7 +1,8 @@
 ﻿#include <iostream>
 #include "classes/file_manager.h"
 using namespace std;
-int main() {
+int main()
+{
   Employee emp1(441, "Mohamed", "121312351", 56000);
   Employee emp2(442, "Menna", "131512312", 7000.54);
   Client cli1(443, "Hassan", "9786412495", 12314.413);
@@ -37,9 +38,9 @@ int main() {
   //   cout << "-----\n";
   // }
   // cout << "-----------------------------------------------------------------\n";
-  adm1.editClient(443, "Johnny", "12314124123", 9000.9745);
-  emp1.editClient(444, "Ronny", "12314124123", 9000.9745);
-  adm1.editEmployee(441, "Dennis", "qwerty9876", 8900.4032);
+  // adm1.editClient(443, "Johnny", "12314124123", 9000.9745);
+  // emp1.editClient(444, "Ronny", "12314124123", 9000.9745);
+  // adm1.editEmployee(441, "Dennis", "qwerty9876", 8900.4032);
 
   return 0;
 }
