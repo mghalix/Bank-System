@@ -5,6 +5,10 @@
     }
   ],
   "settings": {
-    "cSpell.words": ["adms", "Assem", "clis", "emps", "Hassan", "Menna"]
+    "cSpell.words": ["adms", "Assem", "clis", "emps", "Hassan", "Menna"],
+    "files.associations": {
+      "string_view": "cpp",
+      "*.tcc": "cpp"
+    }
   }
 }

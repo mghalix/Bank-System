@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include "classes/file_manager.h"
 using namespace std;
-int main(){
+int main() {
   Employee emp1(441, "Mohamed", "121312351", 56000);
   Employee emp2(442, "Menna", "131512312", 7000.54);
   Client cli1(443, "Hassan", "9786412495", 12314.413);
