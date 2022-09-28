@@ -38,6 +38,8 @@ public:
   }
 
   void withdraw(double amount) {
+    if (amount > balance)
+      throw "Not enough balance in your account\n";
     balance -= amount;
   }
 
