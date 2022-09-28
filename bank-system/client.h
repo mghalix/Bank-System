@@ -42,7 +42,7 @@ public:
   }
 
   void transferTo(double amount, Client &recipient) {
-    if (balance > amount)
+    if (amount > balance)
       throw("Amount exceeded balance!");
     recipient.balance += amount;
     balance -= amount;

@@ -38,9 +38,9 @@ int main() {
   //   cout << "-----\n";
   // }
   // cout << "-----------------------------------------------------------------\n";
-  // adm1.editClient(443, "nonnah", "12314124123", 9000.9745);
-  // emp1.editClient(443, "nonnah", "12314124123", 9000.9745);
-  // adm1.editEmployee(441, "lollah", "qwerty9876", 8900.4032);
+  // adm1.editClient(443, "Johnny", "12314124123", 9000.9745);
+  // emp1.editClient(443, "Ronny", "12314124123", 9000.9745);
+  // adm1.editEmployee(441, "Dennis", "qwerty9876", 8900.4032);
 
 
   return 0;
