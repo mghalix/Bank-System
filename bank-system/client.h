@@ -43,11 +43,10 @@ public:
 
   void transferTo(double amount, Client &recipient) {
     if (balance > amount)
-    {
       throw("Amount exceeded balance!");
-    }
     recipient.balance += amount;
     balance -= amount;
+    std::cout << "Transaction Successful\n";
   }
 
   void checkBalance() {
