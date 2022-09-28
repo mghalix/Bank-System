@@ -2,12 +2,13 @@
 #include "file_manager.h"
 using namespace std;
 int main() {
-  Employee emp1(441, "Mohanad", "121312351", 56000);
-  Employee emp2(442, "Ahmed", "131512312", 7000.54);
-  Client cli1(443, "client1", "9786412495", 12314.413);
-  Client cli2(444, "client2", "923812344", 123123);
-  Admin adm1(445, "admin1", "11281123412", 9000.905);
-  Admin adm2(446, "admin2", "12342412412", 11000.970);
+
+  Employee emp1(441, "Mohamed", "121312351", 56000);
+  Employee emp2(442, "Menna", "131512312", 7000.54);
+  Client cli1(443, "Hassan", "9786412495", 12314.413);
+  Client cli2(444, "Hussein", "923812344", 123123);
+  Admin adm1(445, "Ahmed", "11281123412", 9000.905);
+  Admin adm2(446, "Assem", "12342412412", 11000.970);
   // FileManager fm;
   // fm.addEmployee(emp1);
   // fm.addEmployee(emp2);
@@ -38,7 +39,9 @@ int main() {
   // }
   // cout << "-----------------------------------------------------------------\n";
   // adm1.editClient(443, "nonnah", "12314124123", 9000.9745);
-  emp1.editClient(443, "nonnah", "12314124123", 9000.9745);
-  adm1.editEmployee(441, "lollah", "qwerty9876", 8900.4032);
+  // emp1.editClient(443, "nonnah", "12314124123", 9000.9745);
+  // adm1.editEmployee(441, "lollah", "qwerty9876", 8900.4032);
+
+
   return 0;
 }

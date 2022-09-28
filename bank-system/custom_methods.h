@@ -12,9 +12,10 @@ public:
       (strNumber.erase(i - 1, strNumber.size() - i + 1))
       : strNumber.erase(i, strNumber.size() - i);
   }
-  vector<string> split(const string &str, const char &del) {
-    vector<string> vec;
-    string temp = "";
+
+  std::vector<std::string> split(const std::string &str, const char &del) {
+    std::vector<std::string> vec;
+    std::string temp = "";
     for (int i = 0; i < str.size(); i++) {
       if (str[i] != del)
         temp += str[i];
