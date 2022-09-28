@@ -12,4 +12,18 @@ public:
       (strNumber.erase(i - 1, strNumber.size() - i + 1))
       : strNumber.erase(i, strNumber.size() - i);
   }
+  vector<string> split(const string &str, const char &del) {
+    vector<string> vec;
+    string temp = "";
+    for (int i = 0; i < str.size(); i++) {
+      if (str[i] != del)
+        temp += str[i];
+      else {
+        vec.push_back(temp);
+        temp = "";
+      }
+    }
+    vec.push_back(temp);
+    return vec;
+  }
 };
