@@ -3,12 +3,8 @@ class Validation {
 public:
   static void checkName(std::string name) {
     std::string illegal = "1234567890!@#$%^&*()_+-=;:'\"><?/";
-    for (char c : name)
-      for (int i = 0; i < illegal.size(); i++) {
-        if (c == illegal[i])
-          throw("Error you can only use alphabetic characters.\n");
-      }
-
+    if (std::string::npos != name.find_first_of(illegal))
+      throw("Error you can only use alphabetic characters.\n");
     if (name.length() < 5)
       throw("Name is too short!");
     if (name.length() > 20)
