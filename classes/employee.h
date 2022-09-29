@@ -1,18 +1,20 @@
 #pragma once
 #include <iostream>
 #include "person.h"
-#include "validation.h"
 #include <fstream>
 class Employee : public Person {
 private:
   //Attributes
   double salary;
+  static int id;
+  int empID;
 public:
   //Constructors
-  Employee(int id, std::string name, std::string password, double salary) : Person(id, name, password) {
+  Employee(std::string name, std::string password, double salary) : Person(name, password), empID(id += 10) {
     Validation::checkSalary(salary); // min 5000
     this->salary = salary;
   }
+  ~Employee() { id -= 10; }
 
   //Setters
   void setSalary(float salary) {
@@ -23,13 +25,21 @@ public:
   //Getters
   double getSalary() const { return salary; }
 
+  int getID() const override { return empID; }
+
+  //Setters
+  void setID(int id) override { empID = id; }
+
   //Methods
+  static void initID() { id = FilesHelper::getLast("Employee.txt"); } // for runApp task in phase 3
+
   void display() override {
     std::cout << "Name: " << getName() << std::endl
       // << "password: " << getPassword() << std::endl
       << "ID: #" << getID() << std::endl
-      << "Salary: $" << salary << std::endl;
+      << "Salary: $" << CustomMethods::correctView(salary) << std::endl;
   }
 
   void editClient(int id, std::string name, std::string password, double balance);
 };
+int Employee::id = 1990;

@@ -1,38 +1,40 @@
 #pragma once
-#include <iostream>
 #include "person.h"
 class Client : public Person {
 private:
   // Attributes
   double balance;
-
+  int cliID;
+  static int id;
 public:
   // Constructors
-  /*
-  Client() : Person() { //You mustn't allow a default constructors in Client class because it's required for every client to have a minimum of 1500 balance, so you can't initialize balance variable like the following:
-  balance = 0;
-  }
-  */
-  Client(int id, std::string name, std::string password, double balance) : Person(id, name, password) {
+  Client(std::string name, std::string password, double balance) : Person(name, password), cliID(id += 10) {
     Validation::checkBalanceOfClient(balance);
     this->balance = balance;
   }
 
-  Client(double balance) : Person() {
+  Client(double balance) : Person(), cliID(id += 10) {
     Validation::checkBalanceOfClient(balance);
     this->balance = balance;
   }
 
+  // Destructor
+  ~Client() { id -= 10; }
   // Setters
   void setBalance(double balance) {
     Validation::checkBalanceOfClient(balance);
     this->balance = balance;
   }
 
+  void setID(int id) override { cliID = id; }
   // Getters
   double getBalance() { return balance; }
 
+  int getID() const override { return cliID; }
+
   // Methods
+  static void initID() { id = FilesHelper::getLast("Clients.txt"); }
+
   void deposit(double amount) {
     balance += amount;
   }
@@ -59,6 +61,7 @@ public:
     std::cout << "Name: " << getName() << std::endl
       << "ID: #" << getID() << std::endl
       // << "Password: " << getPassword() << std::endl
-      << "Balance: $" << getBalance() << std::endl;
+      << "Balance: $" << CustomMethods::correctView(balance) << std::endl;
   }
 };
+int Client::id = 6990;

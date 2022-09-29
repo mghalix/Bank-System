@@ -3,11 +3,16 @@
 #include <string>
 #include <fstream>
 #include "custom_methods.h"
+#include "files_helper.h"
 class FileManager : DataSourceInterface {
+private:
+  const std::string clientFile = "Clients.txt";
+  const std::string employeeFile = "Employee.txt";
+  const std::string adminFile = "Admin.txt";
 public:
   // Write
   void addClient(Client cli) override {
-    std::ofstream clientInfo("Clients.txt", std::ios::app); // short for append
+    std::ofstream clientInfo(clientFile, std::ios::app); // short for append
     std::string line; // id|name|password|balance
     line = std::to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + CustomMethods::correctView(cli.getBalance());
     clientInfo << line << std::endl;
@@ -15,7 +20,7 @@ public:
   }
 
   void addEmployee(Employee emp) override {
-    std::ofstream employeeInfo("Employee.txt", std::ios::app);
+    std::ofstream employeeInfo(employeeFile, std::ios::app);
     std::string line;
     line = std::to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + CustomMethods::correctView(emp.getSalary());
     employeeInfo << line << std::endl;
@@ -23,7 +28,7 @@ public:
   }
 
   void addAdmin(Admin adm) override {
-    std::ofstream adminInfo("Admin.txt", std::ios::app);
+    std::ofstream adminInfo(adminFile, std::ios::app);
     std::string line;
     line = std::to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + CustomMethods::correctView(adm.getSalary());
     adminInfo << line << std::endl;
@@ -33,18 +38,20 @@ public:
   // Read
   std::vector<Client> getAllClients() override {
     std::vector<Client> clients;
-    std::ifstream fin("Clients.txt");
+    std::ifstream fin(clientFile);
     if (fin.fail()) {
       throw ("Error opening file\n");
     }
     fin.seekg(0, std::ios::beg); // short for beginning  
-    while (fin.peek() != EOF) {
+    while (!fin.eof()) {
       std::string arr[4];
       getline(fin, arr[0], '|');  // arr[0] = id
       getline(fin, arr[1], '|');  // arr[1] = name
       getline(fin, arr[2], '|');  // arr[2] = password 
       getline(fin, arr[3], '\n'); // arr[3] = balance
-      clients.push_back(Client(stoi(arr[0]), arr[1], arr[2], stod(arr[3])));
+      Client cli(arr[1], arr[2], stod(arr[3]));
+      cli.setID(stoi(arr[0]));
+      clients.push_back(cli);
     }
     fin.close();
     return clients;
@@ -52,8 +59,8 @@ public:
 
   std::vector<Employee> getAllEmployees() override {
     std::vector<Employee> employees;
-    std::ifstream fin("Employee.txt");
-    if (fin.fail()) {
+    std::ifstream fin(employeeFile);
+    if (!fin) {
       throw ("Error opening file\n");
     }
     fin.seekg(0, std::ios::beg);
@@ -63,7 +70,9 @@ public:
       getline(fin, arr[1], '|');
       getline(fin, arr[2], '|');
       getline(fin, arr[3], '\n');
-      employees.push_back(Employee(stoi(arr[0]), arr[1], arr[2], stod(arr[3])));
+      Employee emp(arr[1], arr[2], stod(arr[3]));
+      emp.setID(stoi(arr[0]));
+      employees.push_back(emp);
     }
     fin.close();
     return employees;
@@ -71,18 +80,20 @@ public:
 
   std::vector<Admin> getAllAdmins() override {
     std::vector<Admin> admins;
-    std::ifstream fin("Admin.txt");
+    std::ifstream fin(adminFile);
     if (fin.fail()) {
       throw ("Error opening file\n");
     }
     fin.seekg(0, std::ios::beg);
-    while (fin.peek() != EOF) {
+    while (!fin.eof()) {
       std::string arr[4];
       getline(fin, arr[0], '|');
       getline(fin, arr[1], '|');
       getline(fin, arr[2], '|');
       getline(fin, arr[3], '\n');
-      admins.push_back(Admin(stoi(arr[0]), arr[1], arr[2], stod(arr[3])));
+      Admin adm(arr[1], arr[2], stod(arr[3]));
+      adm.setID(stoi(arr[0]));
+      admins.push_back(adm);
     }
     fin.close();
     return admins;
@@ -90,17 +101,17 @@ public:
 
   // Delete
   void removeAllClients() override {
-    std::ofstream ofs("Clients.txt", std::ios::trunc); // truncate
+    std::ofstream ofs(clientFile, std::ios::trunc); // truncate
     ofs.close();
   }
 
   void removeAllEmployees() override {
-    std::ofstream ofs("Employee.txt", std::ios::trunc);
+    std::ofstream ofs(employeeFile, std::ios::trunc);
     ofs.close();
   }
 
   void removeAllAdmins() override {
-    std::ofstream ofs("Admin.txt", std::ios::trunc);
+    std::ofstream ofs(adminFile, std::ios::trunc);
     ofs.close();
   }
 };
@@ -132,6 +143,7 @@ void Employee::editClient(int id, std::string name, std::string password, double
   }
   ofs.close();
 }
+
 void Admin::editEmployee(int id, std::string name, std::string password, double salary) {
   std::ofstream ofs;
   FileManager fm;
