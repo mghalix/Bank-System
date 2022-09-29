@@ -11,9 +11,12 @@ public:
   }
   Employee *searshEmployee(int id) {
 
-  }
+  }										   
   void listEmployee() {
 
+  }
+  void display() {
+	  cout << " kosom albdaaaan !!!!!!!!!!!!!!";
   }
   // Methods
   void editEmployee(int id, std::string name, std::string password, double salary);
