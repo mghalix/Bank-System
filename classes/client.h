@@ -33,7 +33,7 @@ public:
   int getID() const override { return cliID; }
 
   // Methods
-  static void initID() { id = FilesHelper::getLast("Clients.txt"); }
+  static void initID() { id = FilesHelper::getLast("db/Clients.txt"); }
 
   void deposit(double amount) {
     balance += amount;

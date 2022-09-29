@@ -31,7 +31,7 @@ public:
   void setID(int id) override { empID = id; }
 
   //Methods
-  static void initID() { id = FilesHelper::getLast("Employee.txt"); } // for runApp task in phase 3
+  static void initID() { id = FilesHelper::getLast("db/Employee.txt"); } // for runApp task in phase 3
 
   void display() override {
     std::cout << "Name: " << getName() << std::endl

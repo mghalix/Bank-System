@@ -6,9 +6,10 @@
 #include "files_helper.h"
 class FileManager : DataSourceInterface {
 private:
-  const std::string clientFile = "Clients.txt";
-  const std::string employeeFile = "Employee.txt";
-  const std::string adminFile = "Admin.txt";
+  //Attributes
+  const std::string clientFile = "db/Clients.txt";
+  const std::string employeeFile = "db/Employee.txt";
+  const std::string adminFile = "db/Admin.txt";
 public:
   // Write
   void addClient(Client cli) override {
@@ -133,7 +134,7 @@ void Employee::editClient(int id, std::string name, std::string password, double
     std::cout << "Client not found, please enter correct id\n";
     return;
   }
-  ofs.open("Clients.txt");
+  ofs.open("db/Clients.txt");
   if (!ofs) {
     throw("Error opening the file\n");
   }
@@ -162,7 +163,7 @@ void Admin::editEmployee(int id, std::string name, std::string password, double 
     std::cout << "Client not found, please enter correct id\n";
     return;
   }
-  ofs.open("Employee.txt");
+  ofs.open("db/Employee.txt");
   if (!ofs) {
     throw("Error opening the file\n");
   }
