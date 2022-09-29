@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "person.h"
+#include"file_manager.h"
 #include "validation.h"
 #include <fstream>
 class Employee : public Person {
@@ -9,6 +10,7 @@ private:
   double salary;
 public:
   //Constructors
+    Employee(){}
   Employee(int id, std::string name, std::string password, double salary) : Person(id, name, password) {
     Validation::checkSalary(salary); // min 5000
     this->salary = salary;
@@ -30,6 +32,15 @@ public:
       << "ID: #" << getID() << std::endl
       << "Salary: $" << salary << std::endl;
   }
+  void addClient(Client &client){
+      
+      
+  }
+  Client *searshClient(int id) {
 
+  }
+  void listClient() {
+
+  }
   void editClient(int id, std::string name, std::string password, double balance);
 };
