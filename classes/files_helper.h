@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <fstream>
 class FilesHelper {
 public:
@@ -19,4 +18,11 @@ public:
     inp.close();
     return stoi(strID);
   }
+
+  static void showClients();
+
+  static void showEmployees();
+
+  static void showAdmins();
+  static void clearFile(std::string fileName);
 };

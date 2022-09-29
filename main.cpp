@@ -5,9 +5,9 @@ int main() {
   FileManager fm;
   //TODO: transfer the inits to runApp when phase3 comes.
   //=====================//
-  Admin::initID();
-  Employee::initID();
-  Client::initID();
+  // Admin::initID();
+  // Employee::initID();
+  // Client::initID();
   //====================//
   /*****init test*****/
 //----Admins
@@ -67,10 +67,15 @@ int main() {
     //     adms[i].display();
     //     cout << "-----\n";
     //   }
-    //   cout << "-----------------------------------------------------------------\n";
+  // cout << "-----------------------------------------------------------------\n";
   /*****Editing file info*****/
   // adm1.editClient(3000, "Johnny", "12314124123", 9000.9745);
   // emp1.editClient(3010, "Ronny", "12314124123", 9000.9745);
   // adm1.editEmployee(2000, "Dennis", "qwerty9876", 8900.4032);
+
+  /***** Clearing Files *****/
+  // FilesHelper::clearFile("db/Clients.txt");
+  // FilesHelper::clearFile("db/Employee.txt");
+  // FilesHelper::clearFile("db/Admin.txt");
   return 0;
 }

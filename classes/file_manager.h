@@ -44,7 +44,7 @@ public:
       throw ("Error opening file\n");
     }
     fin.seekg(0, std::ios::beg); // short for beginning  
-    while (!fin.eof()) {
+    while (fin.peek() != EOF) {
       std::string arr[4];
       getline(fin, arr[0], '|');  // arr[0] = id
       getline(fin, arr[1], '|');  // arr[1] = name
@@ -86,7 +86,7 @@ public:
       throw ("Error opening file\n");
     }
     fin.seekg(0, std::ios::beg);
-    while (!fin.eof()) {
+    while (fin.peek() != EOF) {
       std::string arr[4];
       getline(fin, arr[0], '|');
       getline(fin, arr[1], '|');
@@ -116,6 +116,7 @@ public:
     ofs.close();
   }
 };
+//------------------------------------------------------------------------------
 void Employee::editClient(int id, std::string name, std::string password, double balance) {
   std::ofstream ofs;
   FileManager fm;
@@ -144,7 +145,7 @@ void Employee::editClient(int id, std::string name, std::string password, double
   }
   ofs.close();
 }
-
+//------------------------------------------------------------------------------
 void Admin::editEmployee(int id, std::string name, std::string password, double salary) {
   std::ofstream ofs;
   FileManager fm;
@@ -173,3 +174,40 @@ void Admin::editEmployee(int id, std::string name, std::string password, double 
   }
   ofs.close();
 }
+//------------------------------------------------------------------------------
+void FilesHelper::clearFile(std::string fileName) {
+  FileManager fm;
+  if (fileName == "db/Clients.txt") fm.removeAllClients();
+  else if (fileName == "db/Employee.txt") fm.removeAllEmployees();
+  else if (fileName == "db/Admin.txt") fm.removeAllAdmins();
+  else std::cout << "File doesn't exist.\n";
+}
+//------------------------------------------------------------------------------
+//TODO change the use of objects to pointers to not access classes destructors and modify id to wrong values
+void FilesHelper::showClients() {
+  FileManager fm;
+  std::vector<Client> clis = fm.getAllClients();
+  for (int i = 0; i < clis.size(); ++i) {
+    std::cout << "***** Client[" << i + 1 << "] info *****\n";
+    clis[i].display();
+  }
+}
+//------------------------------------------------------------------------------
+void FilesHelper::showEmployees() {
+  FileManager fm;
+  std::vector<Employee> emps = fm.getAllEmployees();
+  for (int i = 0; i < emps.size(); ++i) {
+    std::cout << "***** Employee[" << i + 1 << "] info *****\n";
+    emps[i].display();
+  }
+}
+//------------------------------------------------------------------------------
+void FilesHelper::showAdmins() {
+  FileManager fm;
+  std::vector<Admin> adms = fm.getAllAdmins();
+  for (int i = 0; i < adms.size(); ++i) {
+    std::cout << "***** Admin[" << i + 1 << "] info *****\n";
+    adms[i].display();
+  }
+}
+//------------------------------------------------------------------------------
