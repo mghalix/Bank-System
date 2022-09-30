@@ -1,3 +1,4 @@
+//------------------------------------------------------------------------------
 #pragma once
 #include "data_source_interface.h"
 #include <string>
@@ -192,7 +193,7 @@ void FilesHelper::showClients() {
     clis[i].display();
   }
 }
-
+//------------------------------------------------------------------------------
 void FilesHelper::showEmployees() {
   FileManager fm;
   std::vector<Employee> emps = fm.getAllEmployees();
@@ -201,7 +202,7 @@ void FilesHelper::showEmployees() {
     emps[i].display();
   }
 }
-
+//------------------------------------------------------------------------------
 void FilesHelper::showAdmins() {
   FileManager fm;
   std::vector<Admin> adms = fm.getAllAdmins();
@@ -210,3 +211,4 @@ void FilesHelper::showAdmins() {
     adms[i].display();
   }
 }
+//------------------------------------------------------------------------------

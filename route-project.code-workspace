@@ -60,6 +60,18 @@
       "stdexcept": "cpp",
       "streambuf": "cpp",
       "typeinfo": "cpp"
+    },
+    "explorer.sortOrder": "foldersNestsFiles",
+    "files.watcherExclude": {
+      "**/.dart_tool": false
+    },
+    "files.exclude": {
+      "**/.editor*": true,
+      "**/.git*": true,
+      "**/.vscode": true,
+      "**/*.md": true,
+      "**/*workspace": true,
+      "**/main": true
     }
   }
 }

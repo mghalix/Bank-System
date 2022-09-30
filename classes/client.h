@@ -33,8 +33,6 @@ public:
   int getID() const override { return cliID; }
 
   // Methods
-  static void initID() { id = FilesHelper::getLast("db/Clients.txt"); }
-
   void deposit(double amount) {
     balance += amount;
   }
@@ -63,5 +61,12 @@ public:
       // << "Password: " << getPassword() << std::endl
       << "Balance: $" << CustomMethods::correctView(balance) << std::endl;
   }
+  
+  /**
+   * @brief when we rerun the program we don't want the static id to be reset,
+   * so we correct its value based on the last id on the file.
+   * @param id
+   */
+  static void initID() { id = FilesHelper::getLast("db/Clients.txt"); }
 };
 int Client::id = 6990;
