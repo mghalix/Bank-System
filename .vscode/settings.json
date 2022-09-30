@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    "a.exe": true,
+    "tempCodeRunnerFile.cpp": true,
+    ".vscode/": true,
+    "route-project*": true,
+    "READ*": true,
+    "main": true,
+    ".gitignore": true,
+    ".editor*": true
+  }
+}
