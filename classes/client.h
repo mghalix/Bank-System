@@ -1,5 +1,6 @@
 #pragma once
 #include "person.h"
+
 class Client : public Person {
 private:
   // Attributes
