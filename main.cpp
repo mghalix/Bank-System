@@ -78,6 +78,5 @@ int main() {
   // FilesHelper::clearFile("db/Clients.txt");
   // FilesHelper::clearFile("db/Employee.txt");
   // FilesHelper::clearFile("db/Admin.txt");
-
   return 0;
 }
