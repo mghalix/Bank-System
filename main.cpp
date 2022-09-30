@@ -78,7 +78,6 @@ int main() {
   // FilesHelper::clearFile("db/Clients.txt");
   // FilesHelper::clearFile("db/Employee.txt");
   // FilesHelper::clearFile("db/Admin.txt");
-  cout<<"Fuck Git Hub";
 
   return 0;
 }
