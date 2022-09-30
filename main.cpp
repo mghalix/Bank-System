@@ -78,6 +78,6 @@ int main() {
   // FilesHelper::clearFile("db/Clients.txt");
   // FilesHelper::clearFile("db/Employee.txt");
   // FilesHelper::clearFile("db/Admin.txt");
-  
+  cout << "Hello" << endl;
   return 0;
 }
