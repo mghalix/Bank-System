@@ -14,7 +14,7 @@ public:
       : strNumber.erase(i, strNumber.size() - i);
   }
 
-  std::vector<std::string> split(const std::string &str, const char &del) {
+  static std::vector<std::string> split(const std::string &str, const char &del) {
     std::vector<std::string> vec;
     std::string temp = "";
     for (int i = 0; i < str.size(); i++) {

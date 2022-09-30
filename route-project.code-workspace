@@ -59,7 +59,8 @@
       "ostream": "cpp",
       "stdexcept": "cpp",
       "streambuf": "cpp",
-      "typeinfo": "cpp"
+      "typeinfo": "cpp",
+      "cinttypes": "cpp"
     },
     "explorer.sortOrder": "foldersNestsFiles",
     "files.watcherExclude": {

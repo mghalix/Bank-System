@@ -61,7 +61,7 @@ public:
       // << "Password: " << getPassword() << std::endl
       << "Balance: $" << CustomMethods::correctView(balance) << std::endl;
   }
-  
+
   /**
    * @brief when we rerun the program we don't want the static id to be reset,
    * so we correct its value based on the last id on the file.

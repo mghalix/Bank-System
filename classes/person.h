@@ -6,7 +6,6 @@ class Person {
 private:
   //Attributes
   std::string name, password;
-  virtual void display() = 0;
 public:
   //Constructors
   Person() {
@@ -40,4 +39,6 @@ public:
     Validation::checkPassword(password);
     this->password = password;
   }
+
+  virtual void display() = 0;
 };

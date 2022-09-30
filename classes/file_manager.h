@@ -15,6 +15,9 @@ public:
   // Write
   void addClient(Client cli) override {
     std::ofstream clientInfo(clientFile, std::ios::app); // short for append
+    if (clientInfo.fail()) {
+      throw ("Error opening file\n");
+    }
     std::string line; // id|name|password|balance
     line = std::to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + CustomMethods::correctView(cli.getBalance());
     clientInfo << line << std::endl;
@@ -23,6 +26,9 @@ public:
 
   void addEmployee(Employee emp) override {
     std::ofstream employeeInfo(employeeFile, std::ios::app);
+    if (employeeInfo.fail()) {
+      throw ("Error opening file\n");
+    }
     std::string line;
     line = std::to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + CustomMethods::correctView(emp.getSalary());
     employeeInfo << line << std::endl;
@@ -31,6 +37,9 @@ public:
 
   void addAdmin(Admin adm) override {
     std::ofstream adminInfo(adminFile, std::ios::app);
+    if (adminInfo.fail()) {
+      throw ("Error opening file\n");
+    }
     std::string line;
     line = std::to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + CustomMethods::correctView(adm.getSalary());
     adminInfo << line << std::endl;
@@ -43,9 +52,9 @@ public:
     std::ifstream fin(clientFile);
     if (fin.fail()) {
       throw ("Error opening file\n");
-    }
+    } // Guard Clauses
     fin.seekg(0, std::ios::beg); // short for beginning  
-    while (fin.peek() != EOF) {
+    while (fin.peek() != EOF) { // End of file
       std::string arr[4];
       getline(fin, arr[0], '|');  // arr[0] = id
       getline(fin, arr[1], '|');  // arr[1] = name
