@@ -30,13 +30,13 @@ public:
     throw("Client ID doesn't Exist");
   }
 
-  static Employee parseToEmployee(std::string line) {
+  static Employee parseToEmployee(std::string id) {
     std::ifstream ifs(employeeFile, std::ios::in);
     std::string record;
     while (ifs.peek() != EOF) {
       getline(ifs, record);
       std::vector<std::string> vec = CustomMethods::split(record, '|');
-      if (vec[0] != line)
+      if (vec[0] != id)
         continue;
       Employee e(vec[1], vec[2], stod(vec[3]));
       e.setID(stoi(vec[0]));
@@ -47,13 +47,13 @@ public:
     throw("Employee ID doesn't Exist");
   }
 
-  static Admin parseToAdmin(std::string line) {
+  static Admin parseToAdmin(std::string id) {
     std::ifstream ifs(adminFile, std::ios::in);
     std::string record;
     while (ifs.peek() != EOF) {
       getline(ifs, record);
       std::vector<std::string> vec = CustomMethods::split(record, '|');
-      if (vec[0] != line)
+      if (vec[0] != id)
         continue;
       Admin a(vec[1], vec[2], stod(vec[3]));
       a.setID(stoi(vec[0]));
