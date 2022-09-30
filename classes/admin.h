@@ -1,5 +1,7 @@
 #pragma once
 #include "employee.h"
+#include"parser.h"
+#include"file_manager.h"
 class Admin : public Employee {
 private:
   static int id;
@@ -18,5 +20,17 @@ public:
   void setID(int id) override { admID = id; }
 
   static void initID() { id = FilesHelper::getLast("db/Admin.txt"); }
+
+  void addEmployee(Employee &employee){
+    FileManager fm;
+    fm.addEmployee(employee);
+  }
+  void listEmployee() {
+    FilesHelper::showEmployees();
+  }
+  Employee *searchEmployee(){
+    return &Parser::parseToEmployee(to_string(id));
+  }
+  
 };
 int Admin::id = 0;

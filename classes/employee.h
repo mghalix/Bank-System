@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include "file_manager.h"
+#include"parser.h"
 #include "person.h"
 #include <fstream>
 class Employee : public Person {
@@ -38,6 +40,20 @@ public:
       // << "password: " << getPassword() << std::endl
       << "ID: #" << getID() << std::endl
       << "Salary: $" << CustomMethods::correctView(salary) << std::endl;
+  }
+
+  void addClient(Client&client){
+    FileManager fm;
+    fm.addClient(client);
+  }
+
+  void  listClient(){
+    FilesHelper::showClients();
+  }
+
+  Client *searchClient(int id) {
+    return &Parser::parseToClient(to_string(id));
+    
   }
 
   void editClient(int id, std::string name, std::string password, double balance);
