@@ -24,5 +24,6 @@ public:
   static void showEmployees();
 
   static void showAdmins();
+
   static void clearFile(std::string fileName);
 };

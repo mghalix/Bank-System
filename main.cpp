@@ -10,13 +10,13 @@ int main() {
   // Client::initID();
   //====================//
   /*****init test*****/
-//----Admins
-  // Admin a("nonnah", "1234567890", 90302.50);
-  // a.display();
-  // Admin a2("lollah", "123123123", 75000.304);
-  // a2.display();
-  // // fm.addAdmin(a);
-  // // fm.addAdmin(a2);
+// //----Admins
+//   Admin a("nonnah", "1234567890", 90302.50);
+//   a.display();
+//   Admin a2("lollah", "123123123", 75000.304);
+//   a2.display();
+//   fm.addAdmin(a);
+//   fm.addAdmin(a2);
   //----Employees
     // Employee emp1("Mohamed", "121312351", 56000);
     // Employee emp2("Menna", "131512312", 7000.54);
@@ -69,7 +69,7 @@ int main() {
     //   }
   // cout << "-----------------------------------------------------------------\n";
   /*****Editing file info*****/
-  // adm1.editClient(3000, "Johnny", "12314124123", 9000.9745);
+  // adm1.editClient(7000, "Johnny", "12314124123", 5000.9745);
   // emp1.editClient(3010, "Ronny", "12314124123", 9000.9745);
   // adm1.editEmployee(2000, "Dennis", "qwerty9876", 8900.4032);
 
