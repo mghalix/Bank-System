@@ -31,10 +31,11 @@ public:
   }
 
   static Employee parseToEmployee(std::string id) {
+    // read
     std::ifstream ifs(employeeFile, std::ios::in);
     std::string record;
     while (ifs.peek() != EOF) {
-      getline(ifs, record);
+      getline(ifs, record); // id|name|password|salary
       std::vector<std::string> vec = CustomMethods::split(record, '|');
       if (vec[0] != id)
         continue;

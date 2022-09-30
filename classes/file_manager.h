@@ -193,7 +193,7 @@ void FilesHelper::clearFile(std::string fileName) {
   else std::cout << "File doesn't exist.\n";
 }
 //------------------------------------------------------------------------------
-//TODO change the use of objects to pointers to not access classes destructors and modify id to wrong values
+//bug change the use of objects to pointers to not access classes destructors and modify id to wrong values
 void FilesHelper::showClients() {
   FileManager fm;
   std::vector<Client> clis = fm.getAllClients();

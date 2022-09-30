@@ -78,9 +78,14 @@ int main() {
   // FilesHelper::clearFile("db/Clients.txt");
   // FilesHelper::clearFile("db/Employee.txt");
   // FilesHelper::clearFile("db/Admin.txt");
-  cout << "Hello" << endl;
-  cout << "test for eslam" << endl;
-  cout << "aa";
-
+  // Admin a = Parser::parseToAdmin("1");
+  try {
+    Admin a = Parser::parseToAdmin("3");
+    Person *p = &a;
+    p->display();
+  }
+  catch (const char *msg) {
+    cerr << msg << endl;
+  }
   return 0;
 }
