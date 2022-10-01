@@ -1,17 +1,2 @@
 7000|Karma|qwerty12345|7000.304
 7010|Kenda|qwerty0987|9000.5
-7000|Karma|qwerty12345|7000.304
-7010|Kenda|qwerty0987|9000.5
-7020|Karma|qwerty12345|7000.304
-7030|Kenda|qwerty0987|9000.5
-7040|Karma|qwerty12345|7000.304
-7050|Kenda|qwerty0987|9000.5
-7060|Karma|qwerty12345|7000.304
-7070|Kenda|qwerty0987|9000.5
-6930|Karma|qwerty12345|7000.304
-6940|Kenda|qwerty0987|9000.5
-6800|Karma|qwerty12345|7000.304
-6810|Kenda|qwerty0987|9000.5
-6830|Kenda|qwerty0987|9000.5
-6850|Kenda|qwerty0987|9000.5
-6870|Kenda|qwerty0987|9000.5

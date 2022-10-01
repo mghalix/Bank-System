@@ -25,14 +25,14 @@ int main() {
     // // fm.addEmployee(emp1);
     // // fm.addEmployee(emp2);
   //----Clients
-    // Client cli1("Hassan", "9786412495", 12314.413);
-    // Client cli2("Hussein", "923812344", 123123);
-    // cli1.display();
-    // cli2.display();
-    // // fm.addClient(cli1);
-    // // fm.addClient(cli2);
-    //------------------------
-    /*****Writing into files*****/
+  // Client cli1("Hassan", "9786412495", 12314.413);
+  // Client cli2("Hussein", "923812344", 123123);
+  // cli1.display();
+  // cli2.display();
+  // // fm.addClient(cli1);
+  // // fm.addClient(cli2);
+  //------------------------
+  /*****Writing into files*****/
 // Employee emp1("Mohamed", "121312351", 56000);
 // Employee emp2("Menna", "131512312", 7000.54);
 // fm.addEmployee(emp1);
@@ -92,7 +92,8 @@ int main() {
   // FilesHelper::showClients();
 
 
-  // fm.addClient(c);
+  // fm.addClient(cli1);
+
   // fm.addClient(c2);
   // c.display();
   // c2.display();
