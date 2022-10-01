@@ -8,12 +8,6 @@ int main() {
   // Admin::initID();
   // Employee::initID();
   // Client::initID();
-  try {
-    cout << FilesHelper::getLast("db/Clients.txt") << endl;
-  }
-  catch (const char *msg) {
-    cerr << msg;
-  }
   //====================//
   /*****init test*****/
 // //----Admins
