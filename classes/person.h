@@ -19,7 +19,7 @@ public:
     Validation::checkName(name);
     this->name = name;
   }
-
+  // ~Person() { id -= 10; }
   //Getters
   virtual int getID() const = 0;
 

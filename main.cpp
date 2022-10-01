@@ -5,10 +5,16 @@ using namespace std;
 int main() {
   FileManager fm;
   //TODO: transfer the inits to runApp when phase3 comes.
-    //=====================//
-    // Admin::initID();
-    // Employee::initID();
-  Client::initID();
+  //=====================//
+  // Admin::initID();
+  // Employee::initID();
+  // Client::initID();
+  try {
+    cout << FilesHelper::getLast("db/Clients.txt") << endl;
+  }
+  catch (const char *msg) {
+    cerr << msg;
+  }
   //====================//
   /*****init test*****/
 // //----Admins
@@ -38,7 +44,7 @@ int main() {
 // Employee emp2("Menna", "131512312", 7000.54);
 // fm.addEmployee(emp1);
 // fm.addEmployee(emp2);
-  Client cli1("Hassan", "9786412495", 12314.413);
+  // Client cli1("Hassan", "9786412495", 12314.413);
   // Client cli2("Hussein", "923812344", 123123);
   // fm.addClient(cli1);
   // fm.addClient(cli2);
@@ -79,18 +85,28 @@ int main() {
   // FilesHelper::clearFile("db/Employee.txt");
   // FilesHelper::clearFile("db/Admin.txt");
   // Admin a = Parser::parseToAdmin("1");
-  try {
+
+  // try {
     // Admin a = Parser::parseToAdmin("2");
     // Person *p = &a;
     // p->display();
-    Employee emp = Parser::parseToEmployee("2000");
-    emp.searchClient(7020)->display();
-    Admin adm = Parser::parseToAdmin("1");
-    adm.searchEmployee(2010)->display();
-  }
-  catch (const char *msg) {
-    cerr << msg << endl;
-  }
 
-  return 0;
+    // Employee emp = Parser::parseToEmployee("2000");
+    // emp.searchClient(7010)->display();
+    // Admin adm = Parser::parseToAdmin("1");
+    // adm.searchEmployee(2010)->display();
+
+    // Client c("Karma", "qwerty12345", 7000.304);
+    // c.display();
+    // fm.addClient(c);
+    // Client c2("Kenda", "qwerty0987", 9000.50);
+    // c2.display();
+    // fm.addClient(c2);
+
+    // FilesHelper::showClients();
+  // }
+  // catch (const char *msg) {
+  //   cerr << msg << endl;
+  // }
+
 }
