@@ -5,6 +5,7 @@
 #include <fstream>
 #include "custom_methods.h"
 #include "files_helper.h"
+#include "parser.h"
 class FileManager : DataSourceInterface {
 private:
   //Attributes
@@ -196,7 +197,7 @@ void FilesHelper::clearFile(std::string fileName) {
 //bug change the use of objects to pointers to not access classes destructors and modify id to wrong values
 void FilesHelper::showClients() {
   FileManager fm;
-  std::vector<Client> clis = fm.getAllClients();
+  static std::vector<Client> clis = fm.getAllClients();
   for (int i = 0; i < clis.size(); ++i) {
     std::cout << "***** Client[" << i + 1 << "] info *****\n";
     clis[i].display();
@@ -219,5 +220,33 @@ void FilesHelper::showAdmins() {
     std::cout << "***** Admin[" << i + 1 << "] info *****\n";
     adms[i].display();
   }
+}
+//------------------------------------------------------------------------------
+void Employee::addClient(Client &client) {
+  FileManager fm;
+  fm.addClient(client);
+}
+//------------------------------------------------------------------------------
+void Employee::listClient() {
+  FilesHelper::showClients();
+}
+//------------------------------------------------------------------------------
+Client *Employee::searchClient(int id) {
+  static Client c = Parser::parseToClient(std::to_string(id));
+  return &c;
+}
+//------------------------------------------------------------------------------
+void Admin::addEmployee(Employee &employee) {
+  FileManager fm;
+  fm.addEmployee(employee);
+}
+//------------------------------------------------------------------------------
+void Admin::listEmployee() {
+  FilesHelper::showEmployees();
+}
+//------------------------------------------------------------------------------
+Employee *Admin::searchEmployee(int id) {
+  static Employee e = Parser::parseToEmployee(std::to_string(id));
+  return &e;
 }
 //------------------------------------------------------------------------------

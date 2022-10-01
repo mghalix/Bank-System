@@ -1,9 +1,7 @@
 #pragma once
 #include "custom_methods.h"
-#include "fstream"
 #include "client.h"
 #include "admin.h"
-#include "custom_methods.h"
 #include "employee.h"
 #include <fstream>
 // #include <string>

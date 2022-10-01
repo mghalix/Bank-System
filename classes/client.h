@@ -56,7 +56,7 @@ public:
     std::cout << "Your balance: " << balance;
   }
 
-  void display() {
+  void display() override {
     std::cout << "Name: " << getName() << std::endl
       << "ID: #" << getID() << std::endl
       // << "Password: " << getPassword() << std::endl
