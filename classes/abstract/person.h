@@ -1,7 +1,7 @@
 #pragma once
-#include "validation.h"
-#include "files_helper.h"
-#include "custom_methods.h"
+#include "../helpers/validation.h"
+#include "../helpers/custom_methods.h"
+#include "../helpers/files_helper.h"
 class Person {
 private:
   //Attributes

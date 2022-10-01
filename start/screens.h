@@ -1,4 +1,4 @@
-class Start {
+class Screens {
 private:
   static void mainMenu();
   static void empMenu();

@@ -1,8 +1,8 @@
 #pragma once
-#include "client.h"
 #include <vector>
-#include "admin.h"
-#include "employee.h"
+#include "../entities/client.h"
+#include "../entities/employee.h"
+#include "../entities/admin.h"
 class DataSourceInterface { // abstract
   // write methods
   virtual void addClient(Client) = 0;

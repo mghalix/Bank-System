@@ -1,6 +1,5 @@
 ﻿#include <iostream>
-#include "classes/file_manager.h"
-#include "classes/parser.h"
+#include "classes/managers/file_manager.h"
 using namespace std;
 int main() {
   FileManager fm;

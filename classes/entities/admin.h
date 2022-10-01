@@ -1,6 +1,5 @@
 #pragma once
-#include "employee.h"
-#include"file_manager.h"
+#include "../entities/employee.h"
 class Admin : public Employee {
 private:
   static int id;

@@ -60,7 +60,20 @@
       "stdexcept": "cpp",
       "streambuf": "cpp",
       "typeinfo": "cpp",
-      "cinttypes": "cpp"
+      "cinttypes": "cpp",
+      "xiosbase": "cpp",
+      "cstring": "cpp",
+      "ctime": "cpp",
+      "ios": "cpp",
+      "xfacet": "cpp",
+      "xlocale": "cpp",
+      "xlocinfo": "cpp",
+      "xlocnum": "cpp",
+      "xmemory": "cpp",
+      "xstddef": "cpp",
+      "xstring": "cpp",
+      "xtr1common": "cpp",
+      "xutility": "cpp"
     },
     "explorer.sortOrder": "foldersNestsFiles",
     "files.watcherExclude": {

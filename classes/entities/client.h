@@ -1,5 +1,5 @@
 #pragma once
-#include "person.h"
+#include "../abstract/person.h"
 
 class Client : public Person {
 private:

@@ -1,8 +1,8 @@
 #pragma once
-#include "custom_methods.h"
-#include "client.h"
-#include "admin.h"
-#include "employee.h"
+#include "../helpers/custom_methods.h"
+#include "../entities/client.h"
+#include "../entities/admin.h"
+#include "../entities/employee.h"
 #include <fstream>
 // #include <string>
 class Parser {
