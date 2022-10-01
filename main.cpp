@@ -84,22 +84,28 @@ int main() {
     // Person *p = &a;
     // p->display();
 
-    // Employee emp = Parser::parseToEmployee("2000");
-    // emp.searchClient(7010)->display();
-    // Admin adm = Parser::parseToAdmin("1");
-    // adm.searchEmployee(2010)->display();
+  Employee emp = Parser::parseToEmployee("2000");
+  // emp.searchClient(7010)->display();
+  // Admin adm = Parser::parseToAdmin("1");
+  // adm.searchEmployee(2010)->display();
 
-    // Client c("Karma", "qwerty12345", 7000.304);
-    // c.display();
-    // fm.addClient(c);
-    // Client c2("Kenda", "qwerty0987", 9000.50);
-    // c2.display();
-    // fm.addClient(c2);
+// FilesHelper::showClients();
+  try {
+    vector<Client> clis = fm.getAllClients();
+    cout << clis.size() << endl;
+    clis[13].display();
+  }
+  catch (const char *msg) {
+    cerr << msg;
+  }
+  Client c("Karma", "qwerty12345", 7000.304);
+  FilesHelper::showClients();
+  Client c2("Kenda", "qwerty0987", 9000.50);
+  // emp.addClient(c2);
+  cout << c2.getID() << endl;
 
-    // FilesHelper::showClients();
-  // }
-  // catch (const char *msg) {
-  //   cerr << msg << endl;
-  // }
-
+  // fm.addClient(c);
+  // fm.addClient(c2);
+  // c.display();
+  // c2.display();
 }

@@ -73,7 +73,8 @@
       "xstddef": "cpp",
       "xstring": "cpp",
       "xtr1common": "cpp",
-      "xutility": "cpp"
+      "xutility": "cpp",
+      "map": "cpp"
     },
     "explorer.sortOrder": "foldersNestsFiles",
     "files.watcherExclude": {

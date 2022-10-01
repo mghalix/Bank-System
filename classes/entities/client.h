@@ -20,7 +20,7 @@ public:
   }
 
   // Destructor
-  ~Client() { id -= 10; }
+  // ~Client() { id -= 10; }
   // Setters
   void setBalance(double balance) {
     Validation::checkBalanceOfClient(balance);

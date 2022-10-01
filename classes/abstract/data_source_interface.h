@@ -5,9 +5,9 @@
 #include "../entities/admin.h"
 class DataSourceInterface { // abstract
   // write methods
-  virtual void addClient(Client) = 0;
-  virtual void addEmployee(Employee) = 0;
-  virtual void addAdmin(Admin) = 0;
+  virtual void addClient(Client &) = 0;
+  virtual void addEmployee(Employee &) = 0;
+  virtual void addAdmin(Admin &) = 0;
 
   // read
   virtual std::vector<Client> getAllClients() = 0;

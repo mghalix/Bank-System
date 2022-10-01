@@ -19,10 +19,10 @@ public:
       std::vector<std::string> vec = CustomMethods::split(record, '|');
       if (vec[0] != id)
         continue;
-      Client c(vec[1], vec[2], stod(vec[3]));
-      c.setID(stoi(vec[0]));
+      Client *c = new Client(vec[1], vec[2], stod(vec[3]));
+      c->setID(stoi(vec[0]));
       ifs.close();
-      return c;
+      return *c;
     }
     ifs.close();
     throw("Client ID doesn't Exist");

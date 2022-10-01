@@ -14,7 +14,7 @@ private:
   const std::string adminFile = "db/Admin.txt";
 public:
   // Write
-  void addClient(Client cli) override {
+  void addClient(Client &cli) override {
     std::ofstream clientInfo(clientFile, std::ios::app); // short for append
     if (clientInfo.fail()) {
       throw ("Error opening file\n");
@@ -25,7 +25,7 @@ public:
     clientInfo.close();
   }
 
-  void addEmployee(Employee emp) override {
+  void addEmployee(Employee &emp) override {
     std::ofstream employeeInfo(employeeFile, std::ios::app);
     if (employeeInfo.fail()) {
       throw ("Error opening file\n");
@@ -36,7 +36,7 @@ public:
     employeeInfo.close();
   }
 
-  void addAdmin(Admin adm) override {
+  void addAdmin(Admin &adm) override {
     std::ofstream adminInfo(adminFile, std::ios::app);
     if (adminInfo.fail()) {
       throw ("Error opening file\n");
@@ -51,6 +51,7 @@ public:
   std::vector<Client> getAllClients() override {
     std::vector<Client> clients;
     std::ifstream fin(clientFile);
+    // Client *cli;
     if (fin.fail()) {
       throw ("Error opening file\n");
     } // Guard Clauses
@@ -61,11 +62,10 @@ public:
       getline(fin, arr[1], '|');  // arr[1] = name
       getline(fin, arr[2], '|');  // arr[2] = password 
       getline(fin, arr[3], '\n'); // arr[3] = balance
-      Client cli(arr[1], arr[2], stod(arr[3]));
-      cli.setID(stoi(arr[0]));
-      clients.push_back(cli);
+      clients.push_back(Parser::parseToClient(arr[0]));
     }
     fin.close();
+    Client::initID();
     return clients;
   }
 
@@ -87,6 +87,7 @@ public:
       employees.push_back(emp);
     }
     fin.close();
+    Employee::initID();
     return employees;
   }
 
@@ -108,6 +109,7 @@ public:
       admins.push_back(adm);
     }
     fin.close();
+    Admin::initID();
     return admins;
   }
 
@@ -194,7 +196,7 @@ void FilesHelper::clearFile(std::string fileName) {
   else std::cout << "File doesn't exist.\n";
 }
 //------------------------------------------------------------------------------
-//bug change the use of objects to pointers to not access classes destructors and modify id to wrong values
+// // bug change the use of objects to pointers to not access classes destructors and modify id to wrong values
 void FilesHelper::showClients() {
   FileManager fm;
   static std::vector<Client> clis = fm.getAllClients();
