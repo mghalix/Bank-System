@@ -84,25 +84,13 @@ int main() {
     // Person *p = &a;
     // p->display();
 
-  Employee emp = Parser::parseToEmployee("2000");
+  // Employee emp = Parser::parseToEmployee("2000");
   // emp.searchClient(7010)->display();
   // Admin adm = Parser::parseToAdmin("1");
   // adm.searchEmployee(2010)->display();
 
-// FilesHelper::showClients();
-  try {
-    vector<Client> clis = fm.getAllClients();
-    cout << clis.size() << endl;
-    clis[13].display();
-  }
-  catch (const char *msg) {
-    cerr << msg;
-  }
-  Client c("Karma", "qwerty12345", 7000.304);
-  FilesHelper::showClients();
-  Client c2("Kenda", "qwerty0987", 9000.50);
-  // emp.addClient(c2);
-  cout << c2.getID() << endl;
+  // FilesHelper::showClients();
+
 
   // fm.addClient(c);
   // fm.addClient(c2);
