@@ -11,56 +11,32 @@ private:
   static std::string employeeFile;
   static std::string adminFile;
 public:
-  static Client parseToClient(std::string id) {
-    std::ifstream ifs(clientFile, std::ios::in);
+  template<typename T>
+  static T parseTo(std::string id) {
+    std::string fileName;
+    if (typeid(T) == typeid(Client))
+      fileName = clientFile;
+    else if (typeid(T) == typeid(Employee))
+      fileName = employeeFile;
+    else if (typeid(T) == typeid(Admin))
+      fileName = adminFile;
+    else throw("No such file to open.\n");
+    std::ifstream ifs(fileName, std::ios::in);
     std::string record;
     while (ifs.peek() != EOF) {
       getline(ifs, record);
       std::vector<std::string> vec = CustomMethods::split(record, '|');
       if (vec[0] != id)
         continue;
-      Client *c = new Client(vec[1], vec[2], stod(vec[3]));
-      c->setID(stoi(vec[0]));
-      ifs.close();
-      return *c;
-    }
-    ifs.close();
-    throw("Client ID doesn't Exist");
-  }
-
-  static Employee parseToEmployee(std::string id) {
-    // read
-    std::ifstream ifs(employeeFile, std::ios::in);
-    std::string record;
-    while (ifs.peek() != EOF) {
-      getline(ifs, record); // id|name|password|salary
-      std::vector<std::string> vec = CustomMethods::split(record, '|');
-      if (vec[0] != id)
-        continue;
-      Employee e(vec[1], vec[2], stod(vec[3]));
-      e.setID(stoi(vec[0]));
-      ifs.close();
-      return e;
-    }
-    ifs.close();
-    throw("Employee ID doesn't Exist");
-  }
-
-  static Admin parseToAdmin(std::string id) {
-    std::ifstream ifs(adminFile, std::ios::in);
-    std::string record;
-    while (ifs.peek() != EOF) {
-      getline(ifs, record);
-      std::vector<std::string> vec = CustomMethods::split(record, '|');
-      if (vec[0] != id)
-        continue;
-      Admin a(vec[1], vec[2], stod(vec[3]));
+      T a(vec[1], vec[2], stod(vec[3]));
       a.setID(stoi(vec[0]));
       ifs.close();
       return a;
     }
     ifs.close();
-    throw("Admin ID doesn't Exist");
+    // how to convert this to const char *msg
+    const std::string err = "ID " + id + " doesn't Exist in " + fileName + '\n';
+    throw(err);
   }
 };
 std::string Parser::clientFile = "db/Clients.txt";

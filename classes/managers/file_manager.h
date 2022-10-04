@@ -7,21 +7,22 @@
 #include "../helpers/files_helper.h"
 #include "../helpers/parser.h"
 class FileManager : DataSourceInterface {
-private:
-  //Attributes
-  const std::string clientFile = "db/Clients.txt";
-  const std::string employeeFile = "db/Employee.txt";
-  const std::string adminFile = "db/Admin.txt";
 public:
+  //Attributes
+  static std::string clientFile;
+  static std::string employeeFile;
+  static std::string adminFile;
   // Write
   void addClient(Client &cli) override {
     std::ofstream clientInfo(clientFile, std::ios::app); // short for append
+    int loc = clientInfo.tellp();
     if (clientInfo.fail()) {
       throw ("Error opening file\n");
     }
     std::string line; // id|name|password|balance
     line = std::to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + CustomMethods::correctView(cli.getBalance());
     clientInfo << line << std::endl;
+    // Load::addIndex<Client>(cli.getID(), loc);
     clientInfo.close();
   }
 
@@ -30,9 +31,11 @@ public:
     if (employeeInfo.fail()) {
       throw ("Error opening file\n");
     }
+    int loc = employeeInfo.tellp();
     std::string line;
     line = std::to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + CustomMethods::correctView(emp.getSalary());
     employeeInfo << line << std::endl;
+    // Load::addIndex<Employee>(emp.getID(), loc);
     employeeInfo.close();
   }
 
@@ -41,9 +44,11 @@ public:
     if (adminInfo.fail()) {
       throw ("Error opening file\n");
     }
+    int loc = adminInfo.tellp();
     std::string line;
     line = std::to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + CustomMethods::correctView(adm.getSalary());
     adminInfo << line << std::endl;
+    // Load::addIndex<Admin>(adm.getID(), loc);
     adminInfo.close();
   }
 
@@ -51,18 +56,19 @@ public:
   std::vector<Client> getAllClients() override {
     std::vector<Client> clients;
     std::ifstream fin(clientFile);
-    // Client *cli;
     if (fin.fail()) {
       throw ("Error opening file\n");
     } // Guard Clauses
+    fin.seekg(0, std::ios::end);
+    if (fin.tellg() == 0) {
+      throw("Error, file is empty.\n");
+    }
     fin.seekg(0, std::ios::beg); // short for beginning  
     while (fin.peek() != EOF) { // End of file
-      std::string arr[4];
-      getline(fin, arr[0], '|');  // arr[0] = id
-      getline(fin, arr[1], '|');  // arr[1] = name
-      getline(fin, arr[2], '|');  // arr[2] = password 
-      getline(fin, arr[3], '\n'); // arr[3] = balance
-      clients.push_back(Parser::parseToClient(arr[0]));
+      std::string line;
+      getline(fin, line);
+      std::vector<std::string> record = CustomMethods::split(line, '|');
+      clients.push_back(Parser::parseTo<Client>(record[0]));
     }
     fin.close();
     Client::initID();
@@ -75,6 +81,10 @@ public:
     if (!fin) {
       throw ("Error opening file\n");
     }
+    fin.seekg(0, std::ios::end);
+    if (fin.tellg() == 0) {
+      throw("Error, file is empty.\n");
+    }
     fin.seekg(0, std::ios::beg);
     while (fin.peek() != EOF) {
       std::string arr[4];
@@ -82,9 +92,12 @@ public:
       getline(fin, arr[1], '|');
       getline(fin, arr[2], '|');
       getline(fin, arr[3], '\n');
-      Employee emp(arr[1], arr[2], stod(arr[3]));
-      emp.setID(stoi(arr[0]));
-      employees.push_back(emp);
+
+      // Employee emp(arr[1], arr[2], stod(arr[3]));
+      // emp.setID(stoi(arr[0]));
+      // employees.push_back(emp);
+
+      employees.push_back(Parser::parseTo<Employee>(arr[0]));
     }
     fin.close();
     Employee::initID();
@@ -92,11 +105,15 @@ public:
   }
 
   std::vector<Admin> getAllAdmins() override {
-    std::vector<Admin> admins;
     std::ifstream fin(adminFile);
     if (fin.fail()) {
-      throw ("Error opening file\n");
+      throw ("Error opening file.\n");
     }
+    fin.seekg(0, std::ios::end);
+    if (fin.tellg() == 0) {
+      throw("Error, file is empty.\n");
+    }
+    std::vector<Admin> admins;
     fin.seekg(0, std::ios::beg);
     while (fin.peek() != EOF) {
       std::string arr[4];
@@ -104,9 +121,12 @@ public:
       getline(fin, arr[1], '|');
       getline(fin, arr[2], '|');
       getline(fin, arr[3], '\n');
-      Admin adm(arr[1], arr[2], stod(arr[3]));
-      adm.setID(stoi(arr[0]));
-      admins.push_back(adm);
+
+      // Admin adm(arr[1], arr[2], stod(arr[3]));
+      // adm.setID(stoi(arr[0]));
+      // admins.push_back(adm);
+
+      admins.push_back(Parser::parseTo<Admin>(arr[0]));
     }
     fin.close();
     Admin::initID();
@@ -129,6 +149,10 @@ public:
     ofs.close();
   }
 };
+//------------------------------------------------------------------------------
+std::string FileManager::clientFile = "db/Clients.txt";
+std::string FileManager::employeeFile = "db/Employee.txt";
+std::string FileManager::adminFile = "db/Admin.txt";
 //------------------------------------------------------------------------------
 void Employee::editClient(int id, std::string name, std::string password, double balance) {
   std::ofstream ofs;
@@ -234,7 +258,7 @@ void Employee::listClient() {
 }
 //------------------------------------------------------------------------------
 Client *Employee::searchClient(int id) {
-  static Client c = Parser::parseToClient(std::to_string(id));
+  static Client c = Parser::parseTo<Client>(std::to_string(id));
   return &c;
 }
 //------------------------------------------------------------------------------
@@ -248,7 +272,7 @@ void Admin::listEmployee() {
 }
 //------------------------------------------------------------------------------
 Employee *Admin::searchEmployee(int id) {
-  static Employee e = Parser::parseToEmployee(std::to_string(id));
+  static Employee e = Parser::parseTo<Employee>(std::to_string(id));
   return &e;
 }
 //------------------------------------------------------------------------------
