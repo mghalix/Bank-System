@@ -34,9 +34,8 @@ public:
       return a;
     }
     ifs.close();
-    // how to convert this to const char *msg
-    const std::string err = "ID " + id + " doesn't Exist in " + fileName + '\n';
-    throw(err);
+    
+    throw("ID " + id + " doesn't Exist in " + fileName + '\n');
   }
 };
 std::string Parser::clientFile = "db/Clients.txt";
