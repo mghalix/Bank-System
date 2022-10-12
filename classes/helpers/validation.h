@@ -4,7 +4,7 @@ public:
   static void checkName(std::string name) {
     std::string illegal = "1234567890!@#$%^&*()_+-=;:'\"><?/";
     if (std::string::npos != name.find_first_of(illegal))
-      throw("Name error, you can only use alphabetic characters.\n");
+      throw("Name error, youg can only use alphabetic characters.\n");
     if (name.length() < 5)
       throw("Name is too short!");
     if (name.length() > 20)
