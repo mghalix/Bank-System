@@ -1,5 +1,7 @@
 #pragma once
+
 #include <fstream>
+
 class FilesHelper {
 public:
   static int getLast(std::string fileName) {

@@ -1,10 +1,11 @@
 #pragma once
+
 #include "../helpers/custom_methods.h"
 #include "../entities/client.h"
 #include "../entities/admin.h"
 #include "../entities/employee.h"
 #include <fstream>
-// #include <string>
+
 class Parser {
 private:
   static std::string clientFile;
@@ -34,7 +35,7 @@ public:
       return a;
     }
     ifs.close();
-    
+
     throw("ID " + id + " doesn't Exist in " + fileName + '\n');
   }
 };

@@ -1,4 +1,5 @@
 #pragma once
+
 class Validation {
 public:
   static void checkName(std::string name) {

@@ -1,4 +1,5 @@
 #pragma once
+
 class Screens {
 private:
   static void mainMenu();

@@ -1,7 +1,9 @@
 ﻿#include <iostream>
 #include "classes/managers/file_manager.h"
 #include "classes/dependencies/login.h"
+
 using namespace std;
+
 int main() {
   FileManager fm;
   //TODO: transfer the inits to runApp when phase3 comes.

@@ -1,6 +1,8 @@
 #pragma once
+
 #include <iostream>
 #include <vector>
+
 class CustomMethods {
 public:
   // Method to remove trailing zeros

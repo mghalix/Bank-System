@@ -1,8 +1,10 @@
 #pragma once
+
 #include <iostream>
 #include "../abstract/person.h"
 #include "../managers/file_manager.h"
 #include <fstream>
+
 class Employee : public Person {
 private:
   //Attributes

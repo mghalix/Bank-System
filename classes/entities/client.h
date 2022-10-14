@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../abstract/person.h"
 
 class Client : public Person {

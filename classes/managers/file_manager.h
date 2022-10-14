@@ -1,11 +1,13 @@
 //------------------------------------------------------------------------------
 #pragma once
+
 #include <string>
 #include <fstream>
 #include "../abstract/data_source_interface.h"
 #include "../helpers/custom_methods.h"
 #include "../helpers/files_helper.h"
 #include "../helpers/parser.h"
+
 class FileManager : DataSourceInterface {
 public:
   //Attributes
