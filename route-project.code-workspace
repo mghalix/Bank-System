@@ -74,7 +74,8 @@
       "xstring": "cpp",
       "xtr1common": "cpp",
       "xutility": "cpp",
-      "map": "cpp"
+      "map": "cpp",
+      "chrono": "cpp"
     },
     "explorer.sortOrder": "foldersNestsFiles",
     "files.watcherExclude": {

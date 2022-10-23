@@ -1,11 +1,15 @@
 ﻿#include <iostream>
 #include "classes/managers/file_manager.h"
 #include "classes/dependencies/login.h"
+#include "start/screens.h"
 
 using namespace std;
 
 int main() {
-  FileManager fm;
+  Screens::runApp();
+
+
+  // FileManager fm;
   //TODO: transfer the inits to runApp when phase3 comes.
   //=====================//
   // Admin::initID();
@@ -100,17 +104,18 @@ int main() {
   // fm.addClient(c2);
   // c.display();
   // c2.display();
-  FilesHelper::showClients();
-  try {
-    Login::login<Client>(7010, "qwerty0987")->display();
-    cout << "--------\n";
-    Login::login<Employee>(2000, "121312351")->display();
-    cout << "--------\n";
-    Login::login<Admin>(7010, "qwerty0987")->display();
-  }
-  catch (const char *msg) {
-    cerr << msg;
-  }
-  Load::loadEntity<Employee>();
-  // Login::load<Client>();
+
+  // FilesHelper::showClients();
+  // try {
+  //   Login::login<Client>(7010, "qwerty0987")->display();
+  //   cout << "--------\n";
+  //   Login::login<Employee>(2000, "121312351")->display();
+  //   cout << "--------\n";
+  //   Login::login<Admin>(7010, "qwerty0987")->display();
+  // }
+  // catch (const char *msg) {
+  //   cerr << msg;
+  // }
+  // Load::loadEntity<Employee>();
+  // // Login::load<Client>();
 }
