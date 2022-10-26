@@ -50,6 +50,9 @@ void Screens::mainMenu(int &choice) {
 void Screens::runApp() {
   int choice;
   mainMenu(choice);
+
+  // last step
+  Load::rewriteAll();
 }
 //------------------------------------------------------------------------------
 void Screens::loginAs(int &choice) {

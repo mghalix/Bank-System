@@ -1,0 +1,43 @@
+		***** Welcome to 5awlat Bank *****
+1. login as
+2. about us
+0. exit -> (proceed (y/n))
+				---Menu 1---
+//--------------------------------------------------------------
+				--- Menu 1.1 --- (1.login as)
+Are you a 
+1. admin
+2. employee
+3. client
+0. back to main menu
+//--------------------------------------------------------------
+				-- Menu 1.2 --- (2. about us)
+bla bla bla.......
+0. back
+//--------------------------------------------------------------
+				--- Menu 2.1 --- (1.1.1 admin)
+		***** Welcome Admin *****
+1. search (employee/client/admin)
+2. list all (employees/clients/admin)
+3. edit (employee/client/admin)
+4. add (employee/client/admin)
+5. remove(employee/client/admin) -> (proceed (y/n))
+0. back
+//--------------------------------------------------------------
+				--- Menu 2.2 --- (1.1.2 employee)
+		***** Welcome Employee *****
+1. search (client)
+2. list all (clients)
+3. edit (client)
+4. add (client)
+5. remove(client) -> (proceed (y/n))
+0. back
+//--------------------------------------------------------------
+				--- Menu 2.3 --- (1.1.3 client)
+		***** Welcome Client *****
+1. view balance
+2. deposit -> (show amount deposited correct(y/n))
+3. withdraw 
+4. transfer -> (confirm transfared amount before completing the transaction)
+0. back
+//--------------------------------------------------------------

@@ -90,7 +90,28 @@ public:
     clone = NULL;
     delete clone;
   }
+  static void rewriteAll() {
+    rewriteIdx("db/Admin.txt", "db/adm-index.txt");
+    rewriteIdx("db/Employee.txt", "db/emp-index.txt");
+    rewriteIdx("db/Clients.txt", "db/cli-index.txt");
+  }
 private:
+  static void rewriteIdx(std::string readFile, std::string idxFile) {
+    std::ifstream fin;
+    std::ofstream ofs;
+    fin.open(readFile);
+    ofs.open(idxFile);
+    int loc = 0;
+    std::string line;
+    while (fin.peek() != EOF) {
+      getline(fin, line);
+      line = CustomMethods::split(line, '|')[0] + '|' + std::to_string(loc);
+      ofs << line << std::endl;
+      loc += (int)fin.tellg() + 2;
+    }
+    ofs.close();
+    fin.close();
+  }
   // static void loadIndex() {
   //   cliIdx.clear();
   //   empIdx.clear();
@@ -132,6 +153,7 @@ private:
   //   empFin.close();
   //   admFin.close();
   // }
+
 };
 //------------------------------------------------------------------------------
 std::map<int, std::string> Load::logDb;

@@ -6,9 +6,9 @@
 using namespace std;
 
 int main() {
-  Screens::runApp();
-
-
+  // Screens::runApp();
+  // Load l;
+  // l.rewriteAll();
   // FileManager fm;
   //TODO: transfer the inits to runApp when phase3 comes.
   //=====================//
