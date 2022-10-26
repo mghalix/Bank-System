@@ -7,6 +7,7 @@
 #include "../helpers/custom_methods.h"
 #include "../helpers/files_helper.h"
 #include "../helpers/parser.h"
+#include "../dependencies/load.h"
 
 class FileManager : DataSourceInterface {
 public:
@@ -24,7 +25,7 @@ public:
     std::string line; // id|name|password|balance
     line = std::to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + CustomMethods::correctView(cli.getBalance());
     clientInfo << line << std::endl;
-    // Load::addIndex<Client>(cli.getID(), loc);
+    Load::addIndex<Client>(cli.getID(), loc);
     clientInfo.close();
   }
 

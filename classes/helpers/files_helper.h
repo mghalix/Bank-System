@@ -7,8 +7,10 @@ public:
   static int getLast(std::string fileName) {
     std::ifstream inp(fileName);
     // checking if the file is open
-    if (!inp)
+    if (!inp) {
+      inp.close();
       throw("File doesn't exist.\n");
+    }
     inp.seekg(0, std::ios::end);
     // checking if the file is empty after peeking to the end.
     if (inp.tellg() == 0)

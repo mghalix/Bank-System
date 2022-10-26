@@ -13,7 +13,7 @@ private:
   static std::string adminFile;
 public:
   template<typename T>
-  static T parseTo(std::string id) {
+  static T parseTo(const std::string &id) {
     std::string fileName;
     if (typeid(T) == typeid(Client))
       fileName = clientFile;

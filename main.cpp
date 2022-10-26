@@ -7,9 +7,17 @@ using namespace std;
 
 int main() {
   // Screens::runApp();
-  // Load l;
-  // l.rewriteAll();
   // FileManager fm;
+  Load::loadAll();
+  try
+  {
+    Login::login<Client>(7020, "qwerty12345");
+  }
+  catch (const char *msg)
+  {
+    cerr << msg;
+  }
+
   //TODO: transfer the inits to runApp when phase3 comes.
   //=====================//
   // Admin::initID();

@@ -75,7 +75,11 @@
       "xtr1common": "cpp",
       "xutility": "cpp",
       "map": "cpp",
-      "chrono": "cpp"
+      "chrono": "cpp",
+      "ratio": "cpp",
+      "semaphore": "cpp",
+      "stop_token": "cpp",
+      "thread": "cpp"
     },
     "explorer.sortOrder": "foldersNestsFiles",
     "files.watcherExclude": {
