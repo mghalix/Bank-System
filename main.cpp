@@ -6,7 +6,6 @@
 using namespace std;
 
 int main() {
-  Load::loadAll();
   Screens::runApp();
   // Load::showEmpDic();
 

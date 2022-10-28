@@ -60,8 +60,8 @@ public:
   }
 private:
   static void rewriteIdx(const std::map<int, int> mp, const std::string &idxFile) {
-    std::ofstream ofs;
-    ofs.open(idxFile);
+    std::ofstream ofs(idxFile);
+    ofs.seekp(0);
     int loc = 0;
     std::string line;
     for (auto record : mp) {
