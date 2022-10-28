@@ -15,10 +15,9 @@ class Screens {
 private:
   static void mainMenu(int &choice); // complete
   static void loginAs(int &choice); // complete
-  static void aboutUs(); // bla bla
-  static void admMenu(int &choice);
-  static void empMenu(int &choice);
-  static void cliMenu(int &choice);
+  static void admMenu(int &choice); // complete (2/6)
+  static void empMenu(int &choice); // complete (2/6)
+  static void cliMenu(int &choice); // complete (1/6)
   static Admin adm;
   static Client cli;
   static Employee emp;
@@ -38,10 +37,6 @@ void Screens::mainMenu(int &choice) {
     case 1:
       system("clear");
       loginAs(choice);
-      break;
-    case 2:
-      system("clear");
-      // aboutUs();
       break;
     case 0:
       exit(0);
