@@ -6,14 +6,13 @@
 using namespace std;
 
 int main() {
-  // Screens::runApp();
-  Load::loadAll();
-  try {
-    Load::parseTo<Admin>("3")->display();
-  }
-  catch (std::string msg) {
-    cerr << msg << endl;
-  }
+  Screens::runApp();
+  // try {
+  //   Load::parseTo<Admin>("3")->display();
+  // }
+  // catch (std::string msg) {
+  //   cerr << msg << endl;
+  // }
 
   // try {
   //   Load::search<Client>(7000)->getPassword();

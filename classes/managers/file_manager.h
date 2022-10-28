@@ -279,13 +279,13 @@ void Admin::listEmployee() {
 //------------------------------------------------------------------------------
 Employee *Admin::searchEmployee(const int &id) {
   // Employee *e = Parser::parseTo<Employee>(std::to_string(id));
-  Employee *e = Load::search<Admin>(id);
+  Employee *e = Load::search<Employee>(id);
   return e;
 }
 //------------------------------------------------------------------------------
 Client *Admin::searchClient(const int &id) {
   // Client *e = Parser::parseTo<Client>(std::to_string(id));
-  Client *e = Load::search<Client>(id);
-  return e;
+  Client *c = Load::search<Client>(id);
+  return c;
 }
 //------------------------------------------------------------------------------
