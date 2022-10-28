@@ -71,7 +71,7 @@ public:
       std::string line;
       getline(fin, line);
       std::vector<std::string> record = CustomMethods::split(line, '|');
-      clients.push_back(Parser::parseTo<Client>(record[0]));
+      clients.push_back(*Parser::parseTo<Client>(record[0]));
     }
     fin.close();
     Client::initID();
@@ -100,7 +100,7 @@ public:
       // emp.setID(stoi(arr[0]));
       // employees.push_back(emp);
 
-      employees.push_back(Parser::parseTo<Employee>(arr[0]));
+      employees.push_back(*Parser::parseTo<Employee>(arr[0]));
     }
     fin.close();
     Employee::initID();
@@ -129,7 +129,7 @@ public:
       // adm.setID(stoi(arr[0]));
       // admins.push_back(adm);
 
-      admins.push_back(Parser::parseTo<Admin>(arr[0]));
+      admins.push_back(*Parser::parseTo<Admin>(arr[0]));
     }
     fin.close();
     Admin::initID();
@@ -261,8 +261,8 @@ void Employee::listClient() {
 }
 //------------------------------------------------------------------------------
 Client *Employee::searchClient(int id) {
-  static Client c = Parser::parseTo<Client>(std::to_string(id));
-  return &c;
+  static Client *c = Parser::parseTo<Client>(std::to_string(id));
+  return c;
 }
 //------------------------------------------------------------------------------
 void Admin::addEmployee(Employee &employee) {
@@ -274,8 +274,13 @@ void Admin::listEmployee() {
   FilesHelper::showEmployees();
 }
 //------------------------------------------------------------------------------
-Employee *Admin::searchEmployee(int id) {
-  static Employee e = Parser::parseTo<Employee>(std::to_string(id));
-  return &e;
+Employee *Admin::searchEmployee(const int &id) {
+  Employee *e = Parser::parseTo<Employee>(std::to_string(id));
+  return e;
+}
+//------------------------------------------------------------------------------
+Client *Admin::searchClient(const int &id) {
+  Client *e = Parser::parseTo<Client>(std::to_string(id));
+  return e;
 }
 //------------------------------------------------------------------------------

@@ -6,11 +6,16 @@
 using namespace std;
 
 int main() {
+  Load::loadAll();
   Screens::runApp();
+  // Load::showEmpDic();
+
+
+
   // FileManager fm;
-  // Load::loadAll();
+  // Admin *adm;
   // try {
-  //   Login::login<Admin>(2, "12342412412");
+  //   adm = Login::login<Admin>(2, "12342412412");
   // }
   // catch (const char *msg) {
   //   cerr << msg;
@@ -124,4 +129,5 @@ int main() {
   // }
   // Load::loadEntity<Employee>();
   // // Login::load<Client>();
+  return 0;
 }

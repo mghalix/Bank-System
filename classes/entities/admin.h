@@ -6,6 +6,7 @@ private:
   int admID;
 public:
   // Constructor
+  Admin() : Employee(), admID(++id) {}
   Admin(std::string name, std::string password, double salary) : Employee(name, password, salary), admID(++id) {}
   ~Admin() { id--; }
   // Methods
@@ -21,7 +22,7 @@ public:
 
   void addEmployee(Employee &employee);
   void listEmployee();
-  Employee *searchEmployee(int id);
-
+  Employee *searchEmployee(const int &id);
+  static Client *searchClient(const int &id);
 };
 int Admin::id = 0;

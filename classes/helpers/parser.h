@@ -10,9 +10,14 @@ private:
   static std::string clientFile;
   static std::string employeeFile;
   static std::string adminFile;
+  // std::string correct(const char *name) {
+    // for (int i = 0; i < name->size(); i++) {
+// 
+    // }
+  // }
 public:
   template<typename T>
-  static T parseTo(const std::string &id) {
+  static T *parseTo(const std::string &id) {
     std::string fileName;
     if (typeid(T) == typeid(Client))
       fileName = clientFile;
@@ -28,14 +33,15 @@ public:
       std::vector<std::string> vec = CustomMethods::split(record, '|');
       if (vec[0] != id)
         continue;
-      T a(vec[1], vec[2], stod(vec[3]));
-      a.setID(stoi(vec[0]));
+      T *a = new T(vec[1], vec[2], stod(vec[3]));
+      a->setID(stoi(vec[0]));
       ifs.close();
       return a;
     }
     ifs.close();
-
-    throw("ID " + id + " doesn't Exist in " + fileName + '\n');
+    // std::string className = correct(typeid(T).name());
+    // Employee id #2030 -> doesn't exist
+    throw("ID #" + id + " -> doesn't exist.\n");
   }
 };
 std::string Parser::clientFile = "db/Clients.txt";

@@ -13,6 +13,7 @@ private:
   int empID;
 public:
   //Constructors
+  Employee() :Person(), empID(id += 10) { salary = 0; }
   Employee(std::string name, std::string password, double salary) : Person(name, password), empID(id += 10) {
     Validation::checkSalary(salary); // min 5000
     this->salary = salary;
