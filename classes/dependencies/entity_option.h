@@ -89,7 +89,7 @@ public:
           optEntity(id, "Client");
           std::cout << "------\n";
           try {
-            // emp.(id)->display();
+            emp.searchClient(id)->display();
           }
           catch (std::string msg) {
             std::cerr << msg;
@@ -97,6 +97,10 @@ public:
             std::cin >> choice;
             options(choice, emp);
           }
+          std::cout << "------\n> ";
+          std::cin >> choice;
+          options(choice, emp);
+          break;
         case 0:
           throw(-1);
         default:

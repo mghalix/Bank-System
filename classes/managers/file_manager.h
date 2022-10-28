@@ -261,7 +261,7 @@ void Employee::listClient() {
 }
 //------------------------------------------------------------------------------
 Client *Employee::searchClient(int id) {
-  static Client *c = Parser::parseTo<Client>(std::to_string(id));
+  Client *c = Parser::parseTo<Client>(std::to_string(id));
   return c;
 }
 //------------------------------------------------------------------------------

@@ -196,7 +196,19 @@ void Screens::empMenu(int &choice) {
     notExecuted = false;
     switch (choice) {
     case 1:
-      break;
+      system("clear");
+      Options::Emp::Search::printMenu();
+      std::cin >> choice;
+      try {
+        Options::Emp::Search::options(choice, adm);
+      }
+      catch (int x) {
+        if (x == -1)
+          empMenu(choice);
+      }
+      catch (const char *msg) {
+        std::cerr << msg << std::endl;
+      }
     case 2:
       break;
     case 3:
