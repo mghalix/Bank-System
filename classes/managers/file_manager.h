@@ -38,7 +38,7 @@ public:
     std::string line;
     line = std::to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + CustomMethods::correctView(emp.getSalary());
     employeeInfo << line << std::endl;
-    // Load::addIndex<Employee>(emp.getID(), loc);
+    Load::addIndex<Employee>(emp.getID(), loc);
     employeeInfo.close();
   }
 
@@ -51,7 +51,7 @@ public:
     std::string line;
     line = std::to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + CustomMethods::correctView(adm.getSalary());
     adminInfo << line << std::endl;
-    // Load::addIndex<Admin>(adm.getID(), loc);
+    Load::addIndex<Admin>(adm.getID(), loc);
     adminInfo.close();
   }
 
@@ -71,7 +71,7 @@ public:
       std::string line;
       getline(fin, line);
       std::vector<std::string> record = CustomMethods::split(line, '|');
-      clients.push_back(*Parser::parseTo<Client>(record[0]));
+      clients.push_back(*Parser::parseToObsolete<Client>(record[0]));
     }
     fin.close();
     Client::initID();
@@ -100,7 +100,7 @@ public:
       // emp.setID(stoi(arr[0]));
       // employees.push_back(emp);
 
-      employees.push_back(*Parser::parseTo<Employee>(arr[0]));
+      employees.push_back(*Parser::parseToObsolete<Employee>(arr[0]));
     }
     fin.close();
     Employee::initID();
@@ -129,7 +129,7 @@ public:
       // adm.setID(stoi(arr[0]));
       // admins.push_back(adm);
 
-      admins.push_back(*Parser::parseTo<Admin>(arr[0]));
+      admins.push_back(*Parser::parseToObsolete<Admin>(arr[0]));
     }
     fin.close();
     Admin::initID();
@@ -257,11 +257,13 @@ void Employee::addClient(Client &client) {
 }
 //------------------------------------------------------------------------------
 void Employee::listClient() {
-  FilesHelper::showClients();
+  // FilesHelper::showClients();
+  Load::showEvery<Employee>();
 }
 //------------------------------------------------------------------------------
 Client *Employee::searchClient(int id) {
-  Client *c = Parser::parseTo<Client>(std::to_string(id));
+  // Client *c = Parser::parseTo<Client>(std::to_string(id));
+  Client *c = Load::search<Client>(id);
   return c;
 }
 //------------------------------------------------------------------------------
@@ -271,16 +273,19 @@ void Admin::addEmployee(Employee &employee) {
 }
 //------------------------------------------------------------------------------
 void Admin::listEmployee() {
-  FilesHelper::showEmployees();
+  // FilesHelper::showEmployees();
+  Load::showEvery<Employee>();
 }
 //------------------------------------------------------------------------------
 Employee *Admin::searchEmployee(const int &id) {
-  Employee *e = Parser::parseTo<Employee>(std::to_string(id));
+  // Employee *e = Parser::parseTo<Employee>(std::to_string(id));
+  Employee *e = Load::search<Admin>(id);
   return e;
 }
 //------------------------------------------------------------------------------
 Client *Admin::searchClient(const int &id) {
-  Client *e = Parser::parseTo<Client>(std::to_string(id));
+  // Client *e = Parser::parseTo<Client>(std::to_string(id));
+  Client *e = Load::search<Client>(id);
   return e;
 }
 //------------------------------------------------------------------------------

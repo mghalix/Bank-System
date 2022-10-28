@@ -10,7 +10,9 @@ private:
   static int id;
 public:
   // Constructors
-  Client() :Person(), cliID(id += 10) { balance = 0; }
+  Client() :Person() {
+    balance = 0;
+  }
   Client(std::string name, std::string password, double balance) : Person(name, password), cliID(id += 10) {
     Validation::checkBalanceOfClient(balance);
     this->balance = balance;
@@ -73,4 +75,3 @@ public:
   static void initID() { id = FilesHelper::getLast("db/Clients.txt"); }
 };
 int Client::id = 6990;
-

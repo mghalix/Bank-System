@@ -13,13 +13,14 @@ private:
   int empID;
 public:
   //Constructors
-  Employee() :Person(), empID(id += 10) { salary = 0; }
+  Employee() :Person() {
+    salary = 0;
+  }
   Employee(std::string name, std::string password, double salary) : Person(name, password), empID(id += 10) {
     Validation::checkSalary(salary); // min 5000
     this->salary = salary;
   }
-  ~Employee() { id -= 10; }
-
+  // ~Employee() { id -= 10; }
   //Setters
   void setSalary(float salary) {
     Validation::checkSalary(salary);
@@ -46,7 +47,7 @@ public:
 
   void addClient(Client &client);
 
-  void  listClient();
+  void listClient();
 
   Client *searchClient(int id);
 

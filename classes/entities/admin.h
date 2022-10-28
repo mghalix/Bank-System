@@ -6,7 +6,7 @@ private:
   int admID;
 public:
   // Constructor
-  Admin() : Employee(), admID(++id) {}
+  Admin() : Employee() {}
   Admin(std::string name, std::string password, double salary) : Employee(name, password, salary), admID(++id) {}
   ~Admin() { id--; }
   // Methods

@@ -6,10 +6,22 @@
 using namespace std;
 
 int main() {
-  Screens::runApp();
-  // Load::showEmpDic();
+  // Screens::runApp();
+  Load::loadAll();
+  try {
+    Load::parseTo<Admin>("3")->display();
+  }
+  catch (std::string msg) {
+    cerr << msg << endl;
+  }
 
-
+  // try {
+  //   Load::search<Client>(7000)->getPassword();
+  // }
+  // catch (const char *msg) {
+  //   cerr << msg << endl;
+  // }
+  // Load::showAdmDic();
 
   // FileManager fm;
   // Admin *adm;
@@ -50,18 +62,20 @@ int main() {
   // // fm.addClient(cli2);
   //------------------------
   /*****Writing into files*****/
-  // Employee emp1("Mohamed", "121312351", 56000);
+  // Employee emp1("Mohamed", "nourisgay", 56000);
   // Employee emp2("Menna", "131512312", 7000.54);
+  // cout << emp1.getID() << endl;
   // fm.addEmployee(emp1);
   // fm.addEmployee(emp2);
-  // Client cli1("Hassan", "9786412495", 12314.413);
+  // Client cli1("Hassan", "nourisgay", 12314.413);
   // Client cli2("Hussein", "923812344", 123123);
   // fm.addClient(cli1);
   // fm.addClient(cli2);
-  // Admin adm1("Ahmed", "11281123412", 9000.905);
+  // Admin adm1("Ahmed", "nourisgay", 9000.905);
   // Admin adm2("Assem", "12342412412", 11000.970);
   // fm.addAdmin(adm1);
   // fm.addAdmin(adm2);
+  // Load::rewriteAll();
   //------------------------
   /*****Display*****/
   // vector<Employee> emps = fm.getAllEmployees();

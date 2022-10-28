@@ -39,7 +39,7 @@ void Screens::mainMenu(int &choice) {
       loginAs(choice);
       break;
     case 0:
-      exit(0);
+      break;
     default:
       std::cout << "No such option, please try again.\n";
       std::cout << "1. Login as\n2. About us\n0. Exit\n> ";
@@ -52,7 +52,6 @@ void Screens::runApp() {
   int choice;
   Load::loadAll();
   mainMenu(choice);
-
   // last step
   Load::rewriteAll();
 }
@@ -279,6 +278,6 @@ void Screens::cliMenu(int &choice) {
   }
 }
 //------------------------------------------------------------------------------
-Admin Screens::adm{};
-Employee Screens::emp{};
-Client Screens::cli{};
+Admin Screens::adm;
+Employee Screens::emp;
+Client Screens::cli;

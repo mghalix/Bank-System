@@ -14,7 +14,7 @@ public:
     else return loginEntity<T>(id, password, "db/Admin.txt", Load::admIdx);
     // // TODO: make parseTo method use template
     // static T entity = Parser::parseTo<T>(std::to_string(id));
-    throw("No such us in the bank\n");
+    throw("No such user in the bank\n");
   }
 private:
   template<typename T>
@@ -34,7 +34,7 @@ private:
       throw("User doesn't exist, please try again.\n");
     }
     std::cout << "Login Successfully\n";
-    T *entity = Parser::parseTo<T>(record[0]);
+    T *entity = Load::parseTo<T>(record[0]);
     return entity;
   }
 };

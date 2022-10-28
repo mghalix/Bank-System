@@ -33,10 +33,10 @@ public:
   }
 
   template<typename TK, typename TV>
-  static std::vector<TK> toArray(std::map<TK, TV> mp) {
+  static std::vector<TK> toArray(const std::map<TK, TV> &mp) {
     std::vector<TK> vec;
     for (auto const &key : mp)
-      vec.push_back(key);
+      vec.push_back(key.first);
     return vec;
   }
 
@@ -44,6 +44,7 @@ public:
   static bool BST(T elem, std::vector<T> vec) {
     int start = 0, end = vec.size() - 1, mid = (start + end) / 2;
     while (start <= end) {
+      mid = (start + end) / 2;
       if (elem == vec[mid])
         return true;
       if (elem < vec[mid])

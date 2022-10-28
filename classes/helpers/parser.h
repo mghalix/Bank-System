@@ -21,7 +21,7 @@ private:
   }
 public:
   template<typename T>
-  static T *parseTo(const std::string &id) {
+  static T *parseToObsolete(const std::string &id) {
     std::string fileName;
     if (typeid(T) == typeid(Client))
       fileName = clientFile;
