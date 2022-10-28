@@ -25,11 +25,11 @@ public:
     }
     else if (typeid(T) == typeid(Employee)) {
       clone = &empIdx;
-      fileName = "db/Employee.txt";
+      fileName = "db/Employees.txt";
     }
     else if (typeid(T) == typeid(Admin)) {
       clone = &admIdx;
-      fileName = "db/Admin.txt";
+      fileName = "db/Admins.txt";
     }
     else throw("No such file to open.\n");
     if (clone->find(stoi(id)) != clone->end()) {
@@ -93,14 +93,14 @@ public:
     delete clone;
   }
   static void rewriteAll() {
-    rewriteIdx(admIdx, "db/adm-index.txt");
-    rewriteIdx(empIdx, "db/emp-index.txt");
-    rewriteIdx(cliIdx, "db/cli-index.txt");
+    rewriteIdx(admIdx, idxFileAdm);
+    rewriteIdx(empIdx, idxFileEmp);
+    rewriteIdx(cliIdx, idxFileCli);
   }
   static void loadAll() {
-    loadIdx("db/cli-index.txt", cliIdx);
-    loadIdx("db/adm-index.txt", admIdx);
-    loadIdx("db/emp-index.txt", empIdx);
+    loadIdx(idxFileCli, cliIdx);
+    loadIdx(idxFileAdm, admIdx);
+    loadIdx(idxFileEmp, empIdx);
   }
   // for testing
   static void showCliDic() {
@@ -131,36 +131,48 @@ public:
 
   template<typename T>
   static T *search(const int &id) {
-    std::string idxFile;
+    static std::string *idxFile;
     static std::map<int, int> *clone;
     if (typeid(T) == typeid(Client)) {
       clone = &cliIdx;
-      idxFile = "db/cli-index.txt";
+      idxFile = &idxFileCli;
     }
     else if (typeid(T) == typeid(Admin)) {
       clone = &admIdx;
-      idxFile = "db/adm-index.txt";
+      idxFile = &idxFileAdm;
     }
     else if (typeid(T) == typeid(Employee)) {
       clone = &empIdx;
-      idxFile = "db/emp-index.txt";
+      idxFile = &idxFileEmp;
     }
-    else
+    else {
+      idxFile = NULL;
+      delete idxFile;
+      clone = NULL;
+      delete clone;
       throw("No such type");
+
+    }
     std::vector<int> keys = CustomMethods::toArray(*clone);
     std::string className = correct(typeid(T).name());
-    if (!CustomMethods::BST(id, keys))
-      // throw("User not found.");
+    if (!CustomMethods::BST(id, keys)) {
+      clone = NULL;
+      delete clone;
+      idxFile = NULL;
+      delete idxFile;
       throw(className + " ID #" + std::to_string(id) + " -> doesn't exist.\n");
+    }
 
     int loc = clone->at(id);
-    std::ifstream fin(idxFile);
+    std::ifstream fin(*idxFile);
     fin.seekg(loc);
     std::string line;
     getline(fin, line);
     std::vector<std::string> record = CustomMethods::split(line, '|');
     clone = NULL;
     delete clone;
+    idxFile = NULL;
+    delete idxFile;
     return parseTo<T>(std::to_string(id));
   }
 private:
@@ -208,7 +220,7 @@ private:
 std::map<int, int> Load::cliIdx;
 std::map<int, int> Load::empIdx;
 std::map<int, int> Load::admIdx;
-std::string Load::idxFileCli = "db/cli-index.txt";
-std::string Load::idxFileEmp = "db/adm-index.txt";
-std::string Load::idxFileAdm = "db/emp-index.txt";
+std::string Load::idxFileCli = "db/idx-cli.txt";
+std::string Load::idxFileEmp = "db/idx-emp.txt";
+std::string Load::idxFileAdm = "db/idx-adm.txt";
 //------------------------------------------------------------------------------

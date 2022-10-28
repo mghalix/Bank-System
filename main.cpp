@@ -6,7 +6,12 @@
 using namespace std;
 
 int main() {
-  Screens::runApp();
+  try {
+    Screens::runApp();
+  }
+  catch (const char *msg) {
+    cerr << msg;
+  }
   // try {
   //   Load::parseTo<Admin>("3")->display();
   // }
@@ -105,8 +110,8 @@ int main() {
 
   /***** Clearing Files *****/
   // FilesHelper::clearFile("db/Clients.txt");
-  // FilesHelper::clearFile("db/Employee.txt");
-  // FilesHelper::clearFile("db/Admin.txt");
+  // FilesHelper::clearFile("db/Employees.txt");
+  // FilesHelper::clearFile("db/Admins.txt");
   // Admin a = Parser::parseToAdmin("1");
 
   // try {

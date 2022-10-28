@@ -49,5 +49,5 @@ public:
   }
 };
 std::string Parser::clientFile = "db/Clients.txt";
-std::string Parser::employeeFile = "db/Employee.txt";
-std::string Parser::adminFile = "db/Admin.txt";
+std::string Parser::employeeFile = "db/Employees.txt";
+std::string Parser::adminFile = "db/Admins.txt";

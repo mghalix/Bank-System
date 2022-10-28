@@ -154,8 +154,8 @@ public:
 };
 //------------------------------------------------------------------------------
 std::string FileManager::clientFile = "db/Clients.txt";
-std::string FileManager::employeeFile = "db/Employee.txt";
-std::string FileManager::adminFile = "db/Admin.txt";
+std::string FileManager::employeeFile = "db/Employees.txt";
+std::string FileManager::adminFile = "db/Admins.txt";
 //------------------------------------------------------------------------------
 void Employee::editClient(int id, std::string name, std::string password, double balance) {
   std::ofstream ofs;
@@ -204,7 +204,7 @@ void Admin::editEmployee(int id, std::string name, std::string password, double 
     std::cout << "Client not found, please enter correct id\n";
     return;
   }
-  ofs.open("db/Employee.txt");
+  ofs.open("db/Employees.txt");
   if (!ofs) {
     throw("Error opening the file\n");
   }
@@ -218,8 +218,8 @@ void Admin::editEmployee(int id, std::string name, std::string password, double 
 void FilesHelper::clearFile(std::string fileName) {
   FileManager fm;
   if (fileName == "db/Clients.txt") fm.removeAllClients();
-  else if (fileName == "db/Employee.txt") fm.removeAllEmployees();
-  else if (fileName == "db/Admin.txt") fm.removeAllAdmins();
+  else if (fileName == "db/Employees.txt") fm.removeAllEmployees();
+  else if (fileName == "db/Admins.txt") fm.removeAllAdmins();
   else std::cout << "File doesn't exist.\n";
 }
 //------------------------------------------------------------------------------
@@ -258,7 +258,7 @@ void Employee::addClient(Client &client) {
 //------------------------------------------------------------------------------
 void Employee::listClient() {
   // FilesHelper::showClients();
-  Load::showEvery<Employee>();
+  Load::showEvery<Client>();
 }
 //------------------------------------------------------------------------------
 Client *Employee::searchClient(int id) {

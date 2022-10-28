@@ -10,8 +10,8 @@ public:
     if (typeid(T) == typeid(Client))
       return loginEntity<T>(id, password, "db/Clients.txt", Load::cliIdx);
     else if (typeid(T) == typeid(Employee))
-      return loginEntity<T>(id, password, "db/Employee.txt", Load::empIdx);
-    else return loginEntity<T>(id, password, "db/Admin.txt", Load::admIdx);
+      return loginEntity<T>(id, password, "db/Employees.txt", Load::empIdx);
+    else return loginEntity<T>(id, password, "db/Admins.txt", Load::admIdx);
     // // TODO: make parseTo method use template
     // static T entity = Parser::parseTo<T>(std::to_string(id));
     throw("No such user in the bank\n");

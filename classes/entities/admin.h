@@ -18,7 +18,7 @@ public:
   // Setters
   void setID(int id) override { admID = id; }
 
-  static void initID() { id = FilesHelper::getLast("db/Admin.txt"); }
+  static void initID() { id = FilesHelper::getLast("db/Admins.txt"); }
 
   void addEmployee(Employee &employee);
   void listEmployee();
