@@ -10,11 +10,15 @@ private:
   static std::string clientFile;
   static std::string employeeFile;
   static std::string adminFile;
-  // std::string correct(const char *name) {
-    // for (int i = 0; i < name->size(); i++) {
-// 
-    // }
-  // }
+  static std::string correct(const char *name) {
+    std::string output = "";
+    for (int i = 0; i < name[i] != '\0'; i++) {
+      if (name[i] >= '0' && name[i] <= '9')
+        continue;
+      output += name[i];
+    }
+    return output;
+  }
 public:
   template<typename T>
   static T *parseTo(const std::string &id) {
@@ -39,9 +43,9 @@ public:
       return a;
     }
     ifs.close();
-    // std::string className = correct(typeid(T).name());
+    std::string className = correct(typeid(T).name());
     // Employee id #2030 -> doesn't exist
-    throw("ID #" + id + " -> doesn't exist.\n");
+    throw(className + " ID #" + id + " -> doesn't exist.\n");
   }
 };
 std::string Parser::clientFile = "db/Clients.txt";

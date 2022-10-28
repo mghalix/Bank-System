@@ -50,6 +50,7 @@ void Screens::mainMenu(int &choice) {
 //------------------------------------------------------------------------------
 void Screens::runApp() {
   int choice;
+  Load::loadAll();
   mainMenu(choice);
 
   // last step
