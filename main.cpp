@@ -6,15 +6,15 @@
 using namespace std;
 
 int main() {
-  // Screens::runApp();
+  Screens::runApp();
   // FileManager fm;
-  Load::loadAll();
-  try {
-    Login::login<Admin>(2, "12342412412");
-  }
-  catch (const char *msg) {
-    cerr << msg;
-  }
+  // Load::loadAll();
+  // try {
+  //   Login::login<Admin>(2, "12342412412");
+  // }
+  // catch (const char *msg) {
+  //   cerr << msg;
+  // }
 
   //TODO: transfer the inits to runApp when phase3 comes.
   //=====================//
