@@ -57,21 +57,82 @@ public:
       }
     };
 
-    struct List {
+    struct Edit {
+      static void printMenu() {
+        std::cout << "\t\t***** Edit *****" << std::endl
+          << "1. Employees" << std::endl
+          << "2. Clients" << std::endl <<
+          "0. Back\n> ";
+
+      }
 
     };
 
-    struct Edit {
-
+    struct List {
+      static void printMenu() {
+        std::cout << "\t\t***** List All *****" << std::endl
+          << "1. Employee" << std::endl
+          << "2. Client" << std::endl <<
+          "0. Back\n> ";
+      }
+      static void options(int &choice, Admin &adm) {
+        switch (choice) {
+        case 1:
+          try {
+            adm.listEmployee();
+          }
+          catch (std::string msg) {
+            std::cerr << msg;
+            std::cout << "------\n> ";
+            std::cin >> choice;
+            options(choice, adm);
+          }
+          std::cout << "------\n> ";
+          std::cin >> choice;
+          options(choice, adm);
+          break;
+        case 2:
+          std::cout << "------\n";
+          try {
+            adm.listClient();
+          }
+          catch (std::string msg) {
+            std::cerr << msg;
+            std::cout << "------\n> ";
+            std::cin >> choice;
+            options(choice, adm);
+          }
+          std::cout << "------\n> ";
+          std::cin >> choice;
+          options(choice, adm);
+          break;
+        case 0:
+          throw(-1);
+        default:
+          std::cout << "No such option, please try again\n> ";
+          std::cin >> choice;
+          options(choice, adm);
+        }
+      }
     };
 
 
     struct Add {
-
+      static void printMenu() {
+        std::cout << "\t\t***** Add *****" << std::endl
+          << "1. Employee" << std::endl
+          << "2. Client" << std::endl <<
+          "0. Back\n> ";
+      }
     };
 
     struct Remove {
-
+      static void printMenu() {
+        std::cout << "\t\t***** Remove *****" << std::endl
+          << "1. Employee" << std::endl
+          << "2. Client" << std::endl <<
+          "0. Back\n> ";
+      }
     };
   };
 
@@ -109,12 +170,91 @@ public:
           options(choice, emp);
         }
       }
+
+    };
+    struct List {
+      static void printMenu() {
+        std::cout << "\t\t***** List All *****" << std::endl
+          << "1. Clients" << std::endl <<
+          "0. Back\n> ";
+      }
+      static void options(int &choice, Employee &emp) {
+        switch (choice) {
+        case 1:
+          try {
+            emp.listClient();
+          }
+          catch (std::string msg) {
+            std::cerr << msg;
+            std::cout << "------\n> ";
+            std::cin >> choice;
+            options(choice, emp);
+          }
+          std::cout << "------\n> ";
+          std::cin >> choice;
+          options(choice, emp);
+          break;
+        case 0:
+          throw(-1);
+        default:
+          std::cout << "No such option, please try again\n> ";
+          std::cin >> choice;
+          options(choice, emp);
+        }
+      }
+    };
+
+    struct Edit {
+      static void printMenu() {
+        std::cout << "\t\t***** Edit *****" << std::endl
+          << "1. Client" << std::endl <<
+          "0. Back\n> ";
+      }
+    };
+
+
+    struct Add {
+      static void printMenu() {
+        std::cout << "\t\t***** Add *****" << std::endl
+          << "1. Client" << std::endl <<
+          "0. Back\n> ";
+      }
+    };
+
+    struct Remove {
+      static void printMenu() {
+        std::cout << "\t\t***** Remove *****" << std::endl
+          << "1. Client" << std::endl <<
+          "0. Back\n> ";
+      }
     };
   };
 
 
   struct Client {
+    struct Balance {
+      static void printMenu() {
 
+      }
+    };
+
+    struct Deposit {
+      static void printMenu() {
+
+      }
+    };
+
+    struct Withdraw {
+      static void printMenu() {
+
+      }
+    };
+
+    struct Transfer {
+      static void printMenu() {
+
+      }
+    };
   };
 
 private:

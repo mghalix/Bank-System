@@ -15,8 +15,8 @@ class Screens {
 private:
   static void mainMenu(int &choice); // complete
   static void loginAs(int &choice); // complete
-  static void admMenu(int &choice); // complete (2/6)
-  static void empMenu(int &choice); // complete (2/6)
+  static void admMenu(int &choice); // complete (3/6)
+  static void empMenu(int &choice); // complete (3/6)
   static void cliMenu(int &choice); // complete (1/6)
   static Admin adm;
   static Client cli;
@@ -164,6 +164,19 @@ void Screens::admMenu(int &choice) {
       }
       break;
     case 2:
+      system("clear");
+      Options::Adm::List::printMenu();
+      std::cin >> choice;
+      try {
+        Options::Adm::List::options(choice, adm);
+      }
+      catch (int x) {
+        if (x == -1)
+          admMenu(choice);
+      }
+      catch (const char *msg) {
+        std::cerr << msg << std::endl;
+      }
       break;
     case 3:
       break;
@@ -205,6 +218,19 @@ void Screens::empMenu(int &choice) {
         std::cerr << msg << std::endl;
       }
     case 2:
+      system("clear");
+      Options::Emp::List::printMenu();
+      std::cin >> choice;
+      try {
+        Options::Emp::List::options(choice, adm);
+      }
+      catch (int x) {
+        if (x == -1)
+          admMenu(choice);
+      }
+      catch (const char *msg) {
+        std::cerr << msg << std::endl;
+      }
       break;
     case 3:
       break;
