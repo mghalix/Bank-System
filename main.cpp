@@ -9,12 +9,10 @@ int main() {
   // Screens::runApp();
   // FileManager fm;
   Load::loadAll();
-  try
-  {
-    Login::login<Client>(7020, "qwerty12345");
+  try {
+    Login::login<Admin>(2, "12342412412");
   }
-  catch (const char *msg)
-  {
+  catch (const char *msg) {
     cerr << msg;
   }
 

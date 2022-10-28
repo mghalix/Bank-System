@@ -1,5 +1,4 @@
 #pragma once
-
 #include "../helpers/custom_methods.h"
 #include "../entities/client.h"
 #include "../entities/admin.h"

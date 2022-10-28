@@ -7,15 +7,14 @@ class Login {
 public:
   template<typename T>
   static T *login(const int &id, const std::string &password) {
-    static T *entity;
     if (typeid(T) == typeid(Client))
-      entity = loginEntity<T>(id, password, "db/Clients.txt", Load::cliIdx);
+      return loginEntity<T>(id, password, "db/Clients.txt", Load::cliIdx);
     else if (typeid(T) == typeid(Employee))
-      entity = loginEntity<T>(id, password, "db/Employee.txt", Load::empIdx);
-    else entity = loginEntity<T>(id, password, "db/Admin.txt", Load::admIdx);
+      return loginEntity<T>(id, password, "db/Employee.txt", Load::empIdx);
+    else return loginEntity<T>(id, password, "db/Admin.txt", Load::admIdx);
     // // TODO: make parseTo method use template
     // static T entity = Parser::parseTo<T>(std::to_string(id));
-    return entity;
+    throw("No such entity in the bank\n");
   }
 private:
   template<typename T>
@@ -31,11 +30,12 @@ private:
     getline(fin, line);
     std::vector<std::string> record = CustomMethods::split(line, '|');
     fin.close();
-    if (record[2] != password) {
+    if (record[2] != password || record[0] != std::to_string(id)) {
       throw("User doesn't exist, please try again.\n");
     }
     std::cout << "Login Successfully\n";
-    return Parser::parseTo<T>(record[0]);
+    static T entity = Parser::parseTo<T>(record[0]);
+    return &entity;
   }
 };
 //------------------------------------------------------------------------------

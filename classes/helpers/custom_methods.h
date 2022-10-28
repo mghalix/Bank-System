@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 
 class CustomMethods {
 public:
@@ -29,5 +30,26 @@ public:
     }
     vec.push_back(temp);
     return vec;
+  }
+
+  template<typename TK, typename TV>
+  static std::vector<TK> toArray(std::map<TK, TV> mp) {
+    std::vector<TK> vec;
+    for (auto const &key : mp)
+      vec.push_back(key);
+    return vec;
+  }
+
+  template<typename T>
+  static bool BST(T elem, std::vector<T> vec) {
+    int start = 0, end = vec.size() - 1, mid = (start + end) / 2;
+    while (start <= end) {
+      if (elem == vec[mid])
+        return true;
+      if (elem < vec[mid])
+        end = mid - 1;
+      else start = mid + 1;
+    }
+    return false;
   }
 };

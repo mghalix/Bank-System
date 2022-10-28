@@ -23,9 +23,9 @@ public:
     delete clone;
   }
   static void rewriteAll() {
-    rewriteIdx("db/Admin.txt", "db/adm-index.txt");
-    rewriteIdx("db/Employee.txt", "db/emp-index.txt");
-    rewriteIdx("db/Clients.txt", "db/cli-index.txt");
+    rewriteIdx(admIdx, "db/adm-index.txt");
+    rewriteIdx(empIdx, "db/emp-index.txt");
+    rewriteIdx(cliIdx, "db/cli-index.txt");
   }
   static void loadAll() {
     loadEntity("db/cli-index.txt", cliIdx);
@@ -34,33 +34,40 @@ public:
   }
   // for testing
   static void showCliDic() {
-    for (auto client : cliIdx)
+    for (auto const &client : cliIdx)
       std::cout << client.first << '|' << client.second << std::endl;
   }
   static void showEmpDic() {
-    for (auto employee : empIdx)
+    for (auto const &employee : empIdx)
       std::cout << employee.first << '|' << employee.second << std::endl;
   }
   static void showAdmDic() {
-    for (auto admin : admIdx)
+    for (auto const &admin : admIdx)
       std::cout << admin.first << '|' << admin.second << std::endl;
   }
+  template<typename T>
+  static T search(const int &id, std::map<int, int> &mp, const std::string &idxFile) {
+    std::vector<int> keys = CustomMethods::toArray(mp);
+    if (!CustomMethods::BST(id, keys))
+      throw("Not found\n");
+    int loc = mp[id];
+    std::ifstream fin(idxFile);
+    fin.seekg(loc);
+    std::string line;
+    getline(fin, line);
+    std::vector<std::string> record = CustomMethods::split(line, '|');
+    Parser::parseTo<T>(id);
+  }
 private:
-  static void rewriteIdx(const std::string &readFile, const std::string &idxFile) {
-    std::ifstream fin;
+  static void rewriteIdx(const std::map<int, int> mp, const std::string &idxFile) {
     std::ofstream ofs;
-    fin.open(readFile);
     ofs.open(idxFile);
     int loc = 0;
     std::string line;
-    while (fin.peek() != EOF) {
-      getline(fin, line);
-      line = CustomMethods::split(line, '|')[0] + '|' + std::to_string(loc);
-      ofs << line << std::endl;
-      loc += (int)fin.tellg() + 2;
+    for (auto record : mp) {
+      ofs << record.first << '|' << record.second << std::endl;
     }
     ofs.close();
-    fin.close();
   }
   static void loadIdx(const std::string &fileName, std::map<int, int> &mp) {
     mp.clear();
