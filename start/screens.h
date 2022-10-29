@@ -12,11 +12,11 @@
 #include "../classes/dependencies/print_entity_menu.h"
 class Screens {
 private:
-  static void mainMenu(int &choice); // complete
-  static void loginAs(int &choice); // complete
-  static void admMenu(int &choice); // complete (3/6)
-  static void empMenu(int &choice); // complete (3/6)
-  static void cliMenu(int &choice); // complete (1/6)
+  static void mainMenu(char &choice); // complete
+  static void loginAs(char &choice); // complete
+  static void admMenu(char &choice); // complete (3/6)
+  static void empMenu(char &choice); // complete (3/6)
+  static void cliMenu(char &choice); // complete (1/6)
   static Admin adm;
   static Client cli;
   static Employee emp;
@@ -24,7 +24,7 @@ public:
   static void runApp();
 };
 //------------------------------------------------------------------------------
-void Screens::mainMenu(int &choice) {
+void Screens::mainMenu(char &choice) {
   system("clear");
   Menus::printMenu('S', 'M');
   bool notExecuted = true;
@@ -32,11 +32,11 @@ void Screens::mainMenu(int &choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case 1:
+    case '1':
       system("clear");
       loginAs(choice);
       break;
-    case 0:
+    case 'q': case 'Q':
       return;
     default:
       std::cout << "No such option, please try again.\n";
@@ -47,14 +47,14 @@ void Screens::mainMenu(int &choice) {
 }
 //------------------------------------------------------------------------------
 void Screens::runApp() {
-  int choice;
+  char choice;
   Load::loadAll();
   mainMenu(choice);
   // last step
   Load::rewriteAll();
 }
 //------------------------------------------------------------------------------
-void Screens::loginAs(int &choice) {
+void Screens::loginAs(char &choice) {
   Menus::printMenu('S', 'L');
   int id;
   std::string password;
@@ -66,7 +66,7 @@ void Screens::loginAs(int &choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case 1:
+    case '1':
       while (attempts < 5) {
         std::cout << "Enter admin id: ";
         std::cin >> id;
@@ -85,7 +85,7 @@ void Screens::loginAs(int &choice) {
         }
       }
       return;
-    case 2:
+    case '2':
       while (attempts < 5) {
         std::cout << "Enter employee id: ";
         std::cin >> id;
@@ -104,7 +104,7 @@ void Screens::loginAs(int &choice) {
         }
       }
       return;
-    case 3:
+    case '3':
       while (attempts < 5) {
         try {
           std::cout << "Enter client id: ";
@@ -123,23 +123,23 @@ void Screens::loginAs(int &choice) {
         }
       }
       return;
-      case int('q') :
-        Load::rewriteAll();
-        exit(0);
-      case 0:
-        mainMenu(choice);
-        return;
-      default:
-        std::cout << "No such option, please try again.\n" <<
-          "1. Admin\n" << "2. Employee\n" << "3. Client\n" << "0. Back\n"
-          << "q. Quit\n> ";
-        notExecuted = true;
+    case 'q': case 'Q':
+      Load::rewriteAll();
+      exit(0);
+    case '0':
+      mainMenu(choice);
+      return;
+    default:
+      std::cout << "No such option, please try again.\n" <<
+        "1. Admin\n" << "2. Employee\n" << "3. Client\n" << "0. Back\n"
+        << "q. Quit\n> ";
+      notExecuted = true;
     }
   } while (notExecuted);
   std::cout << "Too many attempts, please try again later\n";
 }
 //------------------------------------------------------------------------------
-void Screens::admMenu(int &choice) {
+void Screens::admMenu(char &choice) {
   system("clear");
   Menus::printMenu('A', 'M');
   bool notExecuted = true;
@@ -147,7 +147,7 @@ void Screens::admMenu(int &choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case 1:
+    case '1':
       system("clear");
       Options::Adm::Search::printMenu();
       std::cin >> choice;
@@ -162,7 +162,7 @@ void Screens::admMenu(int &choice) {
         std::cerr << msg << std::endl;
       }
       break;
-    case 2:
+    case '2':
       system("clear");
       Options::Adm::List::printMenu();
       std::cin >> choice;
@@ -177,13 +177,16 @@ void Screens::admMenu(int &choice) {
         std::cerr << msg << std::endl;
       }
       break;
-    case 3:
+    case '3':
       break;
-    case 4:
+    case '4':
       break;
-    case 5:
+    case '5':
       break;
-    case 0:
+    case 'q': case 'Q':
+      Load::rewriteAll();
+      exit(0);
+    case '0':
       system("clear");
       loginAs(choice);
       break;
@@ -194,7 +197,7 @@ void Screens::admMenu(int &choice) {
   }
 }
 //------------------------------------------------------------------------------
-void Screens::empMenu(int &choice) {
+void Screens::empMenu(char &choice) {
   system("clear");
   Menus::printMenu('E', 'M');
   bool notExecuted = true;
@@ -202,7 +205,7 @@ void Screens::empMenu(int &choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case 1:
+    case '1':
       system("clear");
       Options::Emp::Search::printMenu();
       std::cin >> choice;
@@ -216,7 +219,7 @@ void Screens::empMenu(int &choice) {
       catch (const char *msg) {
         std::cerr << msg << std::endl;
       }
-    case 2:
+    case '2':
       system("clear");
       Options::Emp::List::printMenu();
       std::cin >> choice;
@@ -231,13 +234,16 @@ void Screens::empMenu(int &choice) {
         std::cerr << msg << std::endl;
       }
       break;
-    case 3:
+    case '3':
       break;
-    case 4:
+    case '4':
       break;
-    case 5:
+    case '5':
       break;
-    case 0:
+    case 'q': case 'Q':
+      Load::rewriteAll();
+      exit(0);
+    case '0':
       system("clear");
       loginAs(choice);
       break;
@@ -248,7 +254,7 @@ void Screens::empMenu(int &choice) {
   }
 }
 //------------------------------------------------------------------------------
-void Screens::cliMenu(int &choice) {
+void Screens::cliMenu(char &choice) {
   system("clear");
   Menus::printMenu('C', 'M');
   bool notExecuted = true;
@@ -256,17 +262,17 @@ void Screens::cliMenu(int &choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case 1:
+    case '1':
       break;
-    case 2:
+    case '2':
       break;
-    case 3:
+    case '3':
       break;
-    case 4:
+    case '4':
       break;
-    case 5:
+    case '5':
       break;
-    case 0:
+    case '0':
       system("clear");
       loginAs(choice);
       break;

@@ -10,10 +10,10 @@ public:
       static void printMenu() {
         Menus::printMenu('A', 'S');
       }
-      static void options(int &choice, Admin &adm) {
+      static void options(char &choice, Admin &adm) {
         int id;
         switch (choice) {
-        case 1:
+        case '1':
           optEntity(id, "Employee");
           std::cout << "------\n";
           try {
@@ -29,7 +29,7 @@ public:
           std::cin >> choice;
           options(choice, adm);
           break;
-        case 2:
+        case '2':
           optEntity(id, "Client");
           std::cout << "------\n";
           try {
@@ -45,7 +45,10 @@ public:
           std::cin >> choice;
           options(choice, adm);
           break;
-        case 0:
+        case 'q': case 'Q':
+          Load::rewriteAll();
+          exit(0);
+        case '0':
           throw(-1);
         default:
           std::cout << "No such option, please try again\n> ";
@@ -65,9 +68,9 @@ public:
       static void printMenu() {
         Menus::printMenu('A', 'L');
       }
-      static void options(int &choice, Admin &adm) {
+      static void options(char &choice, Admin &adm) {
         switch (choice) {
-        case 1:
+        case '1':
           try {
             adm.listEmployee();
           }
@@ -81,7 +84,7 @@ public:
           std::cin >> choice;
           options(choice, adm);
           break;
-        case 2:
+        case '2':
           std::cout << "------\n";
           try {
             adm.listClient();
@@ -96,7 +99,10 @@ public:
           std::cin >> choice;
           options(choice, adm);
           break;
-        case 0:
+        case 'q': case 'Q':
+          Load::rewriteAll();
+          exit(0);
+        case '0':
           throw(-1);
         default:
           std::cout << "No such option, please try again\n> ";
@@ -125,10 +131,10 @@ public:
       static void printMenu() {
         Menus::printMenu('E', 'S');
       }
-      static void options(int &choice, Employee &emp) {
+      static void options(char &choice, Employee &emp) {
         int id;
         switch (choice) {
-        case 1:
+        case '1':
           optEntity(id, "Client");
           std::cout << "------\n";
           try {
@@ -144,7 +150,10 @@ public:
           std::cin >> choice;
           options(choice, emp);
           break;
-        case 0:
+        case 'q': case 'Q':
+          Load::rewriteAll();
+          exit(0);
+        case '0':
           throw(-1);
         default:
           std::cout << "No such option, please try again\n> ";
@@ -158,9 +167,9 @@ public:
       static void printMenu() {
         Menus::printMenu('E', 'L');
       }
-      static void options(int &choice, Employee &emp) {
+      static void options(char &choice, Employee &emp) {
         switch (choice) {
-        case 1:
+        case '1':
           try {
             emp.listClient();
           }
@@ -174,7 +183,10 @@ public:
           std::cin >> choice;
           options(choice, emp);
           break;
-        case 0:
+        case 'q': case 'Q':
+          Load::rewriteAll();
+          exit(0);
+        case '0':
           throw(-1);
         default:
           std::cout << "No such option, please try again\n> ";
