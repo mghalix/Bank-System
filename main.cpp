@@ -12,8 +12,7 @@ int main() {
     cerr << msg;
   }
   // Load::loadAll();
-  // Load::editEntity<Admin>(1);
-
+  // Load::editEntity<Client>(1);
   // try {
   //   Load::parseTo<Admin>("3")->display();
   // }

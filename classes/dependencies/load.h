@@ -155,18 +155,21 @@ public:
   }
   // template<typename T>
   // static void editEntity(const int &id) {
-  //   static T target;
+  //   static T *target;
   //   static std::string *file;
   //   if (typeid(T) == typeid(Client)) {
-  //     target = *search<Client>(id);
+  //     static Client *c = search<Client>(id);
+  //     target = c;
   //     file = &FilesHelper::clientFile;
   //   }
   //   else if (typeid(T) == typeid(Admin)) {
-  //     target = *search<Admin>(id);
+  //     static Admin *a = search<Admin>(id);
+  //     target = a;
+  //     // target = search<Admin>(id);
   //     file = &FilesHelper::adminFile;
   //   }
   //   else if (typeid(T) == typeid(Employee)) {
-  //     target = *search<Employee>(id);
+  //     target = search<Employee>(id);
   //     file = &FilesHelper::employeeFile;
   //   }
   //   else
