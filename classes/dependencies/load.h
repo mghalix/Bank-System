@@ -4,17 +4,19 @@
 #include <map>
 #include <fstream>
 #include <string>
+#include "../helpers/custom_methods.h"
+/* <===================|Indexing|===================> */
 class Load {
 public:
-  // Attributes
+  // <|---------------------------Attributes---------------------------|>
   static std::map<int, int> cliIdx;
   static std::map<int, int> empIdx;
   static std::map<int, int> admIdx;
   static std::string idxFileCli;
   static std::string idxFileEmp;
   static std::string idxFileAdm;
-
-  // indexing
+  // <|---------------------------Methods------------------------------|>
+  // enhanced version of parseTo method of Parser class
   template<typename T>
   static T *parseTo(const std::string &id) {
     static std::map<int, int> *clone;
@@ -40,19 +42,20 @@ public:
       getline(fin, line);
       fin.close();
       std::vector<std::string> vec(4);
-      vec = CustomMethods::split(line, '|');
+      vec = Helpers::split(line, '|');
       T *a = new T(vec[1], vec[2], stod(vec[3]));
       a->setID(stoi(vec[0]));
       clone = NULL;
       delete clone;
       return a;
     }
-    std::string className = correct(typeid(T).name());
+    std::string className = Helpers::cName(typeid(T).name());
     clone = NULL;
     delete clone;
     // Employee id #2030 -> doesn't exist
     throw(className + " ID #" + id + " -> doesn't exist.");
   }
+  // for listing all existing info of an entity
   template<typename T>
   static void showEvery() {
     int i = 1;
@@ -77,6 +80,7 @@ public:
     else
       throw("No such type");
   }
+  // for adding new entities into the indexed file
   template<typename T>
   static void addIndex(const int &id, const int &pos) {
     static std::map<int, int> *clone;
@@ -92,43 +96,19 @@ public:
     clone = NULL;
     delete clone;
   }
+  // for index files from the map
   static void rewriteAll() {
     rewriteIdx(admIdx, idxFileAdm);
     rewriteIdx(empIdx, idxFileEmp);
     rewriteIdx(cliIdx, idxFileCli);
   }
+  // for loading all entities info from index files to maps
   static void loadAll() {
     loadIdx(idxFileCli, cliIdx);
     loadIdx(idxFileAdm, admIdx);
     loadIdx(idxFileEmp, empIdx);
   }
-  // for testing
-  static void showCliDic() {
-    for (auto const &client : cliIdx)
-      std::cout << client.first << '|' << client.second << std::endl;
-  }
-  static void showEmpDic() {
-    for (auto const &employee : empIdx)
-      std::cout << employee.first << '|' << employee.second << std::endl;
-  }
-  static void showAdmDic() {
-    for (auto const &admin : admIdx)
-      std::cout << admin.first << '|' << admin.second << std::endl;
-  }
-  template<typename T>
-  static T *search(const int &id, std::map<int, int> &mp, const std::string &idxFile) {
-    std::vector<int> keys = CustomMethods::toArray(mp);
-    if (!CustomMethods::BST(id, keys))
-      throw("Not found\n");
-    int loc = mp[id];
-    std::ifstream fin(idxFile);
-    fin.seekg(loc);
-    std::string line;
-    getline(fin, line);
-    std::vector<std::string> record = CustomMethods::split(line, '|');
-    return parseTo<T>(id);
-  }
-
+  // for searching, editing and retrieving an entity info
   template<typename T>
   static T *search(const int &id) {
     static std::string *idxFile;
@@ -153,9 +133,9 @@ public:
       throw("No such type");
 
     }
-    std::vector<int> keys = CustomMethods::toArray(*clone);
-    std::string className = correct(typeid(T).name());
-    if (!CustomMethods::BST(id, keys)) {
+    std::vector<int> keys = Helpers::toArray(*clone);
+    std::string className = Helpers::cName(typeid(T).name());
+    if (!Helpers::BS(id, keys)) {
       clone = NULL;
       delete clone;
       idxFile = NULL;
@@ -168,14 +148,31 @@ public:
     fin.seekg(loc);
     std::string line;
     getline(fin, line);
-    std::vector<std::string> record = CustomMethods::split(line, '|');
+    std::vector<std::string> record = Helpers::split(line, '|');
     clone = NULL;
     delete clone;
     idxFile = NULL;
     delete idxFile;
     return parseTo<T>(std::to_string(id));
   }
+  // for testing indexed files (id - loc)
+  static void showCliDic() {
+    for (auto const &client : cliIdx)
+      std::cout << client.first << '|' << client.second << std::endl;
+  }
+  static void showEmpDic() {
+    for (auto const &employee : empIdx)
+      std::cout << employee.first << '|' << employee.second << std::endl;
+  }
+  static void showAdmDic() {
+    for (auto const &admin : admIdx)
+      std::cout << admin.first << '|' << admin.second << std::endl;
+  }
+  // <|----------------------------public end---------------------------------|>
 private:
+  // private ctor for restricting object creation
+  Load() {}
+  // |>---------------------------Methods------------------------------<|
   static void rewriteIdx(const std::map<int, int> mp, const std::string &idxFile) {
     std::ofstream ofs(idxFile, std::ios::trunc);
     ofs.seekp(0, std::ios::beg);
@@ -199,28 +196,30 @@ private:
     std::vector<std::string> vec;
     while (fin.peek() != EOF) {
       getline(fin, line);
-      vec = CustomMethods::split(line, '|');
+      vec = Helpers::split(line, '|');
       mp.insert(std::pair<int, int>(stoi(vec[0]), stoi(vec[1])));
     }
     fin.close();
   }
-private:
-  // helpers
-  static std::string correct(const char *name) {
-    std::string output = "";
-    for (int i = 0; i < name[i] != '\0'; i++) {
-      if (name[i] >= '0' && name[i] <= '9')
-        continue;
-      output += name[i];
-    }
-    return output;
+  template<typename T>
+  static T *search(const int &id, std::map<int, int> &mp, const std::string &idxFile) {
+    std::vector<int> keys = Helpers::toArray(mp);
+    if (!Helpers::BS(id, keys))
+      throw("Not found\n");
+    int loc = mp[id];
+    std::ifstream fin(idxFile);
+    fin.seekg(loc);
+    std::string line;
+    getline(fin, line);
+    std::vector<std::string> record = Helpers::split(line, '|');
+    return parseTo<T>(id);
   }
 };
-//------------------------------------------------------------------------------
+// <-----------------------Static members initialization----------------------->
 std::map<int, int> Load::cliIdx;
 std::map<int, int> Load::empIdx;
 std::map<int, int> Load::admIdx;
 std::string Load::idxFileCli = "db/idx-cli.txt";
 std::string Load::idxFileEmp = "db/idx-emp.txt";
 std::string Load::idxFileAdm = "db/idx-adm.txt";
-//------------------------------------------------------------------------------
+// <--------------------------------------------------------------------------->

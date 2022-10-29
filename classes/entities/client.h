@@ -64,7 +64,7 @@ public:
     std::cout << "Name: " << getName() << std::endl
       << "ID: #" << getID() << std::endl
       // << "Password: " << getPassword() << std::endl
-      << "Balance: $" << CustomMethods::correctView(balance) << std::endl;
+      << "Balance: $" << Helpers::correctView(balance) << std::endl;
   }
 
   /**

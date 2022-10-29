@@ -42,7 +42,7 @@ public:
     std::cout << "Name: " << getName() << std::endl
       // << "password: " << getPassword() << std::endl
       << "ID: #" << getID() << std::endl
-      << "Salary: $" << CustomMethods::correctView(salary) << std::endl;
+      << "Salary: $" << Helpers::correctView(salary) << std::endl;
   }
 
   void addClient(Client &client);

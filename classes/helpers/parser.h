@@ -10,15 +10,6 @@ private:
   static std::string clientFile;
   static std::string employeeFile;
   static std::string adminFile;
-  static std::string correct(const char *name) {
-    std::string output = "";
-    for (int i = 0; i < name[i] != '\0'; i++) {
-      if (name[i] >= '0' && name[i] <= '9')
-        continue;
-      output += name[i];
-    }
-    return output;
-  }
 public:
   template<typename T>
   static T *parseToObsolete(const std::string &id) {
@@ -34,7 +25,7 @@ public:
     std::string record;
     while (ifs.peek() != EOF) {
       getline(ifs, record);
-      std::vector<std::string> vec = CustomMethods::split(record, '|');
+      std::vector<std::string> vec = Helpers::split(record, '|');
       if (vec[0] != id)
         continue;
       T *a = new T(vec[1], vec[2], stod(vec[3]));
@@ -43,7 +34,7 @@ public:
       return a;
     }
     ifs.close();
-    std::string className = correct(typeid(T).name());
+    std::string className = Helpers::cName(typeid(T).name());
     // Employee id #2030 -> doesn't exist
     throw(className + " ID #" + id + " -> doesn't exist.\n");
   }

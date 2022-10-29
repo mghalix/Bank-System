@@ -23,7 +23,7 @@ public:
       throw ("Error opening file\n");
     }
     std::string line; // id|name|password|balance
-    line = std::to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + CustomMethods::correctView(cli.getBalance());
+    line = std::to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + Helpers::correctView(cli.getBalance());
     clientInfo << line << std::endl;
     Load::addIndex<Client>(cli.getID(), loc);
     clientInfo.close();
@@ -36,7 +36,7 @@ public:
     }
     int loc = employeeInfo.tellp();
     std::string line;
-    line = std::to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + CustomMethods::correctView(emp.getSalary());
+    line = std::to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + Helpers::correctView(emp.getSalary());
     employeeInfo << line << std::endl;
     Load::addIndex<Employee>(emp.getID(), loc);
     employeeInfo.close();
@@ -49,7 +49,7 @@ public:
     }
     int loc = adminInfo.tellp();
     std::string line;
-    line = std::to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + CustomMethods::correctView(adm.getSalary());
+    line = std::to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + Helpers::correctView(adm.getSalary());
     adminInfo << line << std::endl;
     Load::addIndex<Admin>(adm.getID(), loc);
     adminInfo.close();
@@ -70,7 +70,7 @@ public:
     while (fin.peek() != EOF) { // End of file
       std::string line;
       getline(fin, line);
-      std::vector<std::string> record = CustomMethods::split(line, '|');
+      std::vector<std::string> record = Helpers::split(line, '|');
       clients.push_back(*Parser::parseToObsolete<Client>(record[0]));
     }
     fin.close();
@@ -181,7 +181,7 @@ void Employee::editClient(int id, std::string name, std::string password, double
   }
   for (int i = 0; i < vec.size(); i++) {
     ofs << std::to_string(vec[i].getID()) << '|' << vec[i].getName() << '|'
-      << vec[i].getPassword() << '|' << CustomMethods::correctView(vec[i].getBalance()) << std::endl;
+      << vec[i].getPassword() << '|' << Helpers::correctView(vec[i].getBalance()) << std::endl;
   }
   ofs.close();
 }
@@ -210,7 +210,7 @@ void Admin::editEmployee(int id, std::string name, std::string password, double 
   }
   for (int i = 0; i < vec.size(); i++) {
     ofs << std::to_string(vec[i].getID()) << '|' << vec[i].getName() << '|'
-      << vec[i].getPassword() << '|' << CustomMethods::correctView(vec[i].getSalary()) << std::endl;
+      << vec[i].getPassword() << '|' << Helpers::correctView(vec[i].getSalary()) << std::endl;
   }
   ofs.close();
 }

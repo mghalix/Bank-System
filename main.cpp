@@ -2,7 +2,6 @@
 #include "classes/managers/file_manager.h"
 #include "classes/dependencies/login.h"
 #include "start/screens.h"
-
 using namespace std;
 
 int main() {
@@ -12,6 +11,8 @@ int main() {
   catch (const char *msg) {
     cerr << msg;
   }
+
+
   // try {
   //   Load::parseTo<Admin>("3")->display();
   // }
@@ -146,5 +147,6 @@ int main() {
   // }
   // Load::loadEntity<Employee>();
   // // Login::load<Client>();
+
   return 0;
 }

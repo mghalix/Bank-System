@@ -2,15 +2,13 @@
 #pragma once
 #include <iostream>
 #include "../entities/admin.h"
+#include "../dependencies/print_entity_menu.h"
 class Options {
 public:
   struct Adm {
     struct Search {
       static void printMenu() {
-        std::cout << "\t\t***** Search *****" << std::endl
-          << "1. Employees" << std::endl
-          << "2. Clients" << std::endl <<
-          "0. Back\n> ";
+        Menus::printMenu('A', 'S');
       }
       static void options(int &choice, Admin &adm) {
         int id;
@@ -59,21 +57,13 @@ public:
 
     struct Edit {
       static void printMenu() {
-        std::cout << "\t\t***** Edit *****" << std::endl
-          << "1. Employees" << std::endl
-          << "2. Clients" << std::endl <<
-          "0. Back\n> ";
-
+        Menus::printMenu('A', 'E');
       }
-
     };
 
     struct List {
       static void printMenu() {
-        std::cout << "\t\t***** List All *****" << std::endl
-          << "1. Employee" << std::endl
-          << "2. Client" << std::endl <<
-          "0. Back\n> ";
+        Menus::printMenu('A', 'L');
       }
       static void options(int &choice, Admin &adm) {
         switch (choice) {
@@ -119,19 +109,13 @@ public:
 
     struct Add {
       static void printMenu() {
-        std::cout << "\t\t***** Add *****" << std::endl
-          << "1. Employee" << std::endl
-          << "2. Client" << std::endl <<
-          "0. Back\n> ";
+        Menus::printMenu('A', 'A');
       }
     };
 
     struct Remove {
       static void printMenu() {
-        std::cout << "\t\t***** Remove *****" << std::endl
-          << "1. Employee" << std::endl
-          << "2. Client" << std::endl <<
-          "0. Back\n> ";
+        Menus::printMenu('A', 'R');
       }
     };
   };
@@ -139,9 +123,7 @@ public:
   struct Emp {
     struct Search {
       static void printMenu() {
-        std::cout << "\t\t***** Search *****" << std::endl
-          << "1. Clients" << std::endl <<
-          "0. Back\n> ";
+        Menus::printMenu('E', 'S');
       }
       static void options(int &choice, Employee &emp) {
         int id;
@@ -174,9 +156,7 @@ public:
     };
     struct List {
       static void printMenu() {
-        std::cout << "\t\t***** List All *****" << std::endl
-          << "1. Clients" << std::endl <<
-          "0. Back\n> ";
+        Menus::printMenu('E', 'L');
       }
       static void options(int &choice, Employee &emp) {
         switch (choice) {
@@ -206,26 +186,20 @@ public:
 
     struct Edit {
       static void printMenu() {
-        std::cout << "\t\t***** Edit *****" << std::endl
-          << "1. Client" << std::endl <<
-          "0. Back\n> ";
+        Menus::printMenu('E', 'E');
       }
     };
 
 
     struct Add {
       static void printMenu() {
-        std::cout << "\t\t***** Add *****" << std::endl
-          << "1. Client" << std::endl <<
-          "0. Back\n> ";
+        Menus::printMenu('E', 'A');
       }
     };
 
     struct Remove {
       static void printMenu() {
-        std::cout << "\t\t***** Remove *****" << std::endl
-          << "1. Client" << std::endl <<
-          "0. Back\n> ";
+        Menus::printMenu('E', 'R');
       }
     };
   };

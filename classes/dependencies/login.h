@@ -28,7 +28,7 @@ private:
     std::string line;
     fin.seekg(idx[id]);
     getline(fin, line);
-    std::vector<std::string> record = CustomMethods::split(line, '|');
+    std::vector<std::string> record = Helpers::split(line, '|');
     fin.close();
     if (record[2] != password || record[0] != std::to_string(id)) {
       throw("User doesn't exist, please try again.\n");

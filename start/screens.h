@@ -9,8 +9,7 @@
 #include "../classes/managers/admin_manager.h"
 #include "../classes/managers/client_manager.h"
 #include "../classes/managers/employee_manager.h"
-
-
+#include "../classes/dependencies/print_entity_menu.h"
 class Screens {
 private:
   static void mainMenu(int &choice); // complete
@@ -27,22 +26,21 @@ public:
 //------------------------------------------------------------------------------
 void Screens::mainMenu(int &choice) {
   system("clear");
-  std::cout << "\t\t***** Welcome to Route Bank *****" << std::endl;
-  std::cout << "1. Login as\n2. About us\n0. Exit\n> ";
+  Menus::printMenu('S', 'M');
   bool notExecuted = true;
   while (notExecuted) {
-    notExecuted = false;
     std::cin >> choice;
+    notExecuted = false;
     switch (choice) {
     case 1:
       system("clear");
       loginAs(choice);
       break;
     case 0:
-      break;
+      return;
     default:
       std::cout << "No such option, please try again.\n";
-      std::cout << "1. Login as\n2. About us\n0. Exit\n> ";
+      std::cout << "1. Login as\n2. About us\nq. Quit\n> ";
       notExecuted = true;
     }
   }
@@ -57,9 +55,7 @@ void Screens::runApp() {
 }
 //------------------------------------------------------------------------------
 void Screens::loginAs(int &choice) {
-  std::cout << "\t\t***** Login Page *****\nAre you a/an:\n"
-    << "1. Admin\n" << "2. Employee\n" << "3. Client\n"
-    << "0. Back\n\n> ";
+  Menus::printMenu('S', 'L');
   int id;
   std::string password;
   // attemps > 5 -> too many attempts, please try again later
@@ -127,14 +123,17 @@ void Screens::loginAs(int &choice) {
         }
       }
       return;
-    case 0:
-      mainMenu(choice);
-      return;
-    default:
-      std::cout << "No such option, please try again.\n" <<
-        "1. Admin\n" << "2. Employee\n" << "3. Client\n"
-        << "0. Back\n\n> ";
-      notExecuted = true;
+      case int('q') :
+        Load::rewriteAll();
+        exit(0);
+      case 0:
+        mainMenu(choice);
+        return;
+      default:
+        std::cout << "No such option, please try again.\n" <<
+          "1. Admin\n" << "2. Employee\n" << "3. Client\n" << "0. Back\n"
+          << "q. Quit\n> ";
+        notExecuted = true;
     }
   } while (notExecuted);
   std::cout << "Too many attempts, please try again later\n";
@@ -142,7 +141,7 @@ void Screens::loginAs(int &choice) {
 //------------------------------------------------------------------------------
 void Screens::admMenu(int &choice) {
   system("clear");
-  AdminManager::printAdminMenu();
+  Menus::printMenu('A', 'M');
   bool notExecuted = true;
   while (notExecuted) {
     std::cin >> choice;
@@ -197,7 +196,7 @@ void Screens::admMenu(int &choice) {
 //------------------------------------------------------------------------------
 void Screens::empMenu(int &choice) {
   system("clear");
-  EmployeeManager::printEmployeeMenu();
+  Menus::printMenu('E', 'M');
   bool notExecuted = true;
   while (notExecuted) {
     std::cin >> choice;
@@ -251,7 +250,7 @@ void Screens::empMenu(int &choice) {
 //------------------------------------------------------------------------------
 void Screens::cliMenu(int &choice) {
   system("clear");
-  ClientManager::printClientMenu();
+  Menus::printMenu('C', 'M');
   bool notExecuted = true;
   while (notExecuted) {
     std::cin >> choice;

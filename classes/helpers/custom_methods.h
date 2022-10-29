@@ -1,10 +1,11 @@
+//------------------------------------------------------------------------------
 #pragma once
 
 #include <iostream>
 #include <vector>
 #include <map>
 
-class CustomMethods {
+class Helpers {
 public:
   // Method to remove trailing zeros
   static std::string correctView(double num) {
@@ -41,7 +42,7 @@ public:
   }
 
   template<typename T>
-  static bool BST(T elem, std::vector<T> vec) {
+  static bool BS(T elem, std::vector<T> vec) {
     int start = 0, end = vec.size() - 1, mid = (start + end) / 2;
     while (start <= end) {
       mid = (start + end) / 2;
@@ -53,4 +54,16 @@ public:
     }
     return false;
   }
+
+  // for removing digits when getting class name
+  static std::string cName(const char *name) {
+    std::string output = "";
+    for (int i = 0; i < name[i] != '\0'; i++) {
+      if (name[i] >= '0' && name[i] <= '9')
+        continue;
+      output += name[i];
+    }
+    return output;
+  }
 };
+//------------------------------------------------------------------------------
