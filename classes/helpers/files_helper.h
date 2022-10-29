@@ -4,6 +4,14 @@
 
 class FilesHelper {
 public:
+  //Attributes
+  static std::string clientFile;
+  static std::string employeeFile;
+  static std::string adminFile;
+  static std::string idxFileCli;
+  static std::string idxFileEmp;
+  static std::string idxFileAdm;
+  // Methods
   static int getLast(std::string fileName) {
     std::ifstream inp(fileName);
     // checking if the file is open
@@ -43,3 +51,11 @@ public:
 
   static void clearFile(std::string fileName);
 };
+//------------------------------------------------------------------------------
+std::string FilesHelper::clientFile = "db/Clients.txt";
+std::string FilesHelper::employeeFile = "db/Employees.txt";
+std::string FilesHelper::adminFile = "db/Admins.txt";
+std::string FilesHelper::idxFileCli = "db/idx-cli.txt";
+std::string FilesHelper::idxFileEmp = "db/idx-emp.txt";
+std::string FilesHelper::idxFileAdm = "db/idx-adm.txt";
+//------------------------------------------------------------------------------

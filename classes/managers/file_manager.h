@@ -8,16 +8,13 @@
 #include "../helpers/files_helper.h"
 #include "../helpers/parser.h"
 #include "../dependencies/load.h"
+#include "../helpers/files_helper.h"
 
 class FileManager : DataSourceInterface {
 public:
-  //Attributes
-  static std::string clientFile;
-  static std::string employeeFile;
-  static std::string adminFile;
   // Write
   void addClient(Client &cli) override {
-    std::ofstream clientInfo(clientFile, std::ios::app); // short for append
+    std::ofstream clientInfo(FilesHelper::clientFile, std::ios::app); // short for append
     int loc = clientInfo.tellp();
     if (clientInfo.fail()) {
       throw ("Error opening file\n");
@@ -30,7 +27,7 @@ public:
   }
 
   void addEmployee(Employee &emp) override {
-    std::ofstream employeeInfo(employeeFile, std::ios::app);
+    std::ofstream employeeInfo(FilesHelper::employeeFile, std::ios::app);
     if (employeeInfo.fail()) {
       throw ("Error opening file\n");
     }
@@ -43,7 +40,7 @@ public:
   }
 
   void addAdmin(Admin &adm) override {
-    std::ofstream adminInfo(adminFile, std::ios::app);
+    std::ofstream adminInfo(FilesHelper::adminFile, std::ios::app);
     if (adminInfo.fail()) {
       throw ("Error opening file\n");
     }
@@ -58,7 +55,7 @@ public:
   // Read
   std::vector<Client> getAllClients() override {
     std::vector<Client> clients;
-    std::ifstream fin(clientFile);
+    std::ifstream fin(FilesHelper::clientFile);
     if (fin.fail()) {
       throw ("Error opening file\n");
     } // Guard Clauses
@@ -80,7 +77,7 @@ public:
 
   std::vector<Employee> getAllEmployees() override {
     std::vector<Employee> employees;
-    std::ifstream fin(employeeFile);
+    std::ifstream fin(FilesHelper::employeeFile);
     if (!fin) {
       throw ("Error opening file\n");
     }
@@ -108,7 +105,7 @@ public:
   }
 
   std::vector<Admin> getAllAdmins() override {
-    std::ifstream fin(adminFile);
+    std::ifstream fin(FilesHelper::adminFile);
     if (fin.fail()) {
       throw ("Error opening file.\n");
     }
@@ -138,24 +135,20 @@ public:
 
   // Delete
   void removeAllClients() override {
-    std::ofstream ofs(clientFile, std::ios::trunc); // truncate
+    std::ofstream ofs(FilesHelper::clientFile, std::ios::trunc); // truncate
     ofs.close();
   }
 
   void removeAllEmployees() override {
-    std::ofstream ofs(employeeFile, std::ios::trunc);
+    std::ofstream ofs(FilesHelper::employeeFile, std::ios::trunc);
     ofs.close();
   }
 
   void removeAllAdmins() override {
-    std::ofstream ofs(adminFile, std::ios::trunc);
+    std::ofstream ofs(FilesHelper::adminFile, std::ios::trunc);
     ofs.close();
   }
 };
-//------------------------------------------------------------------------------
-std::string FileManager::clientFile = "db/Clients.txt";
-std::string FileManager::employeeFile = "db/Employees.txt";
-std::string FileManager::adminFile = "db/Admins.txt";
 //------------------------------------------------------------------------------
 void Employee::editClient(int id, std::string name, std::string password, double balance) {
   std::ofstream ofs;
@@ -175,7 +168,7 @@ void Employee::editClient(int id, std::string name, std::string password, double
     std::cout << "Client not found, please enter correct id\n";
     return;
   }
-  ofs.open("db/Clients.txt");
+  ofs.open(FilesHelper::clientFile);
   if (!ofs) {
     throw("Error opening the file\n");
   }
@@ -204,7 +197,7 @@ void Admin::editEmployee(int id, std::string name, std::string password, double 
     std::cout << "Client not found, please enter correct id\n";
     return;
   }
-  ofs.open("db/Employees.txt");
+  ofs.open(FilesHelper::employeeFile);
   if (!ofs) {
     throw("Error opening the file\n");
   }
@@ -217,9 +210,9 @@ void Admin::editEmployee(int id, std::string name, std::string password, double 
 //------------------------------------------------------------------------------
 void FilesHelper::clearFile(std::string fileName) {
   FileManager fm;
-  if (fileName == "db/Clients.txt") fm.removeAllClients();
-  else if (fileName == "db/Employees.txt") fm.removeAllEmployees();
-  else if (fileName == "db/Admins.txt") fm.removeAllAdmins();
+  if (fileName == clientFile) fm.removeAllClients();
+  else if (fileName == employeeFile) fm.removeAllEmployees();
+  else if (fileName == adminFile) fm.removeAllAdmins();
   else std::cout << "File doesn't exist.\n";
 }
 //------------------------------------------------------------------------------

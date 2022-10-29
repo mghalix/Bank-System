@@ -6,20 +6,16 @@
 #include <fstream>
 
 class Parser {
-private:
-  static std::string clientFile;
-  static std::string employeeFile;
-  static std::string adminFile;
 public:
   template<typename T>
   static T *parseToObsolete(const std::string &id) {
     std::string fileName;
     if (typeid(T) == typeid(Client))
-      fileName = clientFile;
+      fileName = FilesHelper::clientFile;
     else if (typeid(T) == typeid(Employee))
-      fileName = employeeFile;
+      fileName = FilesHelper::employeeFile;
     else if (typeid(T) == typeid(Admin))
-      fileName = adminFile;
+      fileName = FilesHelper::adminFile;
     else throw("No such file to open.\n");
     std::ifstream ifs(fileName, std::ios::in);
     std::string record;
@@ -39,6 +35,3 @@ public:
     throw(className + " ID #" + id + " -> doesn't exist.\n");
   }
 };
-std::string Parser::clientFile = "db/Clients.txt";
-std::string Parser::employeeFile = "db/Employees.txt";
-std::string Parser::adminFile = "db/Admins.txt";

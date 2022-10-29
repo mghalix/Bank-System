@@ -72,6 +72,6 @@ public:
    * so we correct its value based on the last id on the file.
    * @param id
    */
-  static void initID() { id = FilesHelper::getLast("db/Clients.txt"); }
+  static void initID() { id = FilesHelper::getLast(FilesHelper::clientFile); }
 };
 int Client::id = 6990;

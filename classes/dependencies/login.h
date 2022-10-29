@@ -8,10 +8,21 @@ public:
   template<typename T>
   static T *login(const int &id, const std::string &password) {
     if (typeid(T) == typeid(Client))
-      return loginEntity<T>(id, password, "db/Clients.txt", Load::cliIdx);
+      return loginEntity<T>(
+        id,
+        password,
+        FilesHelper::clientFile,
+        Load::cliIdx);
     else if (typeid(T) == typeid(Employee))
-      return loginEntity<T>(id, password, "db/Employees.txt", Load::empIdx);
-    else return loginEntity<T>(id, password, "db/Admins.txt", Load::admIdx);
+      return loginEntity<T>(
+        id,
+        password,
+        FilesHelper::employeeFile,
+        Load::empIdx);
+    else return loginEntity<T>(id,
+      password,
+      FilesHelper::adminFile,
+      Load::admIdx);
     // // TODO: make parseTo method use template
     // static T entity = Parser::parseTo<T>(std::to_string(id));
     throw("No such user in the bank\n");

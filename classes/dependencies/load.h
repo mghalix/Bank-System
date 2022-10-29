@@ -4,7 +4,7 @@
 #include <map>
 #include <fstream>
 #include <string>
-#include "../helpers/custom_methods.h"
+// #include "../helpers/custom_methods.h"
 /* <===================|Indexing|===================> */
 class Load {
 public:
@@ -12,9 +12,6 @@ public:
   static std::map<int, int> cliIdx;
   static std::map<int, int> empIdx;
   static std::map<int, int> admIdx;
-  static std::string idxFileCli;
-  static std::string idxFileEmp;
-  static std::string idxFileAdm;
   // <|---------------------------Methods------------------------------|>
   // enhanced version of parseTo method of Parser class
   template<typename T>
@@ -23,15 +20,15 @@ public:
     std::string fileName;
     if (typeid(T) == typeid(Client)) {
       clone = &cliIdx;
-      fileName = "db/Clients.txt";
+      fileName = FilesHelper::clientFile;
     }
     else if (typeid(T) == typeid(Employee)) {
       clone = &empIdx;
-      fileName = "db/Employees.txt";
+      fileName = FilesHelper::employeeFile;
     }
     else if (typeid(T) == typeid(Admin)) {
       clone = &admIdx;
-      fileName = "db/Admins.txt";
+      fileName = FilesHelper::adminFile;
     }
     else throw("No such file to open.\n");
     if (clone->find(stoi(id)) != clone->end()) {
@@ -62,19 +59,19 @@ public:
     if (typeid(T) == typeid(Client)) {
       for (auto const &cli : cliIdx) {
         std::cout << "***** Client[" << i++ << "] info *****\n";
-        Load::search<Client>(cli.first)->display();
+        search<Client>(cli.first)->display();
       }
     }
     else if (typeid(T) == typeid(Admin)) {
       for (auto const &adm : admIdx) {
         std::cout << "***** Admin[" << i++ << "] info *****\n";
-        Load::search<Admin>(adm.first)->display();
+        search<Admin>(adm.first)->display();
       }
     }
     else if (typeid(T) == typeid(Employee)) {
       for (auto const &emp : empIdx) {
         std::cout << "***** Employee[" << i++ << "] info *****\n";
-        Load::search<Employee>(emp.first)->display();
+        search<Employee>(emp.first)->display();
       }
     }
     else
@@ -98,15 +95,15 @@ public:
   }
   // for index files from the map
   static void rewriteAll() {
-    rewriteIdx(admIdx, idxFileAdm);
-    rewriteIdx(empIdx, idxFileEmp);
-    rewriteIdx(cliIdx, idxFileCli);
+    rewriteIdx(admIdx, FilesHelper::idxFileAdm);
+    rewriteIdx(empIdx, FilesHelper::idxFileEmp);
+    rewriteIdx(cliIdx, FilesHelper::idxFileCli);
   }
   // for loading all entities info from index files to maps
   static void loadAll() {
-    loadIdx(idxFileCli, cliIdx);
-    loadIdx(idxFileAdm, admIdx);
-    loadIdx(idxFileEmp, empIdx);
+    loadIdx(FilesHelper::idxFileCli, cliIdx);
+    loadIdx(FilesHelper::idxFileAdm, admIdx);
+    loadIdx(FilesHelper::idxFileEmp, empIdx);
   }
   // for searching, editing and retrieving an entity info
   template<typename T>
@@ -115,15 +112,15 @@ public:
     static std::map<int, int> *clone;
     if (typeid(T) == typeid(Client)) {
       clone = &cliIdx;
-      idxFile = &idxFileCli;
+      idxFile = &FilesHelper::idxFileCli;
     }
     else if (typeid(T) == typeid(Admin)) {
       clone = &admIdx;
-      idxFile = &idxFileAdm;
+      idxFile = &FilesHelper::idxFileAdm;
     }
     else if (typeid(T) == typeid(Employee)) {
       clone = &empIdx;
-      idxFile = &idxFileEmp;
+      idxFile = &FilesHelper::idxFileEmp;
     }
     else {
       idxFile = NULL;
@@ -148,6 +145,7 @@ public:
     fin.seekg(loc);
     std::string line;
     getline(fin, line);
+    fin.close();
     std::vector<std::string> record = Helpers::split(line, '|');
     clone = NULL;
     delete clone;
@@ -155,6 +153,29 @@ public:
     delete idxFile;
     return parseTo<T>(std::to_string(id));
   }
+  // template<typename T>
+  // static void editEntity(const int &id) {
+  //   static T target;
+  //   static std::string *file;
+  //   if (typeid(T) == typeid(Client)) {
+  //     target = *search<Client>(id);
+  //     file = &FilesHelper::clientFile;
+  //   }
+  //   else if (typeid(T) == typeid(Admin)) {
+  //     target = *search<Admin>(id);
+  //     file = &FilesHelper::adminFile;
+  //   }
+  //   else if (typeid(T) == typeid(Employee)) {
+  //     target = *search<Employee>(id);
+  //     file = &FilesHelper::employeeFile;
+  //   }
+  //   else
+  //     throw("No such type");
+  //   std::ofstream ofs(*file);
+  //   ofs.close();
+  //   target = NULL;
+  //   delete target;
+  // }
   // for testing indexed files (id - loc)
   static void showCliDic() {
     for (auto const &client : cliIdx)
@@ -219,7 +240,4 @@ private:
 std::map<int, int> Load::cliIdx;
 std::map<int, int> Load::empIdx;
 std::map<int, int> Load::admIdx;
-std::string Load::idxFileCli = "db/idx-cli.txt";
-std::string Load::idxFileEmp = "db/idx-emp.txt";
-std::string Load::idxFileAdm = "db/idx-adm.txt";
 // <--------------------------------------------------------------------------->
