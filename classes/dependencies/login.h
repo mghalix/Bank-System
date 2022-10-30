@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------
 #pragma once
 #include <iostream>
+#include <typeinfo>
 #include "../managers/file_manager.h"
 #include "load.h"
 class Login {

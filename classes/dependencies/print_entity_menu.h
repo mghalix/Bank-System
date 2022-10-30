@@ -7,7 +7,7 @@ public:
     case 'S': { // start menu 
       switch (option) {
       case 'M': // main menu
-        // printf("\033[36m");
+        printf("\033[36m");
         std::cout << "\t\t\t\b\b\b\b***** Welcome to Route Bank *****" << std::endl
           << "1. Login as\nQ. Quit\n> ";
         break;
@@ -74,7 +74,7 @@ public:
     case 'E': { // employee
       switch (option) {
       case 'M': { // menu
-        std::cout << "\t\t***** Welcome Employee *****\nWhat do you want to do today?\n1. Search (clients)\n2. List all (clients)\n3. edit (clients)\n4. Add (clients)\n5. Remove (clients)\n0. Back\nQ. Quit\n> ";
+        std::cout << "\t\t***** Welcome Employee *****\nWhat do you want to do today?\n1. Search (Clients)\n2. List all (Clients)\n3. Edit (Clients)\n4. Add (Clients)\n5. Remove (Clients)\n0. Back\nQ. Quit\n> ";
         break;
       }
 

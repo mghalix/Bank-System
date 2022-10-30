@@ -79,7 +79,20 @@
       "ratio": "cpp",
       "semaphore": "cpp",
       "stop_token": "cpp",
-      "thread": "cpp"
+      "thread": "cpp",
+      "charconv": "cpp",
+      "format": "cpp",
+      "forward_list": "cpp",
+      "iomanip": "cpp",
+      "locale": "cpp",
+      "mutex": "cpp",
+      "optional": "cpp",
+      "sstream": "cpp",
+      "xlocbuf": "cpp",
+      "xlocmes": "cpp",
+      "xlocmon": "cpp",
+      "xloctime": "cpp",
+      "xtree": "cpp"
     },
     "explorer.sortOrder": "foldersNestsFiles",
     "files.watcherExclude": {

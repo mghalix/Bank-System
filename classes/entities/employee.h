@@ -16,7 +16,8 @@ public:
   Employee() :Person() {
     salary = 0;
   }
-  Employee(std::string name, std::string password, double salary) : Person(name, password), empID(id += 10) {
+  Employee(std::string name, std::string password, double salary) : Person(name, password), empID(id+=10) {
+    Validation::checkName(name);
     Validation::checkSalary(salary); // min 5000
     this->salary = salary;
   }

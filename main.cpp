@@ -6,12 +6,14 @@
 using namespace std;
 
 int main() {
-  try {
-    Screens::runApp();
-  }
-  catch (const char *msg) {
-    cerr << msg;
-  }
+  Load::loadAll();
+  // Load::rewriteAll();
+  // try {
+  //   Screens::runApp(); 
+  // }
+  // catch (const char *msg) {
+  //   cerr << msg;
+  // }
   // FileManager fm;
   // try {
   //   fm.deleteAnEmployee(2000);
@@ -35,7 +37,7 @@ int main() {
   // }
   // Load::showAdmDic();
 
-  // FileManager fm;
+  FileManager fm;
   // Admin *adm;
   // try {
   //   adm = Login::login<Admin>(2, "12342412412");
@@ -73,18 +75,19 @@ int main() {
   // Load::rewriteAll();
   //------------------------
   /*****Writing into files*****/
-  // Employee emp1("Mohamed", "nourisgay", 56000);
-  // Employee emp2("Menna", "131512312", 7000.54);
-  // fm.addEmployee(emp1);
-  // fm.addEmployee(emp2);
-  // Client cli1("Hassan", "nourisgay", 12314.413);
-  // Client cli2("Hussein", "923812344", 123123);
-  // fm.addClient(cli1);
-  // fm.addClient(cli2);
-  // Admin adm1("Ahmed", "nourisgay", 9000.905);
-  // Admin adm2("Assem", "12342412412", 11000.970);
-  // fm.addAdmin(adm1);
-  // fm.addAdmin(adm2);
+  Employee emp1("Mohamed", "nourisgay", 56000);
+  Employee emp2("Menna", "131512312", 7000.54);
+  fm.addEmployee(emp1);
+  fm.addEmployee(emp2);
+  Client cli1("Hassan", "nourisgay", 12314.413);
+  Client cli2("Hussein", "923812344", 123123);
+  fm.addClient(cli1);
+  fm.addClient(cli2);
+  Admin adm1("Ahmed", "nourisgay", 9000.905);
+  Admin adm2("Assem", "12342412412", 11000.970);
+  fm.addAdmin(adm1);
+  fm.addAdmin(adm2);
+  Load::rewriteAll();
   //------------------------
   /*****Display*****/
   // vector<Employee> emps = fm.getAllEmployees();

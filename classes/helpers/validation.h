@@ -5,7 +5,7 @@ public:
   static void checkName(std::string name) {
     std::string illegal = "1234567890!@#$%^&*()_+-=;:'\"><?/";
     if (std::string::npos != name.find_first_of(illegal))
-      throw("Name error, youg can only use alphabetic characters.\n");
+      throw("Name cannot have numeric digits, and should only consist of alphabetic letters.\n");
     if (name.length() < 5)
       throw("Name is too short!");
     if (name.length() > 20)
@@ -26,6 +26,6 @@ public:
 
   static void checkSalary(double salary) {
     if (salary < 5000)
-      throw("Low salary");
+      throw("Low salary, employee salary must at least be $5000");
   }
 };

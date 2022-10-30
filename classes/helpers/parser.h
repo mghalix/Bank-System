@@ -3,6 +3,7 @@
 #include "../entities/client.h"
 #include "../entities/admin.h"
 #include "../entities/employee.h"
+#include <typeinfo>
 #include <fstream>
 
 class Parser {
