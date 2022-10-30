@@ -140,7 +140,7 @@ public:
       delete clone;
       idxFile = NULL;
       delete idxFile;
-      throw(className + " ID #" + std::to_string(id) + " -> doesn't exist.\n");
+      throw(className + " ID #" + std::to_string(id) + " -> doesn't exist.");
     }
 
     int loc = clone->at(id);
@@ -266,7 +266,7 @@ private:
     }
     std::string line;
     std::vector<std::string> vec;
-    // std::cout << fileName << "\nkey\tloc\n"; 
+    // std::cout << fileName << "\nkey\tloc\n";
     while (fin.peek() != EOF) {
       getline(fin, line);
       vec = Helpers::split(line, '|');

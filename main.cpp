@@ -13,8 +13,14 @@ int main() {
   //   cerr << msg;
   // }
   Load::loadAll();
-  FileManager fm;
-  fm.deleteAClient(7010);
+
+  // FileManager fm;
+  // try {
+  //   fm.deleteAnEmployee(2000);
+  // }
+  // catch (std::string msg) {
+  //   cerr << msg << endl;
+  // }
   // Load::editEntity<Client>(1);
   // try {
   //   Load::parseTo<Admin>("3")->display();
@@ -66,12 +72,11 @@ int main() {
     // cli2.display();
     // fm.addClient(cli1);
     // fm.addClient(cli2);
-  Load::rewriteAll();
+  // Load::rewriteAll();
   //------------------------
   /*****Writing into files*****/
   // Employee emp1("Mohamed", "nourisgay", 56000);
   // Employee emp2("Menna", "131512312", 7000.54);
-  // cout << emp1.getID() << endl;
   // fm.addEmployee(emp1);
   // fm.addEmployee(emp2);
   // Client cli1("Hassan", "nourisgay", 12314.413);
@@ -82,7 +87,7 @@ int main() {
   // Admin adm2("Assem", "12342412412", 11000.970);
   // fm.addAdmin(adm1);
   // fm.addAdmin(adm2);
-  // Load::rewriteAll();
+  Load::rewriteAll();
   //------------------------
   /*****Display*****/
   // vector<Employee> emps = fm.getAllEmployees();

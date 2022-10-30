@@ -149,15 +149,26 @@ public:
     ofs.close();
   }
   static void deleteAClient(const int &id) {
-    // if ( == Load::cliIdx.end())
-      // throw("The client you are trying to delete doesn't exist.");
-    Load::search<Client>(id);
-    std::ofstream ofs;
-    ofs.open(FilesHelper::clientFile);
-    ofs.seekp(Load::cliIdx.at(id));
-    ofs.put('*');
+    Load::search<Client>(id); // to throw an error if not found
+    std::fstream fs(FilesHelper::clientFile, std::fstream::in | std::fstream::out);
+    fs.seekp(Load::cliIdx.at(id));
+    fs.put('*');
     Load::cliIdx.erase(id);
-    ofs.close();
+    fs.close();
+    FileManager fm;
+    if (Load::cliIdx.empty())
+      fm.removeAllClients();
+  }
+  static void deleteAnEmployee(const int &id) {
+    Load::search<Employee>(id); // to throw an error if not found
+    std::fstream fs(FilesHelper::employeeFile, std::fstream::in | std::fstream::out);
+    fs.seekp(Load::empIdx.at(id));
+    fs.put('*');
+    Load::empIdx.erase(id);
+    fs.close();
+    FileManager fm;
+    if (Load::empIdx.empty())
+      fm.removeAllEmployees();
   }
 };
 //------------------------------------------------------------------------------

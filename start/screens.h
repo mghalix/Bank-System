@@ -147,7 +147,7 @@ void Screens::admMenu(char &choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case '1':
+    case '1': //
       system("clear");
       Options::Adm::Search::printMenu();
       std::cin >> choice;

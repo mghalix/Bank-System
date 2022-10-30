@@ -17,19 +17,27 @@ public:
     // checking if the file is open
     if (!inp) {
       inp.close();
-      throw("File doesn't exist.\n");
+      throw("File doesn't exist.");
     }
     inp.seekg(0, std::ios::end);
     // checking if the file is empty after peeking to the end.
-    if (inp.tellg() == 0)
-      throw("File is empty.\n");
+    if (inp.tellg() == 0) {
+      int id;
+      if (fileName == employeeFile)
+        id = 1990;
+      else if (fileName == adminFile)
+        id = 0;
+      else id = 6990;
+      return id;
+    }
     // now that we know that there's at least 1 record, we start to fetch id.
     char stop = ' '; // init stop anything but '\n'
     while (stop != '\n') {
       // we take 2 steps back, meaning we won't check for last character
       inp.seekg(-2, std::ios::cur);
       // in case we have 1 record only
-      if (inp.tellg() <= 0) { // if we passed the start of the file,
+      // if stop is * means that id is deleted so we keep going
+      if (inp.tellg() <= 0 || stop == '*') { // if we passed the start of the file,
         inp.seekg(0);         // get back to the start of the line
         break;
       }
