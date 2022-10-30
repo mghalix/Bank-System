@@ -7,7 +7,7 @@ public:
     case 'S': { // start menu 
       switch (option) {
       case 'M': // main menu
-        printf("\033[36m");
+        // printf("\033[36m");
         std::cout << "\t\t\t\b\b\b\b***** Welcome to Route Bank *****" << std::endl
           << "1. Login as\nQ. Quit\n> ";
         break;

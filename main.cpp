@@ -12,8 +12,6 @@ int main() {
   catch (const char *msg) {
     cerr << msg;
   }
-  Load::loadAll();
-
   // FileManager fm;
   // try {
   //   fm.deleteAnEmployee(2000);
@@ -87,7 +85,6 @@ int main() {
   // Admin adm2("Assem", "12342412412", 11000.970);
   // fm.addAdmin(adm1);
   // fm.addAdmin(adm2);
-  Load::rewriteAll();
   //------------------------
   /*****Display*****/
   // vector<Employee> emps = fm.getAllEmployees();
