@@ -120,7 +120,7 @@ public:
         case '1': // Employee
           system("clear");
           std::cout << "\t\t\t***** Please fill employee's info *****\n";
-        x:
+        z:
           std::cout << "Name: ";
           std::cin >> name;
           std::cout << "Salary: $";
@@ -139,7 +139,7 @@ public:
           catch (const char* msg) {
             std::cerr << "-------------\n" << msg;
             std::cout << " please try again\n-------------\n";
-            goto x;
+            goto z;
           }
           // std::cout << "------\nSelect another option\n> ";
           throw(-1);
@@ -147,8 +147,32 @@ public:
           // options(choice, adm);
           break;
         case '2': // Client
+          system("clear");
+          std::cout << "\t\t\t***** Please fill client's info *****\n";
+        x:
+          std::cout << "Name: ";
+          std::cin >> name;
+          std::cout << "Salary: $";
+          std::cin >> salary;
+          std::cout << "Password: ";
+          std::cin >> password;
+          try {
+            Client cli(name, password, salary);
+            std::cout << "Employee with name " << name << " and id #" << cli.getID() << " has been added succesfuly\n";
+            adm.addClient(cli);
+            std::cout << "Enter any key to continue\n";
+            std::cin.ignore(200, '\n');
+            std::cin.get();
+            // thread second(1)
+          }
+          catch (const char* msg) {
+            std::cerr << "-------------\n" << msg;
+            std::cout << " please try again\n-------------\n";
+            goto x;
+          }
+          throw(-1);
           break;
-        case '3':
+        case '0':
           throw(-1);
         default:
           std::cout << "No such option, please try again\n> ";
@@ -262,7 +286,6 @@ public:
           options(choice, emp);
         }
       }
-
     };
     struct List {
       static void printMenu() {
@@ -304,6 +327,45 @@ public:
     struct Add {
       static void printMenu() {
         Menus::printMenu('E', 'A');
+      }
+      static void options(char& choice, Employee& emp) {
+        double salary;
+        std::string name, password;
+        FileManager fm;
+        switch (choice) {
+        case '1': // Client
+          system("clear");
+          std::cout << "\t\t\t***** Please fill client's info *****\n";
+        x:
+          std::cout << "Name: ";
+          std::cin >> name;
+          std::cout << "Salary: $";
+          std::cin >> salary;
+          std::cout << "Password: ";
+          std::cin >> password;
+          try {
+            Client cli(name, password, salary);
+            std::cout << "Employee with name " << name << " and id #" << cli.getID() << " has been added succesfuly\n";
+            emp.addClient(cli);
+            std::cout << "Enter any key to continue\n";
+            std::cin.ignore(200, '\n');
+            std::cin.get();
+            // thread second(1)
+          }
+          catch (const char* msg) {
+            std::cerr << "-------------\n" << msg;
+            std::cout << " please try again\n-------------\n";
+            goto x;
+          }
+          throw(-1);
+          break;
+        case '0':
+          throw(-1);
+        default:
+          std::cout << "No such option, please try again\n> ";
+          std::cin >> choice;
+          options(choice, emp);
+        }
       }
     };
 

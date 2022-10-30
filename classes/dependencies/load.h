@@ -102,9 +102,9 @@ public:
   }
   // for loading all entities info from index files to maps
   static void loadAll() {
-    Admin::initID();
-    Employee::initID();
-    Client::initID();
+    // Admin::initID();
+    // Employee::initID();
+    // Client::initID();
     loadIdx(FilesHelper::idxFileCli, cliIdx);
     loadIdx(FilesHelper::idxFileAdm, admIdx);
     loadIdx(FilesHelper::idxFileEmp, empIdx);

@@ -16,8 +16,8 @@ class Screens {
 private:
   static void mainMenu(char& choice); // complete
   static void loginAs(char& choice); // complete
-  static void admMenu(char& choice); // complete (4/6)
-  static void empMenu(char& choice); // complete (4/6)
+  static void admMenu(char& choice); // complete (5/6)
+  static void empMenu(char& choice); // complete (5/6)
   static void cliMenu(char& choice); // complete (6/6)
   static Admin adm;
   static Client cli;
@@ -68,7 +68,7 @@ void Screens::loginAs(char& choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case '1':
+    case '1': // Admin
       while (attempts < 5) {
         std::cout << "Enter admin id: ";
         std::cin >> id;
@@ -87,7 +87,7 @@ void Screens::loginAs(char& choice) {
         }
       }
       return;
-    case '2':
+    case '2': // Employee
       while (attempts < 5) {
         std::cout << "Enter employee id: ";
         std::cin >> id;
@@ -106,7 +106,7 @@ void Screens::loginAs(char& choice) {
         }
       }
       return;
-    case '3':
+    case '3': // Client
       while (attempts < 5) {
         try {
           std::cout << "Enter client id: ";
@@ -125,10 +125,10 @@ void Screens::loginAs(char& choice) {
         }
       }
       return;
-    case 'q': case 'Q':
+    case 'q': case 'Q': // Quit
       Load::rewriteAll();
       exit(0);
-    case '0':
+    case '0': // Back
       mainMenu(choice);
       return;
     default:
@@ -180,6 +180,7 @@ void Screens::admMenu(char& choice) {
       }
       break;
     case '3': // Edit
+      
       break;
     case '4': // Add
       system("clear");
@@ -227,7 +228,7 @@ void Screens::empMenu(char& choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case '1':
+    case '1': // Search
       system("clear");
       Options::Emp::Search::printMenu();
       std::cin >> choice;
@@ -241,7 +242,7 @@ void Screens::empMenu(char& choice) {
       catch (const char* msg) {
         std::cerr << msg << std::endl;
       }
-    case '2':
+    case '2': // List All
       system("clear");
       Options::Emp::List::printMenu();
       std::cin >> choice;
@@ -256,26 +257,36 @@ void Screens::empMenu(char& choice) {
         std::cerr << msg << std::endl;
       }
       break;
-    case '3':
+    case '3': // Edit
       break;
-    case '4':
-      break;
-    case '5':
+    case '4': // Add
       system("clear");
-      Menus::printMenu('E', 'R');
+      Menus::printMenu('E', 'A');
       try {
         std::cin >> choice;
-        Options::Emp::Remove::options(choice, emp);
+        Options::Emp::Add::options(choice, adm);
       }
       catch (int x) {
         if (x == -1)
           empMenu(choice);
       }
       break;
-    case 'q': case 'Q':
+    case '5': // Remove
+      system("clear");
+      Menus::printMenu('E', 'R');
+      try {
+        std::cin >> choice;
+        Options::Emp::Remove::options(choice, adm);
+      }
+      catch (int x) {
+        if (x == -1)
+          empMenu(choice);
+      }
+      break;
+    case 'q': case 'Q': // Quit
       Load::rewriteAll();
       exit(0);
-    case '0':
+    case '0': // Back
       system("clear");
       loginAs(choice);
       break;
@@ -294,7 +305,7 @@ void Screens::cliMenu(char& choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case '1':
+    case '1': // View Balance
       system("clear");
       std::cout << "\t\t\t***** Balance *****\n";
       cli.checkBalance();
@@ -309,16 +320,18 @@ void Screens::cliMenu(char& choice) {
         }
       }
       break;
-    case '2':
+    case '2': // Deposit
       system("clear");
       Options::Cli::Deposit::printMenu();
       try {
         int amount;
         std::cin >> amount;
         cli.deposit(amount);
+        emp.editClient(cli.getID(), cli.getName(), cli.getPassword(), cli.getBalance());
         std::cout << "Deposit Successful\n0. Back\n> ";
         std::cin >> choice;
         Options::Cli::Deposit::options(choice, cli);
+
       }
       catch (int x) {
         if (x == -1) {
@@ -326,20 +339,22 @@ void Screens::cliMenu(char& choice) {
         }
       }
       break;
-    case '3':
+    case '3': // Withdraw
       system("clear");
-      Options::Cli::Withdraw::printMenu();
       try {
         int amount;
         bool notExecuted = true;
+        Options::Cli::Withdraw::printMenu();
         while (notExecuted) {
           try {
             notExecuted = false;
             std::cin >> amount;
             cli.withdraw(amount);
+            emp.editClient(cli.getID(), cli.getName(), cli.getPassword(), cli.getBalance());
           }
           catch (const char* msg) {
-            std::cerr << msg << std::endl;
+            std::cerr << msg << " please try again\n";
+            std::cout << "Enter an amount: $";
             notExecuted = true;
           }
         }
@@ -353,7 +368,7 @@ void Screens::cliMenu(char& choice) {
         }
       }
       break;
-    case '4':
+    case '4': // Transfer
     x:
       system("clear");
       Options::Cli::Transfer::printMenu();
@@ -368,7 +383,10 @@ void Screens::cliMenu(char& choice) {
             std::cout << "Enter the recipient id: #";
             std::cin >> id;
             // TODO: disallow transferring to self.
-            cli.transferTo(amount, *Load::search<Client>(id));
+            Client cli2 = *Load::search<Client>(id); // 133123
+            cli.transferTo(amount, cli2); // 133123 - amount
+            emp.editClient(cli.getID(), cli.getName(), cli.getPassword(), cli.getBalance());
+            emp.editClient(cli2.getID(), cli2.getName(), cli2.getPassword(), cli2.getBalance());
           }
           catch (const char* msg) {
             char err;
@@ -390,7 +408,6 @@ void Screens::cliMenu(char& choice) {
                 notExecuted2 = true;
               }
             }
-
           }
           catch (std::string msg) {
             char err;
@@ -423,10 +440,10 @@ void Screens::cliMenu(char& choice) {
         }
       }
       break;
-    case 'q': case 'Q':
+    case 'q': case 'Q': // Quit
       Load::rewriteAll();
       exit(0);
-    case '0':
+    case '0': // Back
       system("clear");
       loginAs(choice);
       break;

@@ -34,10 +34,10 @@ public:
     char stop = ' '; // init stop anything but '\n'
     while (stop != '\n') {
       // we take 2 steps back, meaning we won't check for last character
-      inp.seekg(-2, std::ios::cur);
+      inp.seekg(-2, inp.cur);
       // in case we have 1 record only
       // if stop is * means that id is deleted so we keep going
-      if (inp.tellg() <= 0 || stop == '*') { // if we passed the start of the file,
+      if (int(inp.tellg()) <= 0 || stop == '*') { // if we passed the start of the file,
         inp.seekg(0);         // get back to the start of the line
         break;
       }
@@ -45,9 +45,12 @@ public:
     }
     std::string strID;
     // store the first part of the record until the first delimiter is met
-    getline(inp, strID, '|'); // inside of strID
+    getline(inp, strID);
+    std::cout << strID << std::endl;
+    // getline(inp, strID, '|'); // inside of strID
     inp.close();
-    return stoi(strID);
+    return 200;
+    // return stoi(strID);
   }
 
   // the implementation of the functions below is at file_manager.h file

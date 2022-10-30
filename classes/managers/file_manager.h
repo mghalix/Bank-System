@@ -15,6 +15,7 @@ public:
   // Write
   void addClient(Client &cli) override {
     std::ofstream clientInfo(FilesHelper::clientFile, std::ios::app); // short for append
+    clientInfo.seekp(0, clientInfo.end);
     int loc = clientInfo.tellp();
     if (clientInfo.fail()) {
       throw ("Error opening file\n");
@@ -31,6 +32,7 @@ public:
     if (employeeInfo.fail()) {
       throw ("Error opening file\n");
     }
+    employeeInfo.seekp(0, employeeInfo.end);
     int loc = employeeInfo.tellp();
     std::string line;
     line = std::to_string(emp.getID()) + '|' + emp.getName() + '|' + emp.getPassword() + '|' + Helpers::correctView(emp.getSalary());
@@ -44,6 +46,7 @@ public:
     if (adminInfo.fail()) {
       throw ("Error opening file\n");
     }
+    adminInfo.seekp(0, adminInfo.end);
     int loc = adminInfo.tellp();
     std::string line;
     line = std::to_string(adm.getID()) + '|' + adm.getName() + '|' + adm.getPassword() + '|' + Helpers::correctView(adm.getSalary());
@@ -172,7 +175,7 @@ public:
   }
 };
 //------------------------------------------------------------------------------
-void Employee::editClient(int id, std::string name, std::string password, double balance) {
+void Employee::editClient(const int &id, const std::string &name, const std::string &password, const double &balance) {
   std::ofstream ofs;
   FileManager fm;
   std::vector<Client> vec = fm.getAllClients();
@@ -190,7 +193,7 @@ void Employee::editClient(int id, std::string name, std::string password, double
     std::cout << "Client not found, please enter correct id\n";
     return;
   }
-  ofs.open(FilesHelper::clientFile);
+  ofs.open(FilesHelper::clientFile, std::ios_base::trunc);
   if (!ofs) {
     throw("Error opening the file\n");
   }

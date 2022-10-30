@@ -16,7 +16,7 @@ public:
   Employee() :Person() {
     salary = 0;
   }
-  Employee(std::string name, std::string password, double salary) : Person(name, password), empID(id+=10) {
+  Employee(std::string name, std::string password, double salary) : Person(name, password), empID(id += 10) {
     Validation::checkName(name);
     Validation::checkSalary(salary); // min 5000
     this->salary = salary;
@@ -48,12 +48,12 @@ public:
       << "Salary: $" << Helpers::correctView(salary) << std::endl;
   }
 
-  void addClient(Client &client);
+  void addClient(Client& client);
 
   void listClient();
 
-  Client *searchClient(int id);
+  Client* searchClient(int id);
 
-  void editClient(int id, std::string name, std::string password, double balance);
+  void editClient(const int& id, const std::string& name, const std::string& password, const double& balance);
 };
 int Employee::id = 1990;
