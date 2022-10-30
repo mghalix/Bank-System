@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main() { // edit indexing
+int main() {
   try {
     Screens::runApp(); 
   }
