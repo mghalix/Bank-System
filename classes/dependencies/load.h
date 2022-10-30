@@ -57,19 +57,19 @@ public:
   static void showEvery() {
     int i = 1;
     if (typeid(T) == typeid(Client)) {
-      for (auto const &cli : cliIdx) {
+      for (std::pair<int, int> const &cli : cliIdx) {
         std::cout << "***** Client[" << i++ << "] info *****\n";
         search<Client>(cli.first)->display();
       }
     }
     else if (typeid(T) == typeid(Admin)) {
-      for (auto const &adm : admIdx) {
+      for (std::pair<int, int> const &adm : admIdx) {
         std::cout << "***** Admin[" << i++ << "] info *****\n";
         search<Admin>(adm.first)->display();
       }
     }
     else if (typeid(T) == typeid(Employee)) {
-      for (auto const &emp : empIdx) {
+      for (std::pair<int, int> const &emp : empIdx) {
         std::cout << "***** Employee[" << i++ << "] info *****\n";
         search<Employee>(emp.first)->display();
       }
@@ -101,6 +101,9 @@ public:
   }
   // for loading all entities info from index files to maps
   static void loadAll() {
+    Admin::initID();
+    Employee::initID();
+    Client::initID();
     loadIdx(FilesHelper::idxFileCli, cliIdx);
     loadIdx(FilesHelper::idxFileAdm, admIdx);
     loadIdx(FilesHelper::idxFileEmp, empIdx);
@@ -153,6 +156,47 @@ public:
     delete idxFile;
     return parseTo<T>(std::to_string(id));
   }
+  template<typename T>
+  static int getLocation(const int &id) {
+    static std::string *idxFile;
+    static std::map<int, int> *clone;
+    if (typeid(T) == typeid(Client)) {
+      clone = &cliIdx;
+      idxFile = &FilesHelper::idxFileCli;
+    }
+    else if (typeid(T) == typeid(Admin)) {
+      clone = &admIdx;
+      idxFile = &FilesHelper::idxFileAdm;
+    }
+    else if (typeid(T) == typeid(Employee)) {
+      clone = &empIdx;
+      idxFile = &FilesHelper::idxFileEmp;
+    }
+    else {
+      idxFile = NULL;
+      delete idxFile;
+      clone = NULL;
+      delete clone;
+      throw("No such type");
+
+    }
+    std::vector<int> keys = Helpers::toArray(*clone);
+    std::string className = Helpers::cName(typeid(T).name());
+    if (!Helpers::BS(id, keys)) {
+      clone = NULL;
+      delete clone;
+      idxFile = NULL;
+      delete idxFile;
+      throw(className + " ID #" + std::to_string(id) + " -> doesn't exist.\n");
+    }
+
+    int loc = clone->at(id);
+    clone = NULL;
+    delete clone;
+    idxFile = NULL;
+    delete idxFile;
+    return loc;
+  }
   // template<typename T>
   // static void editEntity(const int &id) {
   //   static T *target;
@@ -181,19 +225,23 @@ public:
   // }
   // for testing indexed files (id - loc)
   static void showCliDic() {
-    for (auto const &client : cliIdx)
+    for (std::pair<int, int> const &client : cliIdx)
       std::cout << client.first << '|' << client.second << std::endl;
   }
   static void showEmpDic() {
-    for (auto const &employee : empIdx)
+    for (std::pair<int, int> const &employee : empIdx)
       std::cout << employee.first << '|' << employee.second << std::endl;
   }
   static void showAdmDic() {
-    for (auto const &admin : admIdx)
+    for (std::pair<int, int> const &admin : admIdx)
       std::cout << admin.first << '|' << admin.second << std::endl;
   }
   // <|----------------------------public end---------------------------------|>
 private:
+  // |>--------------------------Attributes----------------------------<|
+  std::ifstream fin;
+  std::ofstream ofs;
+  // |>-------------------------Constructor----------------------------<|
   // private ctor for restricting object creation
   Load() {}
   // |>---------------------------Methods------------------------------<|
@@ -202,7 +250,7 @@ private:
     ofs.seekp(0, std::ios::beg);
     int loc = 0;
     std::string line;
-    for (auto record : mp) {
+    for (std::pair<int, int> const &record : mp) {
       line = std::to_string(record.first) + '|' + std::to_string(record.second);
       ofs << line << std::endl;
     }
@@ -218,10 +266,12 @@ private:
     }
     std::string line;
     std::vector<std::string> vec;
+    // std::cout << fileName << "\nkey\tloc\n"; 
     while (fin.peek() != EOF) {
       getline(fin, line);
       vec = Helpers::split(line, '|');
       mp.insert(std::pair<int, int>(stoi(vec[0]), stoi(vec[1])));
+      // std::cout << vec[0] << '\t' << vec[1] << '\n';
     }
     fin.close();
   }

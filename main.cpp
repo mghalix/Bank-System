@@ -6,13 +6,15 @@
 using namespace std;
 
 int main() {
-  try {
-    Screens::runApp();
-  }
-  catch (const char *msg) {
-    cerr << msg;
-  }
-  // Load::loadAll();
+  // try {
+  //   Screens::runApp();
+  // }
+  // catch (const char *msg) {
+  //   cerr << msg;
+  // }
+  Load::loadAll();
+  FileManager fm;
+  fm.deleteAClient(7010);
   // Load::editEntity<Client>(1);
   // try {
   //   Load::parseTo<Admin>("3")->display();
@@ -40,32 +42,31 @@ int main() {
 
   //TODO: transfer the inits to runApp when phase3 comes.
   //=====================//
-  // Admin::initID();
-  // Employee::initID();
-  // Client::initID();
+
   //====================//
   /*****init test*****/
-// //----Admins
-  // Admin a("nonnah", "1234567890", 90302.50);
-  // a.display();
-  // Admin a2("lollah", "123123123", 75000.304);
-  // a2.display();
-  // fm.addAdmin(a);
-  // fm.addAdmin(a2);
-  //----Employees
-  // Employee emp1("Mohamed", "121312351", 56000);
-  // Employee emp2("Menna", "131512312", 7000.54);
-  // emp1.display();
-  // emp2.display();
-  // // fm.addEmployee(emp1);
-  // // fm.addEmployee(emp2);
-//----Clients
-  // Client cli1("Hassan", "9786412495", 12314.413);
-  // Client cli2("Hussein", "923812344", 123123);
-  // cli1.display();
-  // cli2.display();
-  // // fm.addClient(cli1);
-  // // fm.addClient(cli2);
+  // //----Admins
+    // Admin a("nonnah", "1234567890", 90302.50);
+    // a.display();
+    // Admin a2("lollah", "123123123", 75000.304);
+    // a2.display();
+    // fm.addAdmin(a);
+    // fm.addAdmin(a2);
+    //----Employees
+    // Employee emp1("Mohamed", "121312351", 56000);
+    // Employee emp2("Menna", "131512312", 7000.54);
+    // emp1.display();
+    // emp2.display();
+    // // fm.addEmployee(emp1);
+    // // fm.addEmployee(emp2);
+  //----Clients
+    // Client cli1("Hassan", "9786412495", 12314.413);
+    // Client cli2("ahmedawy", "123124123", 99999);
+    // cli1.display();
+    // cli2.display();
+    // fm.addClient(cli1);
+    // fm.addClient(cli2);
+  Load::rewriteAll();
   //------------------------
   /*****Writing into files*****/
   // Employee emp1("Mohamed", "nourisgay", 56000);

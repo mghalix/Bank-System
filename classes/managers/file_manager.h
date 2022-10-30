@@ -148,6 +148,17 @@ public:
     std::ofstream ofs(FilesHelper::adminFile, std::ios::trunc);
     ofs.close();
   }
+  static void deleteAClient(const int &id) {
+    // if ( == Load::cliIdx.end())
+      // throw("The client you are trying to delete doesn't exist.");
+    Load::search<Client>(id);
+    std::ofstream ofs;
+    ofs.open(FilesHelper::clientFile);
+    ofs.seekp(Load::cliIdx.at(id));
+    ofs.put('*');
+    Load::cliIdx.erase(id);
+    ofs.close();
+  }
 };
 //------------------------------------------------------------------------------
 void Employee::editClient(int id, std::string name, std::string password, double balance) {
