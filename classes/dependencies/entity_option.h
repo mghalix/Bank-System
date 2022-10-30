@@ -4,23 +4,31 @@
 #include "../entities/admin.h"
 #include "../entities/client.h"
 #include "../dependencies/print_entity_menu.h"
-class Options {
+class Options
+{
 public:
-  struct Adm {
-    struct Search {
-      static void printMenu() {
+  struct Adm
+  {
+    struct Search
+    {
+      static void printMenu()
+      {
         Menus::printMenu('A', 'S');
       }
-      static void options(char& choice, Admin& adm) {
+      static void options(char &choice, Admin &adm)
+      {
         int id;
-        switch (choice) {
+        switch (choice)
+        {
         case '1':
           optEntity(id, "Employee");
           std::cout << "------\n";
-          try {
+          try
+          {
             adm.searchEmployee(id)->display();
           }
-          catch (std::string msg) {
+          catch (std::string msg)
+          {
             std::cerr << msg;
             std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
@@ -33,10 +41,12 @@ public:
         case '2':
           optEntity(id, "Client");
           std::cout << "------\n";
-          try {
+          try
+          {
             adm.searchClient(id)->display();
           }
-          catch (std::string msg) {
+          catch (std::string msg)
+          {
             std::cerr << msg;
             std::cout << "------\n> ";
             std::cin >> choice;
@@ -56,23 +66,110 @@ public:
       }
     };
 
-    struct Edit {
-      static void printMenu() {
+    struct Edit
+    {
+      static void printMenu()
+      {
         Menus::printMenu('A', 'E');
+      }
+      static void options(char &choice, Admin &adm)
+      {
+        int id;
+        std::string name, password;
+        double salary;
+        switch (choice)
+        {
+        case '1': // Employee
+          std::cout << "Enter employee id: #";
+          std::cin >> id;
+          try
+          {
+            Employee *target = adm.searchEmployee(id);
+            target->display();
+            std::cout << "Employee found, what do you want to edit?\n";
+            std::cout << "1. Name\n2. Password\n3. Salary\n0. Back\n> ";
+            std::cin >> choice;
+          }
+          catch(std:: string e){}
+          switch (choice)
+          {
+          case '1':
+            std::cout << "New Name: ";
+            std::cin >> name;
+            try
+            {
+              target->setName(name);
+            }
+            catch (const char *e)
+            {
+              std::cerr << e << '\n';
+            }
+            break;
+          case '2':
+            std::cout << "New Password: ";
+            std::cin >> password;
+            try
+            {
+              target->setPassword(password);
+            }
+            catch (const char *e)
+            {
+              std::cerr << e << '\n';
+            }
+            break;
+          case '3':
+            std::cout << "New Salary: ";
+            std::cin >> salary;
+            try
+            {
+              target->setSalary(salary);
+            }
+            catch (const char *e)
+            {
+              std::cerr << e << '\n';
+            }
+            break;
+          case '0':
+            throw(-1);
+            break;
+          default:
+            std::cout << "No such option, please try again\n> ";
+            std::cin >> choice;
+            options(choice, adm);
+          }
+        case '2': // Client
+          std::cout << "\t\t\t***** Edit client *****\n";
+
+          break;
+        case '0': // Back
+          throw(-1);
+          break;
+        default:
+          std::cout << "No such option, please try again\n> ";
+          std::cin >> choice;
+          options(choice, adm);
+          break;
+        }
       }
     };
 
-    struct List {
-      static void printMenu() {
+    struct List
+    {
+      static void printMenu()
+      {
         Menus::printMenu('A', 'L');
       }
-      static void options(char& choice, Admin& adm) {
-        switch (choice) {
+      static void options(char &choice, Admin &adm)
+      {
+        switch (choice)
+        {
         case '1':
-          try {
+          try
+          {
             adm.listEmployee();
           }
-          catch (std::string msg) {
+          catch (std::string msg)
+          {
             std::cerr << msg;
             std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
@@ -84,10 +181,12 @@ public:
           break;
         case '2':
           std::cout << "------\n";
-          try {
+          try
+          {
             adm.listClient();
           }
-          catch (std::string msg) {
+          catch (std::string msg)
+          {
             std::cerr << msg;
             std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
@@ -107,16 +206,19 @@ public:
       }
     };
 
-
-    struct Add {
-      static void printMenu() {
+    struct Add
+    {
+      static void printMenu()
+      {
         Menus::printMenu('A', 'A');
       }
-      static void options(char& choice, Admin& adm) {
+      static void options(char &choice, Admin &adm)
+      {
         double salary;
         std::string name, password;
         FileManager fm;
-        switch (choice) {
+        switch (choice)
+        {
         case '1': // Employee
           system("clear");
           std::cout << "\t\t\t***** Please fill employee's info *****\n";
@@ -127,7 +229,8 @@ public:
           std::cin >> salary;
           std::cout << "Password: ";
           std::cin >> password;
-          try {
+          try
+          {
             Employee emp(name, password, salary);
             std::cout << "Employee with name " << name << " and id #" << emp.getID() << " has been added succesfuly\n";
             adm.addEmployee(emp);
@@ -136,8 +239,10 @@ public:
             std::cin.get();
             // thread second(1)
           }
-          catch (const char* msg) {
-            std::cerr << "-------------\n" << msg;
+          catch (const char *msg)
+          {
+            std::cerr << "-------------\n"
+                      << msg;
             std::cout << " please try again\n-------------\n";
             goto z;
           }
@@ -156,7 +261,8 @@ public:
           std::cin >> salary;
           std::cout << "Password: ";
           std::cin >> password;
-          try {
+          try
+          {
             Client cli(name, password, salary);
             std::cout << "Employee with name " << name << " and id #" << cli.getID() << " has been added succesfuly\n";
             adm.addClient(cli);
@@ -165,8 +271,10 @@ public:
             std::cin.get();
             // thread second(1)
           }
-          catch (const char* msg) {
-            std::cerr << "-------------\n" << msg;
+          catch (const char *msg)
+          {
+            std::cerr << "-------------\n"
+                      << msg;
             std::cout << " please try again\n-------------\n";
             goto x;
           }
@@ -182,22 +290,28 @@ public:
       }
     };
 
-    struct Remove {
-      static void printMenu() {
+    struct Remove
+    {
+      static void printMenu()
+      {
         Menus::printMenu('A', 'R');
       }
-      static void options(char& choice, Admin& adm) {
+      static void options(char &choice, Admin &adm)
+      {
         std::cin.ignore(200, '\n');
         int id;
         char rev;
-        switch (choice) {
+        switch (choice)
+        {
         case '1': // Employee
           std::cout << "Enter the Employee id: #";
           std::cin >> id;
-          try {
+          try
+          {
             adm.searchEmployee(id)->display();
           }
-          catch (std::string msg) {
+          catch (std::string msg)
+          {
             std::cerr << msg;
             std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
@@ -205,13 +319,15 @@ public:
           }
           std::cout << "Are you sure you want to remove? (Y/n)\n> ";
           std::cin >> rev;
-          if (toupper(rev) == 'Y') {
+          if (toupper(rev) == 'Y')
+          {
             // FileManager::deleteAnEmployee(id);
             std::cout << "Removed successfully!\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, adm);
           }
-          else if (tolower(rev) == 'n') {
+          else if (tolower(rev) == 'n')
+          {
             std::cout << "Select another option\n> ";
             std::cin >> choice;
             options(choice, adm);
@@ -220,10 +336,12 @@ public:
         case '2': // Client
           std::cout << "Enter the Client id: #";
           std::cin >> id;
-          try {
+          try
+          {
             adm.searchClient(id)->display();
           }
-          catch (std::string msg) {
+          catch (std::string msg)
+          {
             std::cerr << msg;
             std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
@@ -231,13 +349,15 @@ public:
           }
           std::cout << "Are you sure you want to remove? (Y/n)\n> ";
           std::cin >> rev;
-          if (toupper(rev) == 'Y') {
-            //FileManager::deleteAClient(id);
+          if (toupper(rev) == 'Y')
+          {
+            // FileManager::deleteAClient(id);
             std::cout << "Removed successfully!\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, adm);
           }
-          else if (tolower(rev) == 'n') {
+          else if (tolower(rev) == 'n')
+          {
             std::cout << "Select another option\n> ";
             std::cin >> choice;
             options(choice, adm);
@@ -254,21 +374,28 @@ public:
     };
   };
 
-  struct Emp {
-    struct Search {
-      static void printMenu() {
+  struct Emp
+  {
+    struct Search
+    {
+      static void printMenu()
+      {
         Menus::printMenu('E', 'S');
       }
-      static void options(char& choice, Employee& emp) {
+      static void options(char &choice, Employee &emp)
+      {
         int id;
-        switch (choice) {
+        switch (choice)
+        {
         case '1':
           optEntity(id, "Client");
           std::cout << "------\n";
-          try {
+          try
+          {
             emp.searchClient(id)->display();
           }
-          catch (std::string msg) {
+          catch (std::string msg)
+          {
             std::cerr << msg;
             std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
@@ -287,17 +414,23 @@ public:
         }
       }
     };
-    struct List {
-      static void printMenu() {
+    struct List
+    {
+      static void printMenu()
+      {
         Menus::printMenu('E', 'L');
       }
-      static void options(char& choice, Employee& emp) {
-        switch (choice) {
+      static void options(char &choice, Employee &emp)
+      {
+        switch (choice)
+        {
         case '1':
-          try {
+          try
+          {
             emp.listClient();
           }
-          catch (std::string msg) {
+          catch (std::string msg)
+          {
             std::cerr << msg;
             std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
@@ -317,22 +450,27 @@ public:
       }
     };
 
-    struct Edit {
-      static void printMenu() {
+    struct Edit
+    {
+      static void printMenu()
+      {
         Menus::printMenu('E', 'E');
       }
     };
 
-
-    struct Add {
-      static void printMenu() {
+    struct Add
+    {
+      static void printMenu()
+      {
         Menus::printMenu('E', 'A');
       }
-      static void options(char& choice, Employee& emp) {
+      static void options(char &choice, Employee &emp)
+      {
         double salary;
         std::string name, password;
         FileManager fm;
-        switch (choice) {
+        switch (choice)
+        {
         case '1': // Client
           system("clear");
           std::cout << "\t\t\t***** Please fill client's info *****\n";
@@ -343,7 +481,8 @@ public:
           std::cin >> salary;
           std::cout << "Password: ";
           std::cin >> password;
-          try {
+          try
+          {
             Client cli(name, password, salary);
             std::cout << "Employee with name " << name << " and id #" << cli.getID() << " has been added succesfuly\n";
             emp.addClient(cli);
@@ -352,8 +491,10 @@ public:
             std::cin.get();
             // thread second(1)
           }
-          catch (const char* msg) {
-            std::cerr << "-------------\n" << msg;
+          catch (const char *msg)
+          {
+            std::cerr << "-------------\n"
+                      << msg;
             std::cout << " please try again\n-------------\n";
             goto x;
           }
@@ -369,22 +510,28 @@ public:
       }
     };
 
-    struct Remove {
-      static void printMenu() {
+    struct Remove
+    {
+      static void printMenu()
+      {
         Menus::printMenu('E', 'R');
       }
-      static void options(char& choice, Employee& emp) {
+      static void options(char &choice, Employee &emp)
+      {
         std::cin.ignore(200, '\n');
         int id;
         char rev;
-        switch (choice) {
+        switch (choice)
+        {
         case '1': // Client
           std::cout << "Enter the Client id: #";
           std::cin >> id;
-          try {
+          try
+          {
             emp.searchClient(id)->display();
           }
-          catch (std::string msg) {
+          catch (std::string msg)
+          {
             std::cerr << msg;
             std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
@@ -392,13 +539,15 @@ public:
           }
           std::cout << "Are you sure you want to remove? (Y/n)\n> ";
           std::cin >> rev;
-          if (toupper(rev) == 'Y') {
+          if (toupper(rev) == 'Y')
+          {
             FileManager::deleteAClient(id);
             std::cout << "Removed successfully!\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, emp);
           }
-          else if (tolower(rev) == 'n') {
+          else if (tolower(rev) == 'n')
+          {
             std::cout << "Select another option\n> ";
             std::cin >> choice;
             options(choice, emp);
@@ -414,29 +563,38 @@ public:
       }
     };
   };
-  struct Cli {
-    struct Balance {
-      static void printMenu() {
+  struct Cli
+  {
+    struct Balance
+    {
+      static void printMenu()
+      {
         Menus::printMenu('C', 'B');
       }
-      static void options(char& choice, Client& cli) {
+      static void options(char &choice, Client &cli)
+      {
         if (choice == '0')
           throw(-1);
-        else {
+        else
+        {
           std::cout << "No such option, please try again\n> ";
           std::cin >> choice;
           options(choice, cli);
         }
       };
     };
-    struct Deposit {
-      static void printMenu() {
+    struct Deposit
+    {
+      static void printMenu()
+      {
         Menus::printMenu('C', 'D');
       }
-      static void options(char& choice, Client& cli) {
+      static void options(char &choice, Client &cli)
+      {
         if (choice == '0')
           throw(-1);
-        else {
+        else
+        {
           std::cout << "No such option, please try again\n> ";
           std::cin >> choice;
           options(choice, cli);
@@ -444,14 +602,18 @@ public:
       }
     };
 
-    struct Withdraw {
-      static void printMenu() {
+    struct Withdraw
+    {
+      static void printMenu()
+      {
         Menus::printMenu('C', 'W');
       }
-      static void options(char& choice, Client& cli) {
+      static void options(char &choice, Client &cli)
+      {
         if (choice == '0')
           throw(-1);
-        else {
+        else
+        {
           std::cout << "No such option, please try again\n> ";
           std::cin >> choice;
           options(choice, cli);
@@ -459,14 +621,18 @@ public:
       }
     };
 
-    struct Transfer {
-      static void printMenu() {
+    struct Transfer
+    {
+      static void printMenu()
+      {
         Menus::printMenu('C', 'T');
       }
-      static void options(char& choice, Client& cli) {
+      static void options(char &choice, Client &cli)
+      {
         if (choice == '0')
           throw(-1);
-        else {
+        else
+        {
           std::cout << "No such option, please try again\n> ";
           std::cin >> choice;
           options(choice, cli);
@@ -476,7 +642,8 @@ public:
   };
 
 private:
-  static void optEntity(int& id, std::string entity) {
+  static void optEntity(int &id, std::string entity)
+  {
     std::cout << "Search for an " << entity << " by id : #";
     std::cin >> id;
   }

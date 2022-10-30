@@ -180,7 +180,10 @@ void Screens::admMenu(char& choice) {
       }
       break;
     case '3': // Edit
-      
+      system("clear");
+      Options::Adm::Edit::printMenu();
+      std::cin >> choice;
+      Options::Adm::Edit::options(choice, adm);
       break;
     case '4': // Add
       system("clear");
