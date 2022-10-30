@@ -16,7 +16,7 @@ private:
   static void loginAs(char &choice); // complete
   static void admMenu(char &choice); // complete (3/6)
   static void empMenu(char &choice); // complete (3/6)
-  static void cliMenu(char &choice); // complete (1/6)
+  static void cliMenu(char &choice); // complete (6/6)
   static Admin adm;
   static Client cli;
   static Employee emp;
@@ -311,7 +311,7 @@ void Screens::cliMenu(char &choice) {
             notExecuted = true;
           }
         }
-        std::cout << "Withdraw Succesfull\n0. Back\n> ";
+        std::cout << "Withdraw Successful\n0. Back\n> ";
         std::cin >> choice;
         Options::Cli::Deposit::options(choice, cli);
       }
