@@ -22,11 +22,11 @@ public:
           }
           catch (std::string msg) {
             std::cerr << msg;
-            std::cout << "------\n> ";
+            std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, adm);
           }
-          std::cout << "------\n> ";
+          std::cout << "------\nSelect another option\n> ";
           std::cin >> choice;
           options(choice, adm);
           break;
@@ -74,11 +74,11 @@ public:
           }
           catch (std::string msg) {
             std::cerr << msg;
-            std::cout << "------\n> ";
+            std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, adm);
           }
-          std::cout << "------\n> ";
+          std::cout << "------\nSelect another option\n> ";
           std::cin >> choice;
           options(choice, adm);
           break;
@@ -89,11 +89,11 @@ public:
           }
           catch (std::string msg) {
             std::cerr << msg;
-            std::cout << "------\n> ";
+            std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, adm);
           }
-          std::cout << "------\n> ";
+          std::cout << "------\nSelect another option\n> ";
           std::cin >> choice;
           options(choice, adm);
           break;
@@ -118,6 +118,19 @@ public:
       static void printMenu() {
         Menus::printMenu('A', 'R');
       }
+      static void options(char &choice, Admin &adm) {
+        std::cin >> choice;
+        switch (choice) {
+        case '1': // Employee
+          break;
+        case '2': // Client
+          break;
+        case '0': // Back
+          throw(-1);
+        default:
+          std::cout << "No such option, please try again\n> ";
+        }
+      }
     };
   };
 
@@ -137,11 +150,11 @@ public:
           }
           catch (std::string msg) {
             std::cerr << msg;
-            std::cout << "------\n> ";
+            std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, emp);
           }
-          std::cout << "------\n> ";
+          std::cout << "------\nSelect another option\n> ";
           std::cin >> choice;
           options(choice, emp);
           break;
@@ -167,11 +180,11 @@ public:
           }
           catch (std::string msg) {
             std::cerr << msg;
-            std::cout << "------\n> ";
+            std::cout << "\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, emp);
           }
-          std::cout << "------\n> ";
+          std::cout << "------\nSelect another option\n> ";
           std::cin >> choice;
           options(choice, emp);
           break;

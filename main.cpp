@@ -6,12 +6,12 @@
 using namespace std;
 
 int main() {
-  // try {
-  //   Screens::runApp();
-  // }
-  // catch (const char *msg) {
-  //   cerr << msg;
-  // }
+  try {
+    Screens::runApp();
+  }
+  catch (const char *msg) {
+    cerr << msg;
+  }
   Load::loadAll();
 
   // FileManager fm;

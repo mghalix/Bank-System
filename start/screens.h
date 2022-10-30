@@ -147,7 +147,7 @@ void Screens::admMenu(char &choice) {
     std::cin >> choice;
     notExecuted = false;
     switch (choice) {
-    case '1': //
+    case '1': // Search
       system("clear");
       Options::Adm::Search::printMenu();
       std::cin >> choice;
@@ -162,7 +162,7 @@ void Screens::admMenu(char &choice) {
         std::cerr << msg << std::endl;
       }
       break;
-    case '2':
+    case '2': // List All
       system("clear");
       Options::Adm::List::printMenu();
       std::cin >> choice;
@@ -177,16 +177,24 @@ void Screens::admMenu(char &choice) {
         std::cerr << msg << std::endl;
       }
       break;
-    case '3':
+    case '3': // Edit
       break;
-    case '4':
+    case '4': // Add
       break;
-    case '5':
+    case '5': // Remove
+      Menus::printMenu('A', 'R');
+      try {
+        Options::Adm::Remove::options(choice, adm);
+      }
+      catch (int x) {
+        if (x == -1)
+          admMenu(choice);
+      }
       break;
-    case 'q': case 'Q':
+    case 'q': case 'Q': // Quit
       Load::rewriteAll();
       exit(0);
-    case '0':
+    case '0': // Back
       system("clear");
       loginAs(choice);
       break;
