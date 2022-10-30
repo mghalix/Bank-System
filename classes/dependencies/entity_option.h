@@ -2,6 +2,7 @@
 #pragma once
 #include <iostream>
 #include "../entities/admin.h"
+#include "../entities/client.h"
 #include "../dependencies/print_entity_menu.h"
 class Options {
 public:
@@ -45,9 +46,6 @@ public:
           std::cin >> choice;
           options(choice, adm);
           break;
-        case 'q': case 'Q':
-          Load::rewriteAll();
-          exit(0);
         case '0':
           throw(-1);
         default:
@@ -99,9 +97,6 @@ public:
           std::cin >> choice;
           options(choice, adm);
           break;
-        case 'q': case 'Q':
-          Load::rewriteAll();
-          exit(0);
         case '0':
           throw(-1);
         default:
@@ -150,9 +145,6 @@ public:
           std::cin >> choice;
           options(choice, emp);
           break;
-        case 'q': case 'Q':
-          Load::rewriteAll();
-          exit(0);
         case '0':
           throw(-1);
         default:
@@ -183,9 +175,6 @@ public:
           std::cin >> choice;
           options(choice, emp);
           break;
-        case 'q': case 'Q':
-          Load::rewriteAll();
-          exit(0);
         case '0':
           throw(-1);
         default:
@@ -217,28 +206,63 @@ public:
   };
 
 
-  struct Client {
+  struct Cli {
     struct Balance {
       static void printMenu() {
-
+        Menus::printMenu('C', 'B');
       }
+      static void options(char &choice, Client &cli) {
+        if (choice == '0')
+          throw(-1);
+        else {
+          std::cout << "No such option, please try again\n> ";
+          std::cin >> choice;
+          options(choice, cli);
+        }
+      };
     };
-
     struct Deposit {
       static void printMenu() {
-
+        Menus::printMenu('C', 'D');
+      }
+      static void options(char &choice, Client &cli) {
+        if (choice == '0')
+          throw(-1);
+        else {
+          std::cout << "No such option, please try again\n> ";
+          std::cin >> choice;
+          options(choice, cli);
+        }
       }
     };
 
     struct Withdraw {
       static void printMenu() {
-
+        Menus::printMenu('C', 'W');
+      }
+      static void options(char &choice, Client &cli) {
+        if (choice == '0')
+          throw(-1);
+        else {
+          std::cout << "No such option, please try again\n> ";
+          std::cin >> choice;
+          options(choice, cli);
+        }
       }
     };
 
     struct Transfer {
       static void printMenu() {
-
+        Menus::printMenu('C', 'T');
+      }
+      static void options(char &choice, Client &cli) {
+        if (choice == '0')
+          throw(-1);
+        else {
+          std::cout << "No such option, please try again\n> ";
+          std::cin >> choice;
+          options(choice, cli);
+        }
       }
     };
   };

@@ -57,7 +57,7 @@ public:
   }
 
   void checkBalance() {
-    std::cout << "Your balance: " << balance;
+    std::cout << "Your balance: $" << balance;
   }
 
   void display() override {

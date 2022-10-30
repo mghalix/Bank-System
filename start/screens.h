@@ -263,15 +263,137 @@ void Screens::cliMenu(char &choice) {
     notExecuted = false;
     switch (choice) {
     case '1':
+      system("clear");
+      std::cout << "\t\t\t***** Balance *****\n";
+      cli.checkBalance();
+      Options::Cli::Balance::printMenu();
+      try {
+        std::cin >> choice;
+        Options::Cli::Balance::options(choice, cli);
+      }
+      catch (int x) {
+        if (x == -1) {
+          cliMenu(choice);
+        }
+      }
       break;
     case '2':
+      system("clear");
+      Options::Cli::Deposit::printMenu();
+      try {
+        int amount;
+        std::cin >> amount;
+        cli.deposit(amount);
+        std::cout << "Deposit Successful\n0. Back\n> ";
+        std::cin >> choice;
+        Options::Cli::Deposit::options(choice, cli);
+      }
+      catch (int x) {
+        if (x == -1) {
+          cliMenu(choice);
+        }
+      }
       break;
     case '3':
+      system("clear");
+      Options::Cli::Withdraw::printMenu();
+      try {
+        int amount;
+        bool notExecuted = true;
+        while (notExecuted) {
+          try {
+            notExecuted = false;
+            std::cin >> amount;
+            cli.withdraw(amount);
+          }
+          catch (const char *msg) {
+            std::cerr << msg << std::endl;
+            notExecuted = true;
+          }
+        }
+        std::cout << "Withdraw Succesfull\n0. Back\n> ";
+        std::cin >> choice;
+        Options::Cli::Deposit::options(choice, cli);
+      }
+      catch (int x) {
+        if (x == -1) {
+          cliMenu(choice);
+        }
+      }
       break;
     case '4':
+    x:
+      system("clear");
+      Options::Cli::Transfer::printMenu();
+      try {
+        double amount;
+        int id;
+        bool notExecuted = true;
+        while (notExecuted) {
+          try {
+            notExecuted = false;
+            std::cin >> amount;
+            std::cout << "Enter the recipient id: #";
+            std::cin >> id;
+            // TODO: disallow transferring to self.
+            cli.transferTo(amount, *Load::search<Client>(id));
+          }
+          catch (const char *msg) {
+            char err;
+            std::cerr << msg << std::endl;
+            notExecuted = true;
+            bool notExecuted2 = true;
+            while (notExecuted2) {
+              notExecuted2 = false;
+              std::cout << "do you want to try again (Y/n)?";
+              std::cin >> err;
+              if (toupper(err) == 'Y') {
+                goto x;
+              }
+              else if (tolower(err) == 'n')
+                cliMenu(choice);
+              else {
+                std::cout << "No such option, please try again\n> ";
+                std::cin >> err;
+                notExecuted2 = true;
+              }
+            }
+
+          }
+          catch (std::string msg) {
+            char err;
+            std::cerr << msg << std::endl;
+            notExecuted = true;
+            bool notExecuted2 = true;
+            while (notExecuted2) {
+              notExecuted2 = false;
+              std::cout << "do you want to try again (Y/n)?";
+              std::cin >> err;
+              if (toupper(err) == 'Y')
+                goto x;
+              else if (tolower(err) == 'n')
+                cliMenu(choice);
+              else {
+                std::cout << "No such option, please try again\n> ";
+                std::cin >> err;
+                notExecuted2 = true;
+              }
+            }
+          }
+        }
+        std::cout << "\n0. Back\n> ";
+        std::cin >> choice;
+        Options::Cli::Transfer::options(choice, cli);
+      }
+      catch (int x) {
+        if (x == -1) {
+          cliMenu(choice);
+        }
+      }
       break;
-    case '5':
-      break;
+    case 'q': case 'Q':
+      Load::rewriteAll();
+      exit(0);
     case '0':
       system("clear");
       loginAs(choice);
@@ -286,3 +408,4 @@ void Screens::cliMenu(char &choice) {
 Admin Screens::adm;
 Employee Screens::emp;
 Client Screens::cli;
+//------------------------------------------------------------------------------

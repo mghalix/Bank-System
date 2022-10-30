@@ -31,7 +31,7 @@ public:
         std::cout << "\t\t\t***** Search *****" << std::endl
           << "1. Employees" << std::endl
           << "2. Clients" << std::endl <<
-          "0. Back\nQ. Quit\n> ";
+          "0. Back\n> ";
         break;
       }
 
@@ -39,7 +39,7 @@ public:
         std::cout << "\t\t***** List All *****" << std::endl
           << "1. Employee" << std::endl
           << "2. Client" << std::endl <<
-          "0. Back\nQ. Quit\n> ";
+          "0. Back\n> ";
         break;
       }
 
@@ -47,7 +47,7 @@ public:
         std::cout << "\t\t***** Edit *****" << std::endl
           << "1. Employees" << std::endl
           << "2. Clients" << std::endl <<
-          "0. Back\nQ. Quit\n> ";
+          "0. Back\n> ";
         break;
       }
 
@@ -55,7 +55,7 @@ public:
         std::cout << "\t\t***** Add *****" << std::endl
           << "1. Employee" << std::endl
           << "2. Client" << std::endl <<
-          "0. Back\nQ. Quit\n> ";
+          "0. Back\n> ";
         break;
       }
 
@@ -63,7 +63,7 @@ public:
         std::cout << "\t\t***** Remove *****" << std::endl
           << "1. Employee" << std::endl
           << "2. Client" << std::endl <<
-          "0. Back\nQ. Quit\n> ";
+          "0. Back\n> ";
         break;
       }
 
@@ -81,21 +81,21 @@ public:
       case 'S': { // search
         std::cout << "\t\t\t***** Search *****" << std::endl
           << "1. Clients" << std::endl <<
-          "0. Back\nQ. Quit\n> ";
+          "0. Back\n> ";
         break;
       }
 
       case 'L': { // list all
         std::cout << "\t\t***** List All *****" << std::endl
           << "1. Clients" << std::endl <<
-          "0. Back\nQ. Quit\n> ";
+          "0. Back\n> ";
         break;
       }
 
       case 'E': { // edit
         std::cout << "\t\t***** Edit *****" << std::endl
           << "1. Client" << std::endl <<
-          "0. Back\nQ. Quit\n> ";
+          "0. Back\n> ";
         break;
       }
 
@@ -120,15 +120,19 @@ public:
     case 'C': { // client
       switch (option) {
       case 'M': // menu
-        std::cout << "\t\t***** Welcome Client *****\nWhat do you want to do today?\n1. View Balance\n2. Deposit\n3. Withdraw\n4. Transfer\n0. Back\n> ";
+        std::cout << "\t\t***** Welcome Client *****\nWhat do you want to do today?\n1. View Balance\n2. Deposit\n3. Withdraw\n4. Transfer\n0. Back\nQ. Quit\n> ";
         break;
       case 'B': // balance
+        std::cout << "\n0. Back\n> ";
         break;
       case 'D': // deposit
+        std::cout << "\t\t\t***** Deposit *****\nEnter an amount: $";
         break;
       case 'W': // withdraw
+        std::cout << "\t\t\t***** Withdraw *****\nEnter an amount: $";
         break;
       case 'T': // transfer
+        std::cout << "\t\t\t***** Transfer *****\nEnter an amount: $";
         break;
       } // end of option(of client) switch
       break;
