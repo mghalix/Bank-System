@@ -298,7 +298,7 @@ void Screens::empMenu(char& choice) {
       }
       catch (int x) {
         if (x == -1)
-          admMenu(choice);
+          empMenu(choice);
       }
       catch (const char* msg) {
         std::cerr << msg << std::endl;

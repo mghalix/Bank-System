@@ -6,6 +6,9 @@
 using namespace std;
 
 int main() {
+  // ifstream fin(FilesHelper::adminFile);
+  // Admin::initID();
+  // FilesHelper::getLast(FilesHelper::employeeFile);
   try {
     Screens::runApp(); 
   }
