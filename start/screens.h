@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <typeinfo>
-#include <windows.h>
+#include <string>
 #include <iostream>
 #include "../classes/dependencies/login.h"
 #include "../classes/dependencies/entity_option.h"
@@ -16,8 +16,8 @@ class Screens {
 private:
   static void mainMenu(char& choice); // complete
   static void loginAs(char& choice); // complete
-  static void admMenu(char& choice); // complete (5/6)
-  static void empMenu(char& choice); // complete (5/6)
+  static void admMenu(char& choice); // complete (6/6)
+  static void empMenu(char& choice); // complete (6/6)
   static void cliMenu(char& choice); // complete (6/6)
   static Admin adm;
   static Client cli;
@@ -42,7 +42,7 @@ void Screens::mainMenu(char& choice) {
       return;
     default:
       std::cout << "No such option, please try again.\n";
-      std::cout << "1. Login as\n2. About us\nq. Quit\n> ";
+      std::cout << "1. Login as\nq. Quit\n> ";
       notExecuted = true;
     }
   }
@@ -58,7 +58,7 @@ void Screens::runApp() {
 //------------------------------------------------------------------------------
 void Screens::loginAs(char& choice) {
   Menus::printMenu('S', 'L');
-  int id;
+  std::string id;
   std::string password;
   // attemps > 5 -> too many attempts, please try again later
   bool notExecuted = true;
@@ -70,12 +70,22 @@ void Screens::loginAs(char& choice) {
     switch (choice) {
     case '1': // Admin
       while (attempts < 5) {
-        std::cout << "Enter admin id: ";
-        std::cin >> id;
+        while (true) {
+          std::cout << "Enter admin id: ";
+          std::cin >> id;
+          try {
+            stoi(id);
+            break;
+          }
+          catch (std::exception e) {
+            std::cout << "ID must be numeric digits only, please try again\n";
+            continue;
+          }
+        }
         std::cout << "Enter admin password: ";
         std::cin >> password;
         try {
-          adm = *Login::login<Admin>(id, password);
+          adm = *Login::login<Admin>(stoi(id), password);
           // std::chrono::seconds dura(1);
           // std::this_thread::sleep_for(std::chrono::seconds(1));
           admMenu(choice);
@@ -86,17 +96,27 @@ void Screens::loginAs(char& choice) {
           attempts++;
         }
       }
-      return;
+      break;
     case '2': // Employee
       while (attempts < 5) {
-        std::cout << "Enter employee id: ";
-        std::cin >> id;
+        while (true) {
+          std::cout << "Enter employee id: ";
+          std::cin >> id;
+          try {
+            stoi(id);
+            break;
+          }
+          catch (std::exception e) {
+            std::cout << "ID must be numeric digits only, please try again\n";
+            continue;
+          }
+        }
         std::cout << "Enter employee password: ";
         std::cin >> password;
-        emp = *Login::login<Employee>(id, password);
         // std::chrono::seconds dura(1);
         // std::this_thread::sleep_for(std::chrono::seconds(1));
         try {
+          emp = *Login::login<Employee>(stoi(id), password);
           empMenu(choice);
           break;
         }
@@ -105,15 +125,25 @@ void Screens::loginAs(char& choice) {
           attempts++;
         }
       }
-      return;
+      break;
     case '3': // Client
       while (attempts < 5) {
-        try {
+        while (true) {
           std::cout << "Enter client id: ";
           std::cin >> id;
-          std::cout << "Enter client password: ";
-          std::cin >> password;
-          cli = *Login::login<Client>(id, password);
+          try {
+            stoi(id);
+            break;
+          }
+          catch (std::exception e) {
+            std::cout << "ID must be numeric digits only, please try again\n";
+            continue;
+          }
+        }
+        std::cout << "Enter client password: ";
+        std::cin >> password;
+        try {
+          cli = *Login::login<Client>(stoi(id), password);
           // std::chrono::seconds dura(1);
           // std::this_thread::sleep_for(std::chrono::seconds(1));
           cliMenu(choice);
@@ -124,13 +154,12 @@ void Screens::loginAs(char& choice) {
           attempts++;
         }
       }
-      return;
+      break;
     case 'q': case 'Q': // Quit
       Load::rewriteAll();
       exit(0);
     case '0': // Back
       mainMenu(choice);
-      return;
     default:
       std::cout << "No such option, please try again.\n" <<
         "1. Admin\n" << "2. Employee\n" << "3. Client\n" << "0. Back\n"
@@ -138,7 +167,11 @@ void Screens::loginAs(char& choice) {
       notExecuted = true;
     }
   } while (notExecuted);
-  std::cout << "Too many attempts, please try again later\n";
+  std::cout << "Too many attempts, press any key to try again\n";
+  std::cin.ignore(200, '\n');
+  std::cin.get();
+  system("clear");
+  loginAs(choice);
 }
 //------------------------------------------------------------------------------
 void Screens::admMenu(char& choice) {
@@ -180,10 +213,21 @@ void Screens::admMenu(char& choice) {
       }
       break;
     case '3': // Edit
-      system("clear");
-      Options::Adm::Edit::printMenu();
-      std::cin >> choice;
-      Options::Adm::Edit::options(choice, adm);
+      while (true) {
+        system("clear");
+        Options::Adm::Edit::printMenu();
+        std::cin >> choice;
+        try {
+          Options::Adm::Edit::options(choice, adm);
+          break;
+        }
+        catch (int x) {
+          if (x == -1)
+            admMenu(choice);
+          if (x == -2)
+            continue;
+        }
+      }
       break;
     case '4': // Add
       system("clear");
@@ -261,6 +305,21 @@ void Screens::empMenu(char& choice) {
       }
       break;
     case '3': // Edit
+      while (true) {
+        system("clear");
+        Options::Emp::Edit::printMenu();
+        std::cin >> choice;
+        try {
+          Options::Emp::Edit::options(choice, emp);
+          break;
+        }
+        catch (int x) {
+          if (x == -1)
+            empMenu(choice);
+          if (x == -2)
+            continue;
+        }
+      }
       break;
     case '4': // Add
       system("clear");

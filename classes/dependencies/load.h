@@ -248,8 +248,6 @@ private:
   // |>---------------------------Methods------------------------------<|
   static void rewriteIdx(const std::map<int, int> mp, const std::string &idxFile) {
     std::ofstream ofs(idxFile, std::ios::trunc);
-    ofs.seekp(0, std::ios::beg);
-    int loc = 0;
     std::string line;
     for (std::pair<int, int> const &record : mp) {
       line = std::to_string(record.first) + '|' + std::to_string(record.second);

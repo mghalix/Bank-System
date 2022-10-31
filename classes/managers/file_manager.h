@@ -13,13 +13,13 @@
 class FileManager : DataSourceInterface {
 public:
   // Write
-  void addClient(Client &cli) override {
+  void addClient(Client& cli) override {
     std::ofstream clientInfo(FilesHelper::clientFile, std::ios::app); // short for append
-    clientInfo.seekp(0, clientInfo.end);
-    int loc = clientInfo.tellp();
     if (clientInfo.fail()) {
       throw ("Error opening file\n");
     }
+    clientInfo.seekp(0, clientInfo.end);
+    int loc = clientInfo.tellp();
     std::string line; // id|name|password|balance
     line = std::to_string(cli.getID()) + '|' + cli.getName() + '|' + cli.getPassword() + '|' + Helpers::correctView(cli.getBalance());
     clientInfo << line << std::endl;
@@ -27,7 +27,7 @@ public:
     clientInfo.close();
   }
 
-  void addEmployee(Employee &emp) override {
+  void addEmployee(Employee& emp) override {
     std::ofstream employeeInfo(FilesHelper::employeeFile, std::ios::app);
     if (employeeInfo.fail()) {
       throw ("Error opening file\n");
@@ -41,7 +41,7 @@ public:
     employeeInfo.close();
   }
 
-  void addAdmin(Admin &adm) override {
+  void addAdmin(Admin& adm) override {
     std::ofstream adminInfo(FilesHelper::adminFile, std::ios::app);
     if (adminInfo.fail()) {
       throw ("Error opening file\n");
@@ -151,7 +151,7 @@ public:
     std::ofstream ofs(FilesHelper::adminFile, std::ios::trunc);
     ofs.close();
   }
-  static void deleteAClient(const int &id) {
+  static void deleteAClient(const int& id) {
     Load::search<Client>(id); // to throw an error if not found
     std::fstream fs(FilesHelper::clientFile, std::fstream::in | std::fstream::out);
     fs.seekp(Load::cliIdx.at(id));
@@ -162,7 +162,7 @@ public:
     if (Load::cliIdx.empty())
       fm.removeAllClients();
   }
-  static void deleteAnEmployee(const int &id) {
+  static void deleteAnEmployee(const int& id) {
     Load::search<Employee>(id); // to throw an error if not found
     std::fstream fs(FilesHelper::employeeFile, std::fstream::in | std::fstream::out);
     fs.seekp(Load::empIdx.at(id));
@@ -175,11 +175,12 @@ public:
   }
 };
 //------------------------------------------------------------------------------
-void Employee::editClient(const int &id, const std::string &name, const std::string &password, const double &balance) {
+void Employee::editClient(const int& id, const std::string& name, const std::string& password, const double& balance) {
   std::ofstream ofs;
   FileManager fm;
   std::vector<Client> vec = fm.getAllClients();
   bool found = false;
+
   for (int i = 0; i < vec.size(); i++) {
     if (vec[i].getID() == id) {
       vec[i].setName(name);
@@ -198,8 +199,11 @@ void Employee::editClient(const int &id, const std::string &name, const std::str
     throw("Error opening the file\n");
   }
   for (int i = 0; i < vec.size(); i++) {
-    ofs << std::to_string(vec[i].getID()) << '|' << vec[i].getName() << '|'
-      << vec[i].getPassword() << '|' << Helpers::correctView(vec[i].getBalance()) << std::endl;
+    int loc = ofs.tellp();
+    Load::cliIdx[vec[i].getID()] = loc;
+    std::string line = std::to_string(vec[i].getID()) + '|' + vec[i].getName() + '|'
+      + vec[i].getPassword() + '|' + Helpers::correctView(vec[i].getBalance());
+    ofs << line << std::endl;
   }
   ofs.close();
 }
@@ -219,7 +223,7 @@ void Admin::editEmployee(int id, std::string name, std::string password, double 
     }
   }
   if (!found) {
-    std::cout << "Client not found, please enter correct id\n";
+    std::cout << "Employee not found, please enter correct id\n";
     return;
   }
   ofs.open(FilesHelper::employeeFile);
@@ -227,8 +231,11 @@ void Admin::editEmployee(int id, std::string name, std::string password, double 
     throw("Error opening the file\n");
   }
   for (int i = 0; i < vec.size(); i++) {
-    ofs << std::to_string(vec[i].getID()) << '|' << vec[i].getName() << '|'
-      << vec[i].getPassword() << '|' << Helpers::correctView(vec[i].getSalary()) << std::endl;
+    int loc = ofs.tellp();
+    Load::empIdx[vec[i].getID()] = loc;
+    std::string line = std::to_string(vec[i].getID()) + '|' + vec[i].getName() + '|'
+      + vec[i].getPassword() + '|' + Helpers::correctView(vec[i].getSalary());
+    ofs << line << std::endl;
   }
   ofs.close();
 }
@@ -269,7 +276,7 @@ void FilesHelper::showAdmins() {
   }
 }
 //------------------------------------------------------------------------------
-void Employee::addClient(Client &client) {
+void Employee::addClient(Client& client) {
   FileManager fm;
   fm.addClient(client);
 }
@@ -279,13 +286,13 @@ void Employee::listClient() {
   Load::showEvery<Client>();
 }
 //------------------------------------------------------------------------------
-Client *Employee::searchClient(int id) {
+Client* Employee::searchClient(int id) {
   // Client *c = Parser::parseTo<Client>(std::to_string(id));
-  Client *c = Load::search<Client>(id);
+  Client* c = Load::search<Client>(id);
   return c;
 }
 //------------------------------------------------------------------------------
-void Admin::addEmployee(Employee &employee) {
+void Admin::addEmployee(Employee& employee) {
   FileManager fm;
   fm.addEmployee(employee);
 }
@@ -295,15 +302,15 @@ void Admin::listEmployee() {
   Load::showEvery<Employee>();
 }
 //------------------------------------------------------------------------------
-Employee *Admin::searchEmployee(const int &id) {
+Employee* Admin::searchEmployee(const int& id) {
   // Employee *e = Parser::parseTo<Employee>(std::to_string(id));
-  Employee *e = Load::search<Employee>(id);
+  Employee* e = Load::search<Employee>(id);
   return e;
 }
 //------------------------------------------------------------------------------
-Client *Admin::searchClient(const int &id) {
+Client* Admin::searchClient(const int& id) {
   // Client *e = Parser::parseTo<Client>(std::to_string(id));
-  Client *c = Load::search<Client>(id);
+  Client* c = Load::search<Client>(id);
   return c;
 }
 //------------------------------------------------------------------------------

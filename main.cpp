@@ -11,7 +11,8 @@ int main() {
   }
   catch (const char *msg) {
     cerr << msg;
-  }
+  }  
+
   // FileManager fm;
   // try {
   //   fm.deleteAnEmployee(2000);
@@ -46,33 +47,36 @@ int main() {
 
   //TODO: transfer the inits to runApp when phase3 comes.
   //=====================//
-
+// FileManager fm;
   //====================//
   /*****init test*****/
   // //----Admins
-    // Admin a("nonnah", "1234567890", 90302.50);
-    // a.display();
-    // Admin a2("lollah", "123123123", 75000.304);
-    // a2.display();
-    // fm.addAdmin(a);
-    // fm.addAdmin(a2);
-    //----Employees
-    // Employee emp1("Mohamed", "121312351", 56000);
-    // Employee emp2("Menna", "131512312", 7000.54);
-    // emp1.display();
-    // emp2.display();
-    // // fm.addEmployee(emp1);
-    // // fm.addEmployee(emp2);
-  //----Clients
-    // Client cli1("Hassan", "9786412495", 12314.413);
-    // Client cli2("ahmedawy", "123124123", 99999);
-    // cli1.display();
-    // cli2.display();
-    // fm.addClient(cli1);
-    // fm.addClient(cli2);
+  //   Admin a("nonnah", "1234567890", 90302.50);
+  //   // a.display();
+  //   Admin a2("lollah", "123123123", 75000.304);
+  //   // a2.display();
+  //   fm.addAdmin(a);
+  //   fm.addAdmin(a2);
+  //   // ----Employees
+  //   Employee emp1("Mohamed", "121312351", 56000);
+  //   Employee emp2("Menna", "131512312", 7000.54);
+  //   // emp1.display();
+  //   // emp2.display();
+  //   fm.addEmployee(emp1);
+  //   fm.addEmployee(emp2);
+  // // ----Clients
+  //   Client cli1("Hassan", "9786412495", 12314.413);
+  //   Client cli2("ahmedawy", "123124123", 99999);
+  //   cli1.display();
+  //   cli2.display();
+  //   fm.addClient(cli1);
+  //   fm.addClient(cli2);
   // Load::rewriteAll();
   //------------------------
   /*****Writing into files*****/
+  // fm.removeAllAdmins();
+  // fm.removeAllClients();
+  // fm.removeAllEmployees();
   // Employee emp1("Mohamed", "nourisgay", 56000);
   // Employee emp2("Menna", "131512312", 7000.54);
   // fm.addEmployee(emp1);
