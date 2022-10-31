@@ -1,6 +1,4 @@
 ﻿#include <iostream>
-// #include "classes/managers/file_manager.h"
-// #include "classes/dependencies/login.h"
 #include "start/screens.h"
 
 using namespace std;
@@ -12,6 +10,41 @@ int main() {
   catch (const char* msg) {
     cerr << msg;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //=====================//
   // FileManager fm;
   // Admin::initID();
@@ -43,18 +76,20 @@ int main() {
   // Load::rewriteAll();
   //------------------------
   /*****Writing into files*****/
+  // Load::loadAll();
+  // FileManager fm;
   // fm.removeAllAdmins();
   // fm.removeAllClients();
   // fm.removeAllEmployees();
-  // Employee emp1("Mohamed", "nourisgay", 56000);
+  // Employee emp1("Mohamed", "qwerty12345", 56000);
   // Employee emp2("Menna", "131512312", 7000.54);
   // fm.addEmployee(emp1);
   // fm.addEmployee(emp2);
-  // Client cli1("Hassan", "nourisgay", 12314.413);
+  // Client cli1("Hassan", "qwerty12345", 12314.413);
   // Client cli2("Hussein", "923812344", 123123);
   // fm.addClient(cli1);
   // fm.addClient(cli2);
-  // Admin adm1("Ahmed", "nourisgay", 9000.905);
+  // Admin adm1("Ahmed", "qwerty12345", 9000.905);
   // Admin adm2("Assem", "12342412412", 11000.970);
   // fm.addAdmin(adm1);
   // fm.addAdmin(adm2);
