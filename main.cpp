@@ -6,51 +6,17 @@
 using namespace std;
 
 int main() {
-  // ifstream fin(FilesHelper::adminFile);
-  // Admin::initID();
-  // FilesHelper::getLast(FilesHelper::employeeFile);
   try {
-    Screens::runApp(); 
+    Screens::runApp();
   }
-  catch (const char *msg) {
+  catch (const char* msg) {
     cerr << msg;
-  }  
-
-  // FileManager fm;
-  // try {
-  //   fm.deleteAnEmployee(2000);
-  // }
-  // catch (std::string msg) {
-  //   cerr << msg << endl;
-  // }
-  // Load::editEntity<Client>(1);
-  // try {
-  //   Load::parseTo<Admin>("3")->display();
-  // }
-  // catch (std::string msg) {
-  //   cerr << msg << endl;
-  // }
-
-  // try {
-  //   Load::search<Client>(7000)->getPassword();
-  // }
-  // catch (const char *msg) {
-  //   cerr << msg << endl;
-  // }
-  // Load::showAdmDic();
-
-  // FileManager fm;
-  // Admin *adm;
-  // try {
-  //   adm = Login::login<Admin>(2, "12342412412");
-  // }
-  // catch (const char *msg) {
-  //   cerr << msg;
-  // }
-
-  //TODO: transfer the inits to runApp when phase3 comes.
+  }
   //=====================//
-// FileManager fm;
+  // FileManager fm;
+  // Admin::initID();
+  // Employee::initID();
+  // Client::initID();
   //====================//
   /*****init test*****/
   // //----Admins

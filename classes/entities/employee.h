@@ -16,7 +16,7 @@ public:
   Employee() :Person() {
     salary = 0;
   }
-  Employee(std::string name, std::string password, double salary) : Person(name, password), empID(id += 10) {
+  Employee(std::string name, std::string password, double salary) : Person(name, password), empID(id+=10) {
     Validation::checkName(name);
     Validation::checkSalary(salary); // min 5000
     this->salary = salary;
@@ -38,9 +38,12 @@ public:
 
   //Methods
   static void initID() {
-    id = FilesHelper::getLast(FilesHelper::employeeFile);
-  } // for runApp task in phase 3
+    id = FilesHelper::getLastID(FilesHelper::employeeFile);
+  } 
 
+static int getLastID() {
+    return FilesHelper::getLastID(FilesHelper::employeeFile);
+  } 
   void display() override {
     std::cout << "Name: " << getName() << std::endl
       // << "password: " << getPassword() << std::endl

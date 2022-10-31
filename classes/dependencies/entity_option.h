@@ -339,6 +339,7 @@ public:
             std::cin >> password;
             try
             {
+              Employee::initID();
               Employee emp(name, password, salary);
               std::cout << "Employee with name " << name << " and id #" << emp.getID() << " has been added succesfuly\n";
               adm.addEmployee(emp);
@@ -373,6 +374,7 @@ public:
             std::cin >> password;
             try
             {
+              Client::initID();
               Client cli(name, password, salary);
               std::cout << "Employee with name " << name << " and id #" << cli.getID() << " has been added succesfuly\n";
               adm.addClient(cli);
@@ -431,7 +433,7 @@ public:
           std::cin >> rev;
           if (toupper(rev) == 'Y')
           {
-            // FileManager::deleteAnEmployee(id);
+            FileManager::deleteAnEmployee(id);
             std::cout << "Removed successfully!\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, adm);
@@ -461,7 +463,7 @@ public:
           std::cin >> rev;
           if (toupper(rev) == 'Y')
           {
-            // FileManager::deleteAClient(id);
+            FileManager::deleteAClient(id);
             std::cout << "Removed successfully!\nSelect another option\n> ";
             std::cin >> choice;
             options(choice, adm);
@@ -700,6 +702,7 @@ public:
             std::cin >> password;
             try
             {
+              Client::initID();
               Client cli(name, password, salary);
               std::cout << "Employee with name " << name << " and id #" << cli.getID() << " has been added succesfuly\n";
               emp.addClient(cli);

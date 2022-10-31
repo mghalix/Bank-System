@@ -161,6 +161,7 @@ public:
     FileManager fm;
     if (Load::cliIdx.empty())
       fm.removeAllClients();
+    // Client::initID();
   }
   static void deleteAnEmployee(const int& id) {
     Load::search<Employee>(id); // to throw an error if not found
@@ -172,6 +173,7 @@ public:
     FileManager fm;
     if (Load::empIdx.empty())
       fm.removeAllEmployees();
+    // Employee::initID();
   }
 };
 //------------------------------------------------------------------------------

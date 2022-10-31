@@ -48,7 +48,7 @@ public:
     balance -= amount;
   }
 
-  void transferTo(double amount, Client &recipient) {
+  void transferTo(double amount, Client& recipient) {
     if (amount > balance)
       throw("Amount exceeded balance!");
     recipient.balance += amount;
@@ -72,6 +72,7 @@ public:
    * so we correct its value based on the last id on the file.
    * @param id
    */
-  static void initID() { id = FilesHelper::getLast(FilesHelper::clientFile); }
+  static void initID() { id = FilesHelper::getLastID(FilesHelper::clientFile); }
+  static int lastID() { return FilesHelper::getLastID(FilesHelper::clientFile); }
 };
 int Client::id = 6990;
