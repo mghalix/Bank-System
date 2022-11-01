@@ -42,7 +42,7 @@ public:
       std::vector<std::string> vec(4);
       vec = Helpers::split(line, '|');
       T *a = new T(vec[1], vec[2], stod(vec[3]));
-      a->setID(stoi(vec[0]));
+      a->setID(stoi(id));
       clone = NULL;
       delete clone;
       return a;
