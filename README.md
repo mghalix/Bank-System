@@ -1,2 +1,2 @@
 # Bank-System
-C++ App to run a bank system
+This project is purely based on OOP and File Organization in replacement of databases
