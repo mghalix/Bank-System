@@ -5,14 +5,14 @@ using namespace std;
 
 int main() {
   // for testing
-  // login as admin:        id -> 1 | pw -> qwerty12345
+  // login as admin:        id -> 1 | pw -> qwerty12345 
   // login as employee:     id -> 2000 | pw -> qwerty12345
   // login as client:       id -> 7000 | pw -> qwerty12345
 
   try {
     Screens::runApp();
   }
-  catch (const char* msg) {
+  catch (const char *msg) {
     cerr << msg;
   }
 
